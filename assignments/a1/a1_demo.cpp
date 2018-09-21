@@ -5,6 +5,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <string>
 #include <unistd.h>
 #include <sys/time.h>
 #include <vector>
@@ -175,9 +176,27 @@ int main( int argc, char *argv[] ) {
 			// draw rectangle
 			if (counter == 0) {
 				XFillRectangle(display, window, gc1, 50, 50, 1255, 615);
+				string game_name = "BREAKOUT!";
+				string name = "Angad Singh";
+				string id = "20597494";
+				string info = "Use 'a' and 'd' to move the paddle left and right respectively. Press 'p' to play!";
+
+				Text * game_name_obj = new Text (650, 350, game_name);
+				Text * name_obj = new Text (650, 375, name);
+				Text * id_obj = new Text (650, 400, id);
+				Text * info_obj = new Text (650, 425, info);
+
+				game_name_obj->paint(xinfo);
+				name_obj->paint(xinfo);
+				id_obj->paint(xinfo);
+				info_obj->paint(xinfo);
+
 				XFlush( display );
 				lastRepaint = now();
 			} else {
+
+				Text * score = new Text (20,20,"Score:");
+				score->paint(xinfo);
 
 			// XDrawRectangle(display, window, gc, rectPos.x, rectPos.y, 50, 50);
 
@@ -188,6 +207,7 @@ int main( int argc, char *argv[] ) {
 					ballSize, ballSize,
 					0, 360*64);
 
+				// check for collision with the paddle and change position of the ball
 			// update ball position
 				ballPos.x += ballDir.x;
 				ballPos.y += ballDir.y;
@@ -203,7 +223,8 @@ int main( int argc, char *argv[] ) {
 				vector<Displayable *>::iterator it;
 				int ii = 0;
 				for (it = board.begin(); it != board.end(); it++) {
-				// check for collision and remove block is true and repaint
+				// check for collision and remove block if true and repaint
+					// also update the score accordingly
 					++ii;
 					if (ii%10 == 0){
 						XColor xcolour;
