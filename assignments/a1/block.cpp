@@ -7,7 +7,8 @@ public:
   // constructor 
   Block(int x, int y): x(x), y(y) {}
 
-private:
   int x;
   int y;
+  int width = 60;
+  int height = 40;
 };

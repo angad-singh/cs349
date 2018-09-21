@@ -21,7 +21,6 @@ public:
   // constructor
   Ball(int x, int y, int d): x(x), y(y), d(d) {}
 
-private:
   int x;
   int y;
   int d; // diameter

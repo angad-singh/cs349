@@ -34,7 +34,7 @@ unsigned long now() {
 	return tv.tv_sec * 1000000 + tv.tv_usec;
 }
 
-std::vector <Displayable *> board;
+std::vector <Block *> board;
 
 int init_blocks() {
 	int x = 50;
@@ -51,6 +51,22 @@ int init_blocks() {
 			x += 65;
 		}
 	}
+}
+
+bool intersects(Ball ball, Block block) {
+    int circleDistancex = abs(ball.x - block.x);
+    int circleDistancey = abs(ball.y - block.y);
+
+    if (circleDistancex > (block.width/2 + ball.d/2)) { return false; }
+    if (circleDistancey > (block.height/2 + ball.d/2)) { return false; }
+
+    if (circleDistancex <= (block.width/2)) { return true; } 
+    if (circleDistancey <= (block.height/2)) { return true; }
+
+    int cornerDistance_sq = (circleDistancex - block.width/2)^2 +
+                         (circleDistancey - block.height/2)^2;
+
+    return (cornerDistance_sq <= ((ball.d/2)^2));
 }
 
 int splash_screen(XInfo &xinfo) {
@@ -76,6 +92,8 @@ int splash_screen(XInfo &xinfo) {
 // entry point
 int main( int argc, char *argv[] ) {
 
+	int score = 0;
+
 	// create window
 	display = XOpenDisplay("");
 	if (display == NULL) exit (-1);
@@ -95,6 +113,8 @@ int main( int argc, char *argv[] ) {
 	ballPos.x = 50;
 	ballPos.y = 50;
 	int ballSize = 50;
+
+	Ball * ball = new Ball(ballPos.x, ballPos.y, ballSize);
 
 	XPoint ballDir;
 	ballDir.x = 3;
@@ -122,15 +142,6 @@ int main( int argc, char *argv[] ) {
 		window,
 		gc1
 	};
-
-	XClearWindow(display, window);
-	XFillRectangle(display, window, gc1, 50, 50, 1255, 615);
-	XFillArc(display, window, gc1,
-		ballPos.x - ballSize/2,
-		ballPos.y - ballSize/2,
-		ballSize, ballSize,
-		0, 360*64);
-	XFlush( display );
 
 	// save time of last window paint
 	unsigned long lastRepaint = 0;
@@ -199,8 +210,10 @@ int main( int argc, char *argv[] ) {
 				lastRepaint = now();
 			} else {
 
-				Text * score = new Text (20,20,"Score:");
-				score->paint(xinfo);
+				Text * score_text = new Text (20,20,"Score:");
+				Text * score_num = new Text (60,20, to_string(score));
+				score_text->paint(xinfo);
+				score_num->paint(xinfo);
 
 				// Draw Paddle
 				XFillRectangle(display, window, gc1, rectPos.x, rectPos.y, 100, 10);
@@ -215,6 +228,8 @@ int main( int argc, char *argv[] ) {
 				// check for collision with the paddle and change position of the ball
 			// update ball position
 				ballPos.x += ballDir.x;
+				ball->x += ballDir.x;
+				ball->y += ballDir.y;
 				ballPos.y += ballDir.y;
 
 			// bounce ball
@@ -225,21 +240,30 @@ int main( int argc, char *argv[] ) {
 					ballPos.y - ballSize/2 < 0)
 					ballDir.y = -ballDir.y;
 
-				vector<Displayable *>::iterator it;
+				vector<Block *>::iterator it;
 				int ii = 0;
-				for (it = board.begin(); it != board.end(); it++) {
+				for (it = board.begin(); it != board.end();) {
+					if (intersects(*ball, **it)){
+						board.erase(it);
+						++score;
+						// delete(*it);
+						// continue;
+					} else {
+					// cout << "loop" << endl;
 				// check for collision and remove block if true and repaint
 					// also update the score accordingly
-					++ii;
-					if (ii%10 == 0){
-						XColor xcolour;
+					++ii; 
+					// if (ii%10 == 0){
+					// 	XColor xcolour;
 
-					// I guess XParseColor will work here
-						xcolour.red = 32000; xcolour.green = 65000; xcolour.blue = 32000;
-						xcolour.flags = DoRed | DoGreen | DoBlue;
-						XSetForeground(display, xinfo.gc, xcolour.pixel);
-					}
+					// // I guess XParseColor will work here
+					// 	xcolour.red = 32000; xcolour.green = 65000; xcolour.blue = 32000;
+					// 	xcolour.flags = DoRed | DoGreen | DoBlue;
+					// 	// XSetForeground(display, xinfo.gc, xcolour.pixel);
+					// }
 					(*it)->paint(xinfo);
+					++it;
+				}
 				}
 
 				XFlush( display );
