@@ -103,7 +103,7 @@ int main( int argc, char *argv[] ) {
 	// block position, size
 	XPoint rectPos;
 	rectPos.x = 225;
-	rectPos.y = 400;
+	rectPos.y = 675;
 
 	// create gc for drawing
 	GC gc = XCreateGC(display, window, 0, 0);
@@ -168,12 +168,12 @@ int main( int argc, char *argv[] ) {
 				}
 
 					// move right
-				if ( i == 1 && text[0] == 'd' ) {
+				if (key == XK_Right || (i == 1 && text[0] == 'd')) {
 					rectPos.x += 10;
 				}
 
 					// move left
-				if ( i == 1 && text[0] == 'a' ) {
+				if (key == XK_Left || (i == 1 && text[0] == 'a')) {
 					rectPos.x -= 10;
 				}
 
@@ -202,7 +202,8 @@ int main( int argc, char *argv[] ) {
 				Text * score = new Text (20,20,"Score:");
 				score->paint(xinfo);
 
-			// XDrawRectangle(display, window, gc, rectPos.x, rectPos.y, 50, 50);
+				// Draw Paddle
+				XFillRectangle(display, window, gc1, rectPos.x, rectPos.y, 100, 10);
 
 			// draw ball from centre
 				XFillArc(display, window, gc1, 
