@@ -53,6 +53,26 @@ int init_blocks() {
 	}
 }
 
+int splash_screen(XInfo &xinfo) {
+	XFillRectangle(xinfo.display, xinfo.window, xinfo.gc, 50, 50, 1255, 615);
+	string game_name = "BREAKOUT!";
+	string name = "Angad Singh";
+	string id = "20597494";
+	string info = "Use 'a' and 'd' to move the paddle left and right respectively. Press 'p' to play!";
+
+	Text * game_name_obj = new Text (650, 350, game_name);
+	Text * name_obj = new Text (650, 375, name);
+	Text * id_obj = new Text (650, 400, id);
+	Text * info_obj = new Text (650, 425, info);
+
+	game_name_obj->paint(xinfo);
+	name_obj->paint(xinfo);
+	id_obj->paint(xinfo);
+	info_obj->paint(xinfo);
+
+	XFlush(xinfo.display);
+}
+
 // entry point
 int main( int argc, char *argv[] ) {
 
@@ -142,7 +162,7 @@ int main( int argc, char *argv[] ) {
 				int i = XLookupString( (XKeyEvent*)&event, text, 10, &key, 0 );
 
 					// start game
-				if ( i == 1 && text[0] == 'p' && counter == 0 ) {
+				if ( i == 1 && (text[0] == 'p' || text[0] == 'P') && counter == 0 ) {
 					counter++;
 					XClearWindow(display, window);
 				}
@@ -175,23 +195,7 @@ int main( int argc, char *argv[] ) {
 
 			// draw rectangle
 			if (counter == 0) {
-				XFillRectangle(display, window, gc1, 50, 50, 1255, 615);
-				string game_name = "BREAKOUT!";
-				string name = "Angad Singh";
-				string id = "20597494";
-				string info = "Use 'a' and 'd' to move the paddle left and right respectively. Press 'p' to play!";
-
-				Text * game_name_obj = new Text (650, 350, game_name);
-				Text * name_obj = new Text (650, 375, name);
-				Text * id_obj = new Text (650, 400, id);
-				Text * info_obj = new Text (650, 425, info);
-
-				game_name_obj->paint(xinfo);
-				name_obj->paint(xinfo);
-				id_obj->paint(xinfo);
-				info_obj->paint(xinfo);
-
-				XFlush( display );
+				splash_screen(xinfo);
 				lastRepaint = now();
 			} else {
 
