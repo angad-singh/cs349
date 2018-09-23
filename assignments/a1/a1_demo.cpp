@@ -117,13 +117,17 @@ int main( int argc, char *argv[] ) {
 	Ball * ball = new Ball(ballPos.x, ballPos.y, ballSize);
 
 	XPoint ballDir;
-	ballDir.x = 3;
-	ballDir.y = 3;
+	ballDir.x = 5;
+	ballDir.y = 5;
 
 	// block position, size
 	XPoint rectPos;
 	rectPos.x = 225;
 	rectPos.y = 675;
+
+	Block * paddle = new Block (225, 675);
+	paddle->width = 100;
+	paddle->height = 10;
 
 	// create gc for drawing
 	GC gc = XCreateGC(display, window, 0, 0);
@@ -181,11 +185,13 @@ int main( int argc, char *argv[] ) {
 					// move right
 				if (key == XK_Right || (i == 1 && text[0] == 'd')) {
 					rectPos.x += 10;
+					paddle->x += 10;
 				}
 
 					// move left
 				if (key == XK_Left || (i == 1 && text[0] == 'a')) {
 					rectPos.x -= 10;
+					paddle->x -= 10;
 				}
 
 					// quit game
@@ -226,11 +232,34 @@ int main( int argc, char *argv[] ) {
 					0, 360*64);
 
 				// check for collision with the paddle and change position of the ball
+				// if interects(ball, paddle) false, then prompt to restart
 			// update ball position
 				ballPos.x += ballDir.x;
 				ball->x += ballDir.x;
 				ball->y += ballDir.y;
 				ballPos.y += ballDir.y;
+
+				if (ballPos.y >= rectPos.y) {
+					if (intersects(*ball, *paddle)){
+						if (ballPos.x + ballSize/2 < paddle->width/2) {
+							ballDir.x = -ballDir.x;
+						} else {
+							ballDir.x = +ballDir.x;
+						}
+						if (ballPos.y + ballSize/2 > paddle->height ||
+							ballPos.y - ballSize/2 < 0)
+							ballDir.y = -ballDir.y;
+
+						ballPos.x += ballDir.x;
+				ball->x += ballDir.x;
+				ball->y += ballDir.y;
+				ballPos.y += ballDir.y;
+					} else {
+						// exit(1);
+						// quit();
+					}
+				}
+
 
 			// bounce ball
 				if (ballPos.x + ballSize/2 > w.width ||
