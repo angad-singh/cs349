@@ -53,20 +53,26 @@ int init_blocks() {
 	}
 }
 
-bool intersects(Ball ball, Block block) {
-    int circleDistancex = abs(ball.x - block.x);
-    int circleDistancey = abs(ball.y - block.y);
+bool contactWtihBlock(Ball ball, Block block) {
+	return (ball.x >= (block.x - ball.d/2)) &&
+		   (ball.x <= (block.x + ball.d/2 + block.width)) &&
+		   (ball.y >= (block.y - ball.d/2)) &&
+		   (ball.y <= (block.y + ball.d/2 + block.height));
 
-    if (circleDistancex > (block.width/2 + ball.d/2)) { return false; }
-    if (circleDistancey > (block.height/2 + ball.d/2)) { return false; }
 
-    if (circleDistancex <= (block.width/2)) { return true; } 
-    if (circleDistancey <= (block.height/2)) { return true; }
+    // int circleDistancex = abs(ball.x - block.x);
+    // int circleDistancey = abs(ball.y - block.y);
 
-    int cornerDistance_sq = (circleDistancex - block.width/2)^2 +
-                         (circleDistancey - block.height/2)^2;
+    // if (circleDistancex > (block.width/2 + ball.d/2)) { return false; }
+    // if (circleDistancey > (block.height/2 + ball.d/2)) { return false; }
 
-    return (cornerDistance_sq <= ((ball.d/2)^2));
+    // if (circleDistancex <= (block.width/2)) { return true; } 
+    // if (circleDistancey <= (block.height/2)) { return true; }
+
+    // int cornerDistance_sq = (circleDistancex - block.width/2)^2 +
+    //                      (circleDistancey - block.height/2)^2;
+
+    // return (cornerDistance_sq <= ((ball.d/2)^2));
 }
 
 int splash_screen(XInfo &xinfo) {
@@ -112,7 +118,7 @@ int main( int argc, char *argv[] ) {
 	XPoint ballPos;
 	ballPos.x = 50;
 	ballPos.y = 50;
-	int ballSize = 50;
+	int ballSize = 20;
 
 	Ball * ball = new Ball(ballPos.x, ballPos.y, ballSize);
 
@@ -233,17 +239,12 @@ int main( int argc, char *argv[] ) {
 
 				// check for collision with the paddle and change position of the ball
 				// if interects(ball, paddle) false, then prompt to restart
-			// update ball position
-				ballPos.x += ballDir.x;
-				ball->x += ballDir.x;
-				ball->y += ballDir.y;
-				ballPos.y += ballDir.y;
-
-				if (ballPos.y >= rectPos.y) {
-					if (intersects(*ball, *paddle)){
-						if (ballPos.x + ballSize/2 < paddle->width/2) {
+			
+				if ((ballPos.y+ballSize/2) >= rectPos.y) {
+					if (contactWtihBlock(*ball, *paddle)){
+						if ((ballPos.x + ballSize/2 >= paddle->x) && (ballPos.x + ballSize/2 <= (paddle->x + paddle->width/2))) {
 							ballDir.x = -ballDir.x;
-						} else {
+						} else if ((ballPos.x + ballSize/2 >= (paddle->x + paddle->width/2)) && (ballPos.x + ballSize/2 <= (paddle->x + paddle->width))) {
 							ballDir.x = +ballDir.x;
 						}
 						if (ballPos.y + ballSize/2 > paddle->height ||
@@ -255,24 +256,33 @@ int main( int argc, char *argv[] ) {
 				ball->y += ballDir.y;
 				ballPos.y += ballDir.y;
 					} else {
-						// exit(1);
+						exit(1);
 						// quit();
 					}
-				}
+				} else {
+// update ball position
+				ballPos.x += ballDir.x;
+				ball->x += ballDir.x;
+				ball->y += ballDir.y;
+				ballPos.y += ballDir.y;
 
 
-			// bounce ball
+					// bounce ball
 				if (ballPos.x + ballSize/2 > w.width ||
 					ballPos.x - ballSize/2 < 0)
 					ballDir.x = -ballDir.x;
 				if (ballPos.y + ballSize/2 > w.height ||
 					ballPos.y - ballSize/2 < 0)
 					ballDir.y = -ballDir.y;
+				}
+
+
+			
 
 				vector<Block *>::iterator it;
 				int ii = 0;
 				for (it = board.begin(); it != board.end();) {
-					if (intersects(*ball, **it)){
+					if (contactWtihBlock(*ball, **it)){
 						board.erase(it);
 						++score;
 						// delete(*it);
