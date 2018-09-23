@@ -24,9 +24,6 @@ using namespace std;
 Display* display;
 Window window;
 
-// fixed frames per second animation
-int FPS = 60;
-
 // get current time
 unsigned long now() {
 	timeval tv;
@@ -98,6 +95,12 @@ int splash_screen(XInfo &xinfo) {
 // entry point
 int main( int argc, char *argv[] ) {
 
+	// fixed frames per second animation
+	int FPS = atoi(argv[1]);
+	int speed = atoi(argv[2]);
+
+	int constant_speed = speed * FPS;
+
 	int score = 0;
 
 	// create window
@@ -123,8 +126,8 @@ int main( int argc, char *argv[] ) {
 	Ball * ball = new Ball(ballPos.x, ballPos.y, ballSize);
 
 	XPoint ballDir;
-	ballDir.x = 5;
-	ballDir.y = 5;
+	ballDir.x = speed * 60/FPS;
+	ballDir.y = speed * 60/FPS;
 
 	// block position, size
 	XPoint rectPos;
@@ -242,10 +245,13 @@ int main( int argc, char *argv[] ) {
 			
 				if ((ballPos.y+ballSize/2) >= rectPos.y) {
 					if (contactWtihBlock(*ball, *paddle)){
-						if ((ballPos.x + ballSize/2 >= paddle->x) && (ballPos.x + ballSize/2 <= (paddle->x + paddle->width/2))) {
-							ballDir.x = -ballDir.x;
-						} else if ((ballPos.x + ballSize/2 >= (paddle->x + paddle->width/2)) && (ballPos.x + ballSize/2 <= (paddle->x + paddle->width))) {
-							ballDir.x = +ballDir.x;
+						if ((ballPos.x >= (paddle->x-ballSize/2)) && (ballPos.x < (paddle->x + paddle->width/2))) {
+							// ballDir.x = -ballDir.x;
+							ballDir.x = (ballDir.x < 0) ? ballDir.x : -ballDir.x;
+						} else if ((ballPos.x >= (paddle->x + paddle->width/2)) && (ballPos.x <= (paddle->x + paddle->width + ballSize/2))) {
+							// reverse bounce dir
+							ballDir.x = (ballDir.x > 0) ? ballDir.x : -ballDir.x;
+							// +ballDir.x;
 						}
 						if (ballPos.y + ballSize/2 > paddle->height ||
 							ballPos.y - ballSize/2 < 0)
@@ -256,7 +262,7 @@ int main( int argc, char *argv[] ) {
 				ball->y += ballDir.y;
 				ballPos.y += ballDir.y;
 					} else {
-						exit(1);
+						// exit(1);
 						// quit();
 					}
 				} else {
@@ -265,7 +271,6 @@ int main( int argc, char *argv[] ) {
 				ball->x += ballDir.x;
 				ball->y += ballDir.y;
 				ballPos.y += ballDir.y;
-
 
 					// bounce ball
 				if (ballPos.x + ballSize/2 > w.width ||
@@ -276,33 +281,15 @@ int main( int argc, char *argv[] ) {
 					ballDir.y = -ballDir.y;
 				}
 
-
-			
-
 				vector<Block *>::iterator it;
-				int ii = 0;
 				for (it = board.begin(); it != board.end();) {
 					if (contactWtihBlock(*ball, **it)){
 						board.erase(it);
 						++score;
-						// delete(*it);
-						// continue;
 					} else {
-					// cout << "loop" << endl;
-				// check for collision and remove block if true and repaint
-					// also update the score accordingly
-					++ii; 
-					// if (ii%10 == 0){
-					// 	XColor xcolour;
-
-					// // I guess XParseColor will work here
-					// 	xcolour.red = 32000; xcolour.green = 65000; xcolour.blue = 32000;
-					// 	xcolour.flags = DoRed | DoGreen | DoBlue;
-					// 	// XSetForeground(display, xinfo.gc, xcolour.pixel);
-					// }
-					(*it)->paint(xinfo);
-					++it;
-				}
+						(*it)->paint(xinfo);
+						++it;
+					}
 				}
 
 				XFlush( display );
