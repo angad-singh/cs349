@@ -24,6 +24,9 @@ using namespace std;
 Display* display;
 Window window;
 
+int FPS = 60;
+int speed = 5;
+
 // get current time
 unsigned long now() {
 	timeval tv;
@@ -96,10 +99,11 @@ int splash_screen(XInfo &xinfo) {
 int main( int argc, char *argv[] ) {
 
 	// fixed frames per second animation
-	int FPS = atoi(argv[1]);
-	int speed = atoi(argv[2]);
-
-	int constant_speed = speed * FPS;
+	if (argc == 3) {
+		FPS = atoi(argv[1]);
+		int input_speed = atoi(argv[2]);
+		speed = 60/FPS * input_speed;
+	}
 
 	int score = 0;
 
@@ -126,8 +130,8 @@ int main( int argc, char *argv[] ) {
 	Ball * ball = new Ball(ballPos.x, ballPos.y, ballSize);
 
 	XPoint ballDir;
-	ballDir.x = speed * 60/FPS;
-	ballDir.y = speed * 60/FPS;
+	ballDir.x = speed;
+	ballDir.y = speed;
 
 	// block position, size
 	XPoint rectPos;
