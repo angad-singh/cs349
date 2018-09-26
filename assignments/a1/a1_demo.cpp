@@ -41,7 +41,7 @@ int init_blocks(vector<Block *> *board) {
 	int y = 120;
 	int counter = 0;
 	board->clear();
-	for (int i = 0; i < 25; ++i) {
+	for (int i = 0; i < 95; ++i) {
 		Block * block = new Block (x,y);
 		board->emplace_back(block);
 		counter++;
@@ -64,8 +64,6 @@ int quit_game(int *counter, XInfo &xinfo, Ball *ball, XPoint *ballPos) {
 }
 
 bool contactWtihBlock(Ball ball, Block block) {
-	// cout << "ball.x = " << ball.x << " ball.y = " << ball.y << endl;
-	// cout << "block.x = " << block.x << " block.y = " << block.y << endl;
 	return (ball.x >= (block.x - ball.d/2)) &&
 	(ball.x <= (block.x + ball.d/2 + block.width)) &&
 	(ball.y >= (block.y - ball.d/2)) &&
