@@ -36,13 +36,14 @@ unsigned long now() {
 
 std::vector <Block *> board;
 
-int init_blocks() {
+int init_blocks(vector<Block *> *board) {
 	int x = 50;
 	int y = 120;
 	int counter = 0;
+	board->clear();
 	for (int i = 0; i < 25; ++i) {
 		Block * block = new Block (x,y);
-		board.emplace_back(block);
+		board->emplace_back(block);
 		counter++;
 		if (counter%19 == 0){
 			x = 50;
@@ -53,26 +54,22 @@ int init_blocks() {
 	}
 }
 
+int quit_game(int *counter, XInfo &xinfo, Ball *ball, XPoint *ballPos) {
+	XClearWindow(xinfo.display, xinfo.window);
+	*counter = 0;
+	ball->x = 50;
+	ball->y = 50;
+	ballPos->x = 50;
+	ballPos->y = 50;
+}
+
 bool contactWtihBlock(Ball ball, Block block) {
+	// cout << "ball.x = " << ball.x << " ball.y = " << ball.y << endl;
+	// cout << "block.x = " << block.x << " block.y = " << block.y << endl;
 	return (ball.x >= (block.x - ball.d/2)) &&
-		   (ball.x <= (block.x + ball.d/2 + block.width)) &&
-		   (ball.y >= (block.y - ball.d/2)) &&
-		   (ball.y <= (block.y + ball.d/2 + block.height));
-
-
-    // int circleDistancex = abs(ball.x - block.x);
-    // int circleDistancey = abs(ball.y - block.y);
-
-    // if (circleDistancex > (block.width/2 + ball.d/2)) { return false; }
-    // if (circleDistancey > (block.height/2 + ball.d/2)) { return false; }
-
-    // if (circleDistancex <= (block.width/2)) { return true; } 
-    // if (circleDistancey <= (block.height/2)) { return true; }
-
-    // int cornerDistance_sq = (circleDistancex - block.width/2)^2 +
-    //                      (circleDistancey - block.height/2)^2;
-
-    // return (cornerDistance_sq <= ((ball.d/2)^2));
+	(ball.x <= (block.x + ball.d/2 + block.width)) &&
+	(ball.y >= (block.y - ball.d/2)) &&
+	(ball.y <= (block.y + ball.d/2 + block.height));
 }
 
 int splash_screen(XInfo &xinfo) {
@@ -168,7 +165,7 @@ int main( int argc, char *argv[] ) {
 
 	int counter = 0;
 
-	init_blocks();
+	init_blocks(&board);
 
 	// event loop
 	while ( true ) {
@@ -237,7 +234,7 @@ int main( int argc, char *argv[] ) {
 				// Draw Paddle
 				XFillRectangle(display, window, gc1, rectPos.x, rectPos.y, 100, 10);
 
-			// draw ball from centre
+				// draw ball from centre
 				XFillArc(display, window, gc1, 
 					ballPos.x - ballSize/2, 
 					ballPos.y - ballSize/2, 
@@ -246,7 +243,7 @@ int main( int argc, char *argv[] ) {
 
 				// check for collision with the paddle and change position of the ball
 				// if interects(ball, paddle) false, then prompt to restart
-			
+
 				if ((ballPos.y+ballSize/2) >= rectPos.y) {
 					if (contactWtihBlock(*ball, *paddle)){
 						if ((ballPos.x >= (paddle->x-ballSize/2)) && (ballPos.x < (paddle->x + paddle->width/2))) {
@@ -262,27 +259,29 @@ int main( int argc, char *argv[] ) {
 							ballDir.y = -ballDir.y;
 
 						ballPos.x += ballDir.x;
-				ball->x += ballDir.x;
-				ball->y += ballDir.y;
-				ballPos.y += ballDir.y;
+						ball->x += ballDir.x;
+						ball->y += ballDir.y;
+						ballPos.y += ballDir.y;
 					} else {
 						// exit(1);
-						// quit();
+						quit_game(&counter, xinfo, ball, &ballPos);
+						init_blocks(&board);
+						score = 0;
 					}
 				} else {
-// update ball position
-				ballPos.x += ballDir.x;
-				ball->x += ballDir.x;
-				ball->y += ballDir.y;
-				ballPos.y += ballDir.y;
+					// update ball position
+					ballPos.x += ballDir.x;
+					ball->x += ballDir.x;
+					ball->y += ballDir.y;
+					ballPos.y += ballDir.y;
 
 					// bounce ball
-				if (ballPos.x + ballSize/2 > w.width ||
-					ballPos.x - ballSize/2 < 0)
-					ballDir.x = -ballDir.x;
-				if (ballPos.y + ballSize/2 > w.height ||
-					ballPos.y - ballSize/2 < 0)
-					ballDir.y = -ballDir.y;
+					if (ballPos.x + ballSize/2 > w.width ||
+						ballPos.x - ballSize/2 < 0)
+						ballDir.x = -ballDir.x;
+					if (ballPos.y + ballSize/2 > w.height ||
+						ballPos.y - ballSize/2 < 0)
+						ballDir.y = -ballDir.y;
 				}
 
 				vector<Block *>::iterator it;
@@ -302,7 +301,7 @@ int main( int argc, char *argv[] ) {
 		}
 	}
 
-		// IMPORTANT: sleep for a bit to let other processes work
+	// IMPORTANT: sleep for a bit to let other processes work
 	if (XPending(display) == 0) {
 		usleep(1000000 / FPS - (now() - lastRepaint));
 	}
