@@ -244,14 +244,14 @@ int main( int argc, char *argv[] ) {
 
 				if ((ballPos.y+ballSize/2) >= rectPos.y) {
 					if (contactWtihBlock(*ball, *paddle)){
-						if ((ballPos.x >= (paddle->x-ballSize/2)) && (ballPos.x < (paddle->x + paddle->width/2))) {
-							// ballDir.x = -ballDir.x;
-							ballDir.x = (ballDir.x < 0) ? ballDir.x : -ballDir.x;
-						} else if ((ballPos.x >= (paddle->x + paddle->width/2)) && (ballPos.x <= (paddle->x + paddle->width + ballSize/2))) {
-							// reverse bounce dir
-							ballDir.x = (ballDir.x > 0) ? ballDir.x : -ballDir.x;
-							// +ballDir.x;
-						}
+						// if ((ballPos.x >= (paddle->x-ballSize/2)) && (ballPos.x < (paddle->x + paddle->width/2))) {
+						// 	// ballDir.x = -ballDir.x;
+						// 	ballDir.x = (ballDir.x < 0) ? ballDir.x : -ballDir.x;
+						// } else if ((ballPos.x >= (paddle->x + paddle->width/2)) && (ballPos.x <= (paddle->x + paddle->width + ballSize/2))) {
+						// 	// reverse bounce dir
+						// 	ballDir.x = (ballDir.x > 0) ? ballDir.x : -ballDir.x;
+						// 	// +ballDir.x;
+						// }
 						if (ballPos.y + ballSize/2 > paddle->height ||
 							ballPos.y - ballSize/2 < 0)
 							ballDir.y = -ballDir.y;
@@ -261,7 +261,6 @@ int main( int argc, char *argv[] ) {
 						ball->y += ballDir.y;
 						ballPos.y += ballDir.y;
 					} else {
-						// exit(1);
 						quit_game(&counter, xinfo, ball, &ballPos);
 						init_blocks(&board);
 						score = 0;
