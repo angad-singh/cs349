@@ -292,6 +292,11 @@ int main( int argc, char *argv[] ) {
 					}
 				}
 
+				// create new blocks if user cleared all blocks
+				if (board.size() == 0) {
+					init_blocks(&board);
+				}
+
 				XFlush( display );
 
 			lastRepaint = now(); // remember when the paint happened
