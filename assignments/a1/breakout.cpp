@@ -183,7 +183,6 @@ int main( int argc, char *argv[] ) {
 
 				// mouse button press
 				case ButtonPress:
-				cout << "CLICK" << endl;
 				break;
 
 				case KeyPress: // any keypress
