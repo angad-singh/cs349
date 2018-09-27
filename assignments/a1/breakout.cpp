@@ -57,10 +57,10 @@ int init_blocks(vector<Block *> *board) {
 int quit_game(int *counter, XInfo &xinfo, Ball *ball, XPoint *ballPos) {
 	XClearWindow(xinfo.display, xinfo.window);
 	*counter = 0;
-	ball->x = 50;
-	ball->y = 50;
-	ballPos->x = 50;
-	ballPos->y = 50;
+	ballPos->x = rand()%100;
+	ballPos->y = 350 + rand()%(800-350+1);
+	ball->x = ballPos->x;
+	ball->y = ballPos->y;
 }
 
 bool contactWtihBlock(Ball ball, Block block) {
@@ -93,6 +93,8 @@ int splash_screen(XInfo &xinfo) {
 // entry point
 int main( int argc, char *argv[] ) {
 
+	srand(time(NULL));
+
 	// fixed frames per second animation
 	if (argc == 3) {
 		FPS = atoi(argv[1]);
@@ -118,8 +120,8 @@ int main( int argc, char *argv[] ) {
 
 	// ball postition, size, and velocity
 	XPoint ballPos;
-	ballPos.x = 50;
-	ballPos.y = 50;
+	ballPos.x = rand()%100;
+	ballPos.y = 350 + rand()%(800-350+1);
 	int ballSize = 20;
 
 	Ball * ball = new Ball(ballPos.x, ballPos.y, ballSize);
