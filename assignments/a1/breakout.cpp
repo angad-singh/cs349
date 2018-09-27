@@ -109,7 +109,7 @@ int main( int argc, char *argv[] ) {
 	long foreground = WhitePixel(display, screennum);
 	long background = BlackPixel(display, screennum);
 	window = XCreateSimpleWindow(display, DefaultRootWindow(display),
-		10, 10, 1200, 800, 2, foreground, background);
+		10, 10, 1280, 800, 2, foreground, background);
 
 	// set events to monitor and display window
 	XSelectInput(display, window, ButtonPressMask | KeyPressMask);
