@@ -83,11 +83,11 @@ int splash_screen(XInfo &xinfo, bool game_over) {
 	string game_over_text = "Game Over! Press 'p' to try again or 'q' to quit";
 	string info = "Use 'a' and 'd' to move the paddle left and right respectively. Press 'p' to play!";
 
-	Text * game_name_obj = new Text (650, 350, game_name);
-	Text * name_obj = new Text (650, 375, name);
-	Text * id_obj = new Text (650, 400, id);
-	Text * info_obj = new Text (650, 425, info);
-	Text * game_over_text_obj = new Text (650, 425, game_over_text);
+	Text * game_name_obj = new Text (640, 350, game_name);
+	Text * name_obj = new Text (634, 375, name);
+	Text * id_obj = new Text (642, 400, id);
+	Text * info_obj = new Text (440, 425, info);
+	Text * game_over_text_obj = new Text (540, 425, game_over_text);
 
 	game_name_obj->paint(xinfo);
 	name_obj->paint(xinfo);
