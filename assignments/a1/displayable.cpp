@@ -2,9 +2,10 @@
  * Information to draw on the window.
  */
 struct XInfo {
-  Display*  display;
+  Display* display;
   Window   window;
   GC       gc;
+  Pixmap   buffer;
 };
 
 

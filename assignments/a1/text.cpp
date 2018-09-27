@@ -7,7 +7,7 @@ using namespace std;
 class Text : public Displayable {
 public:
   virtual void paint(XInfo& xinfo) {
-    XDrawImageString( xinfo.display, xinfo.window, xinfo.gc,
+    XDrawImageString( xinfo.display, xinfo.buffer, xinfo.gc,
                       this->x, this->y, this->s.c_str(), this->s.length() );
   }
 

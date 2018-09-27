@@ -58,7 +58,7 @@ int quit_game(int *counter, XInfo &xinfo, Ball *ball, XPoint *ballPos) {
 	XClearWindow(xinfo.display, xinfo.window);
 	*counter = 0;
 	ballPos->x = rand()%100;
-	ballPos->y = 350 + rand()%(800-350+1);
+	ballPos->y = 50 + rand()%(600-50+1);
 	ball->x = ballPos->x;
 	ball->y = ballPos->y;
 }
@@ -71,7 +71,7 @@ bool contactWtihBlock(Ball ball, Block block) {
 }
 
 int splash_screen(XInfo &xinfo) {
-	XFillRectangle(xinfo.display, xinfo.window, xinfo.gc, 50, 50, 1255, 615);
+	XFillRectangle(xinfo.display, xinfo.buffer, xinfo.gc, 50, 50, 1255, 615);
 	string game_name = "BREAKOUT!";
 	string name = "Angad Singh";
 	string id = "20597494";
@@ -121,7 +121,7 @@ int main( int argc, char *argv[] ) {
 	// ball postition, size, and velocity
 	XPoint ballPos;
 	ballPos.x = rand()%100;
-	ballPos.y = 350 + rand()%(800-350+1);
+	ballPos.y = 50 + rand()%(600-50+1);
 	int ballSize = 20;
 
 	Ball * ball = new Ball(ballPos.x, ballPos.y, ballSize);
@@ -151,12 +151,6 @@ int main( int argc, char *argv[] ) {
 	XSetLineAttributes(display, gc1,
 		1, LineSolid, CapButt, JoinRound);
 
-	XInfo xinfo{
-		display,
-		window,
-		gc1
-	};
-
 	// save time of last window paint
 	unsigned long lastRepaint = 0;
 
@@ -166,6 +160,17 @@ int main( int argc, char *argv[] ) {
 	int counter = 0;
 
 	init_blocks(&board);
+
+	int depth = DefaultDepth(display, DefaultScreen(display));
+	Pixmap buffer = XCreatePixmap(display, window, w.width, w.height, depth);
+
+	XInfo xinfo{
+		display,
+		window,
+		gc1,
+		buffer
+	};
+
 
 	// event loop
 	while ( true ) {
@@ -215,7 +220,12 @@ int main( int argc, char *argv[] ) {
 
 		unsigned long end = now();	// get current time in microsecond
 
-		if (end - lastRepaint > 1000000 / FPS) { 
+		if (end - lastRepaint > 1000000 / FPS) {
+
+			XSetForeground(display, xinfo.gc, BlackPixel(display, screennum));
+			XFillRectangle(display, buffer, xinfo.gc,
+				           0, 0, w.width, w.height);
+			XSetForeground(display, xinfo.gc, WhitePixel(display, screennum));
 
 			// clear background
 			XClearWindow(display, window);
@@ -232,10 +242,10 @@ int main( int argc, char *argv[] ) {
 				score_num->paint(xinfo);
 
 				// Draw Paddle
-				XFillRectangle(display, window, gc1, rectPos.x, rectPos.y, 100, 10);
+				XFillRectangle(display, buffer, gc1, rectPos.x, rectPos.y, 100, 10);
 
 				// draw ball from centre
-				XFillArc(display, window, gc1, 
+				XFillArc(display, buffer, gc1, 
 					ballPos.x - ballSize/2, 
 					ballPos.y - ballSize/2, 
 					ballSize, ballSize,
@@ -303,6 +313,11 @@ int main( int argc, char *argv[] ) {
 
 			lastRepaint = now(); // remember when the paint happened
 		}
+
+		XCopyArea(xinfo.display, xinfo.buffer, xinfo.window, xinfo.gc,
+				  0, 0, w.width, w.height,
+				  0, 0);
+
 	}
 
 	// IMPORTANT: sleep for a bit to let other processes work
