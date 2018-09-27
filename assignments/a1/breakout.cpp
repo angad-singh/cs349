@@ -54,13 +54,14 @@ int init_blocks(vector<Block *> *board) {
 	}
 }
 
-int quit_game(int *counter, XInfo &xinfo, Ball *ball, XPoint *ballPos) {
+int quit_game(int *counter, XInfo &xinfo, Ball *ball, XPoint *ballPos, bool *game_over) {
 	XClearWindow(xinfo.display, xinfo.window);
 	*counter = 0;
 	ballPos->x = rand()%100;
 	ballPos->y = 50 + rand()%(600-50+1);
 	ball->x = ballPos->x;
 	ball->y = ballPos->y;
+	*game_over = true;
 }
 
 bool contactWtihBlock(Ball ball, Block block) {
@@ -70,7 +71,7 @@ bool contactWtihBlock(Ball ball, Block block) {
 	(ball.y <= (block.y + ball.d/2 + block.height));
 }
 
-int splash_screen(XInfo &xinfo) {
+int splash_screen(XInfo &xinfo, bool game_over) {
 	XFillRectangle(xinfo.display, xinfo.buffer, xinfo.gc, 50, 50, 1255, 615);
 
 	XSetForeground(xinfo.display, xinfo.gc, BlackPixel(xinfo.display, DefaultScreen(xinfo.display)));
@@ -79,20 +80,24 @@ int splash_screen(XInfo &xinfo) {
 	string game_name = "BREAKOUT!";
 	string name = "Angad Singh";
 	string id = "20597494";
+	string game_over_text = "Game Over! Press 'p' to try again or 'q' to quit";
 	string info = "Use 'a' and 'd' to move the paddle left and right respectively. Press 'p' to play!";
 
 	Text * game_name_obj = new Text (650, 350, game_name);
 	Text * name_obj = new Text (650, 375, name);
 	Text * id_obj = new Text (650, 400, id);
 	Text * info_obj = new Text (650, 425, info);
+	Text * game_over_text_obj = new Text (650, 425, game_over_text);
 
 	game_name_obj->paint(xinfo);
 	name_obj->paint(xinfo);
 	id_obj->paint(xinfo);
-	info_obj->paint(xinfo);
+	game_over ? game_over_text_obj->paint(xinfo) : info_obj->paint(xinfo);
 
 	XSetForeground(xinfo.display, xinfo.gc, WhitePixel(xinfo.display, DefaultScreen(xinfo.display)));
 	XSetBackground(xinfo.display, xinfo.gc, BlackPixel(xinfo.display, DefaultScreen(xinfo.display)));
+
+	game_over = false;
 
 	XFlush(xinfo.display);
 }
@@ -101,6 +106,8 @@ int splash_screen(XInfo &xinfo) {
 int main( int argc, char *argv[] ) {
 
 	srand(time(NULL));
+
+	bool game_over = false;
 
 	// fixed frames per second animation
 	if (argc == 3) {
@@ -200,6 +207,7 @@ int main( int argc, char *argv[] ) {
 					// start game
 				if ( i == 1 && (text[0] == 'p' || text[0] == 'P') && counter == 0 ) {
 					counter++;
+					game_over = false;
 					XClearWindow(display, window);
 				}
 
@@ -238,10 +246,9 @@ int main( int argc, char *argv[] ) {
 
 			// draw rectangle
 			if (counter == 0) {
-				splash_screen(xinfo);
+				splash_screen(xinfo, game_over);
 				lastRepaint = now();
 			} else {
-
 				Text * score_text = new Text (20,20,"Score:");
 				Text * score_num = new Text (60,20, to_string(score));
 				score_text->paint(xinfo);
@@ -279,7 +286,7 @@ int main( int argc, char *argv[] ) {
 						ball->y += ballDir.y;
 						ballPos.y += ballDir.y;
 					} else {
-						quit_game(&counter, xinfo, ball, &ballPos);
+						quit_game(&counter, xinfo, ball, &ballPos, &game_over);
 						init_blocks(&board);
 						score = 0;
 					}
@@ -321,9 +328,7 @@ int main( int argc, char *argv[] ) {
 		}
 
 		XCopyArea(xinfo.display, xinfo.buffer, xinfo.window, xinfo.gc,
-			0, 0, w.width, w.height,
-			0, 0);
-
+				  0, 0, w.width, w.height, 0, 0);
 	}
 
 	// IMPORTANT: sleep for a bit to let other processes work
