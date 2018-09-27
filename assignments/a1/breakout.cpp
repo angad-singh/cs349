@@ -72,6 +72,10 @@ bool contactWtihBlock(Ball ball, Block block) {
 
 int splash_screen(XInfo &xinfo) {
 	XFillRectangle(xinfo.display, xinfo.buffer, xinfo.gc, 50, 50, 1255, 615);
+
+	XSetForeground(xinfo.display, xinfo.gc, BlackPixel(xinfo.display, DefaultScreen(xinfo.display)));
+	XSetBackground(xinfo.display, xinfo.gc, WhitePixel(xinfo.display, DefaultScreen(xinfo.display)));
+
 	string game_name = "BREAKOUT!";
 	string name = "Angad Singh";
 	string id = "20597494";
@@ -86,6 +90,9 @@ int splash_screen(XInfo &xinfo) {
 	name_obj->paint(xinfo);
 	id_obj->paint(xinfo);
 	info_obj->paint(xinfo);
+
+	XSetForeground(xinfo.display, xinfo.gc, WhitePixel(xinfo.display, DefaultScreen(xinfo.display)));
+	XSetBackground(xinfo.display, xinfo.gc, BlackPixel(xinfo.display, DefaultScreen(xinfo.display)));
 
 	XFlush(xinfo.display);
 }
@@ -223,7 +230,7 @@ int main( int argc, char *argv[] ) {
 
 			XSetForeground(display, xinfo.gc, BlackPixel(display, screennum));
 			XFillRectangle(display, buffer, xinfo.gc,
-				           0, 0, w.width, w.height);
+				0, 0, w.width, w.height);
 			XSetForeground(display, xinfo.gc, WhitePixel(display, screennum));
 
 			// clear background
@@ -314,8 +321,8 @@ int main( int argc, char *argv[] ) {
 		}
 
 		XCopyArea(xinfo.display, xinfo.buffer, xinfo.window, xinfo.gc,
-				  0, 0, w.width, w.height,
-				  0, 0);
+			0, 0, w.width, w.height,
+			0, 0);
 
 	}
 
