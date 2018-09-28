@@ -57,7 +57,7 @@ int init_blocks(vector<Block *> *board) {
 int quit_game(int *counter, XInfo &xinfo, Ball *ball, XPoint *ballPos, bool *game_over) {
 	XClearWindow(xinfo.display, xinfo.window);
 	*counter = 0;
-	ballPos->x = rand()%100;
+	ballPos->x = 50 + rand()%(200-50+1);
 	ballPos->y = 50 + rand()%(600-50+1);
 	ball->x = ballPos->x;
 	ball->y = ballPos->y;
@@ -81,19 +81,29 @@ int splash_screen(XInfo &xinfo, bool game_over) {
 	string name = "Angad Singh";
 	string id = "20597494";
 	string game_over_text = "Game Over! Press 'p' to try again or 'q' to quit";
-	string info = "Use 'a' and 'd' to move the paddle left and right respectively. Press 'p' to play!";
+	string info1 = "Press 'p' to start the game!";
+	string info2 = "Use 'a' and 'd' or arrow keys to move the paddle left and right respectively.";
+	string info3 = "Press 'q' to quit the game anytime.";
 
 	Text * game_name_obj = new Text (640, 350, game_name);
 	Text * name_obj = new Text (634, 375, name);
 	Text * id_obj = new Text (642, 400, id);
-	Text * info_obj = new Text (440, 425, info);
+	Text * info1_obj = new Text (580, 425, info1);
+	Text * info2_obj = new Text (430, 450, info2);
+	Text * info3_obj = new Text (560, 475, info3);
 	Text * game_over_text_obj = new Text (540, 425, game_over_text);
 
 	game_name_obj->paint(xinfo);
 	name_obj->paint(xinfo);
 	id_obj->paint(xinfo);
-	game_over ? game_over_text_obj->paint(xinfo) : info_obj->paint(xinfo);
-
+	if (game_over) {
+		game_over_text_obj->paint(xinfo);
+	} else { 
+		info1_obj->paint(xinfo);
+		info2_obj->paint(xinfo);
+		info3_obj->paint(xinfo);
+	}
+ 
 	XSetForeground(xinfo.display, xinfo.gc, WhitePixel(xinfo.display, DefaultScreen(xinfo.display)));
 	XSetBackground(xinfo.display, xinfo.gc, BlackPixel(xinfo.display, DefaultScreen(xinfo.display)));
 
@@ -134,7 +144,7 @@ int main( int argc, char *argv[] ) {
 
 	// ball postition, size, and velocity
 	XPoint ballPos;
-	ballPos.x = rand()%100;
+	ballPos.x = 50 + rand()%(200-50+1);
 	ballPos.y = 50 + rand()%(600-50+1);
 	int ballSize = 20;
 
