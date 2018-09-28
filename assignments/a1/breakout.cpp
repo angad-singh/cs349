@@ -27,12 +27,6 @@ Window window;
 int FPS = 60;
 int speed = 5;
 
-// GC gc2 = XCreateGC(display, window, 0, 0);
-// GC gc3 = XCreateGC(display, window, 0, 0);
-// GC gc4 = XCreateGC(display, window, 0, 0);
-// GC gc5 = XCreateGC(display, window, 0, 0);
-// GC gc6 = XCreateGC(display, window, 0, 0);
-
 // get current time
 unsigned long now() {
 	timeval tv;
@@ -42,18 +36,21 @@ unsigned long now() {
 
 std::vector <Block *> board;
 
-int init_blocks(vector<Block *> *board) {
+int init_blocks(vector<Block *> *board, vector <GC> GC_vector) {
 	int x = 50;
 	int y = 120;
 	int counter = 0;
 	board->clear();
+	int j = 0;
 	for (int i = 0; i < 95; ++i) {
 		Block * block = new Block (x,y);
+		block->gc = GC_vector[j];
 		board->emplace_back(block);
 		counter++;
 		if (counter%19 == 0){
 			x = 50;
 			y += 45;
+			++j;
 		} else {
 			x += 65;
 		}
@@ -70,11 +67,24 @@ int quit_game(int *counter, XInfo &xinfo, Ball *ball, XPoint *ballPos, bool *gam
 	*game_over = true;
 }
 
+int init_GC_vector(std::vector<GC> *GC_vector, Display *display) {
+	XColor xcolour;
+	srand(time(NULL));
+	for (int i = 0; i < 5; ++i) {
+		GC gc = XCreateGC(display, window, 0, 0);
+		xcolour.red = rand()%65535;
+		xcolour.green = rand()%65535;
+		xcolour.blue = rand()%65535;
+		XSetForeground(display, gc, xcolour.pixel);
+		GC_vector->emplace_back(gc);
+	}
+}
+
 bool contactWtihBlock(Ball ball, Block block) {
 	return (ball.x >= (block.x - ball.d/2)) &&
-	(ball.x <= (block.x + ball.d/2 + block.width)) &&
-	(ball.y >= (block.y - ball.d/2)) &&
-	(ball.y <= (block.y + ball.d/2 + block.height));
+		   (ball.x <= (block.x + ball.d/2 + block.width)) &&
+		   (ball.y >= (block.y - ball.d/2)) &&
+	       (ball.y <= (block.y + ball.d/2 + block.height));
 }
 
 int splash_screen(XInfo &xinfo, bool game_over) {
@@ -184,6 +194,9 @@ int main( int argc, char *argv[] ) {
 	XWindowAttributes w;
 	XGetWindowAttributes(display, window, &w);
 
+	vector <GC> GC_vector;
+	init_GC_vector(&GC_vector, display);
+
 	GC gc1 = XCreateGC(display, window, 0, 0);
 	XSetForeground(display, gc1, WhitePixel(display, screennum));
 	XSetBackground(display, gc1, BlackPixel(display, screennum));
@@ -199,7 +212,7 @@ int main( int argc, char *argv[] ) {
 
 	int counter = 0;
 
-	init_blocks(&board);
+	init_blocks(&board, GC_vector);
 
 	int depth = DefaultDepth(display, DefaultScreen(display));
 	Pixmap buffer = XCreatePixmap(display, window, w.width, w.height, depth);
@@ -210,7 +223,6 @@ int main( int argc, char *argv[] ) {
 		gc1,
 		buffer
 	};
-
 
 	// event loop
 	while ( true ) {
@@ -313,7 +325,7 @@ int main( int argc, char *argv[] ) {
 						ballPos.y += ballDir.y;
 					} else {
 						quit_game(&counter, xinfo, ball, &ballPos, &game_over);
-						init_blocks(&board);
+						init_blocks(&board, GC_vector);
 						score = 0;
 					}
 				} else {
@@ -338,11 +350,6 @@ int main( int argc, char *argv[] ) {
 						board.erase(it);
 						++score;
 					} else {
-						XColor xcolour;
-						xcolour.red = 65535; xcolour.green = 65535; 
-						xcolour.blue = 65535;
-						xcolour.flags =  DoBlue;
-						XSetForeground(display, xinfo.gc, xcolour.pixel);
 						(*it)->paint(xinfo);
 						++it;
 					}
@@ -350,7 +357,7 @@ int main( int argc, char *argv[] ) {
 
 				// create new blocks if user cleared all blocks
 				if (board.size() == 0) {
-					init_blocks(&board);
+					init_blocks(&board, GC_vector);
 				}
 
 				XFlush( display );

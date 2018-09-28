@@ -1,7 +1,8 @@
 class Block : public Displayable {
 public:
   virtual void paint(XInfo& xinfo) {
-    XFillRectangle(xinfo.display, xinfo.buffer, xinfo.gc, this->x, this->y, 60, 40);
+    (this->gc == NULL) ? XFillRectangle(xinfo.display, xinfo.buffer, xinfo.gc, this->x, this->y, 60, 40) :
+                         XFillRectangle(xinfo.display, xinfo.buffer, this->gc, this->x, this->y, 60, 40);
   }
 
   // constructor 
@@ -11,4 +12,5 @@ public:
   int y;
   int width = 60;
   int height = 40;
+  GC gc = NULL;
 };
