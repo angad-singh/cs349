@@ -27,6 +27,12 @@ Window window;
 int FPS = 60;
 int speed = 5;
 
+// GC gc2 = XCreateGC(display, window, 0, 0);
+// GC gc3 = XCreateGC(display, window, 0, 0);
+// GC gc4 = XCreateGC(display, window, 0, 0);
+// GC gc5 = XCreateGC(display, window, 0, 0);
+// GC gc6 = XCreateGC(display, window, 0, 0);
+
 // get current time
 unsigned long now() {
 	timeval tv;
@@ -75,6 +81,16 @@ int splash_screen(XInfo &xinfo, bool game_over) {
 	XFillRectangle(xinfo.display, xinfo.buffer, xinfo.gc, 50, 50, 1255, 615);
 
 	XSetForeground(xinfo.display, xinfo.gc, BlackPixel(xinfo.display, DefaultScreen(xinfo.display)));
+	XFillRectangle(xinfo.display, xinfo.buffer, xinfo.gc, 100, 100, 1127, 515);
+	XSetForeground(xinfo.display, xinfo.gc, WhitePixel(xinfo.display, DefaultScreen(xinfo.display)));
+	XFillRectangle(xinfo.display, xinfo.buffer, xinfo.gc, 150, 150, 1027, 415);
+
+    XSetForeground(xinfo.display, xinfo.gc, BlackPixel(xinfo.display, DefaultScreen(xinfo.display)));
+	XFillRectangle(xinfo.display, xinfo.buffer, xinfo.gc, 200, 200, 927, 315);
+	XSetForeground(xinfo.display, xinfo.gc, WhitePixel(xinfo.display, DefaultScreen(xinfo.display)));
+	XFillRectangle(xinfo.display, xinfo.buffer, xinfo.gc, 250, 250, 827, 215);
+
+	XSetForeground(xinfo.display, xinfo.gc, BlackPixel(xinfo.display, DefaultScreen(xinfo.display)));
 	XSetBackground(xinfo.display, xinfo.gc, WhitePixel(xinfo.display, DefaultScreen(xinfo.display)));
 
 	string game_name = "BREAKOUT!";
@@ -85,13 +101,13 @@ int splash_screen(XInfo &xinfo, bool game_over) {
 	string info2 = "Use 'a' and 'd' or arrow keys to move the paddle left and right respectively.";
 	string info3 = "Press 'q' to quit the game anytime.";
 
-	Text * game_name_obj = new Text (640, 350, game_name);
-	Text * name_obj = new Text (634, 375, name);
-	Text * id_obj = new Text (642, 400, id);
-	Text * info1_obj = new Text (580, 425, info1);
-	Text * info2_obj = new Text (430, 450, info2);
-	Text * info3_obj = new Text (560, 475, info3);
-	Text * game_over_text_obj = new Text (540, 425, game_over_text);
+	Text * game_name_obj = new Text (640, 310, game_name);
+	Text * name_obj = new Text (634, 335, name);
+	Text * id_obj = new Text (642, 360, id);
+	Text * info1_obj = new Text (580, 385, info1);
+	Text * info2_obj = new Text (430, 410, info2);
+	Text * info3_obj = new Text (560, 435, info3);
+	Text * game_over_text_obj = new Text (540, 385, game_over_text);
 
 	game_name_obj->paint(xinfo);
 	name_obj->paint(xinfo);
@@ -322,6 +338,11 @@ int main( int argc, char *argv[] ) {
 						board.erase(it);
 						++score;
 					} else {
+						XColor xcolour;
+						xcolour.red = 65535; xcolour.green = 65535; 
+						xcolour.blue = 65535;
+						xcolour.flags =  DoBlue;
+						XSetForeground(display, xinfo.gc, xcolour.pixel);
 						(*it)->paint(xinfo);
 						++it;
 					}
