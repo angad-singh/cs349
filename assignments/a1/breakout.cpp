@@ -1,7 +1,5 @@
 // CS 349 Fall 2018
-// A1: Breakout code sample
-// You may use any or all of this code in your assignment!
-// See makefile for compiling instructions
+// A1: Breakout code
 
 #include <cstdlib>
 #include <iostream>
@@ -251,14 +249,14 @@ int main( int argc, char *argv[] ) {
 
 					// move right
 				if (key == XK_Right || (i == 1 && text[0] == 'd')) {
-					rectPos.x += 10;
-					paddle->x += 10;
+					rectPos.x += (speed <= 5) ? 10 : 1.5*speed;
+					paddle->x += (speed <= 5) ? 10 : 1.5*speed;
 				}
 
 					// move left
 				if (key == XK_Left || (i == 1 && text[0] == 'a')) {
-					rectPos.x -= 10;
-					paddle->x -= 10;
+					rectPos.x -= (speed <= 5) ? 10 : 1.5*speed;
+					paddle->x -= (speed <= 5) ? 10 : 1.5*speed;
 				}
 
 					// quit game
