@@ -18,7 +18,7 @@ public class Menu extends JPanel implements Observer {
         this.setSize(800, 200);
         // this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.setLayout(new FlowLayout());
+        this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         // Add the components 
         // change the north button to be a toolbar using flow layout

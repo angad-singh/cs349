@@ -20,7 +20,6 @@ public class Main {
         
         // add the panel to the app window
         frame.getContentPane().add(appWindow);
-        System.out.println("TEST");
         
         // View view = new View(model);
         // Menu menu = new Menu(model);
