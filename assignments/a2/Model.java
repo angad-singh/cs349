@@ -1,7 +1,7 @@
 
 import java.util.*;
 
-public class Model {
+public class Model extends Observable {
     /** The observers that are watching this model for changes. */
     private List<Observer> observers;
 
