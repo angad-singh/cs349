@@ -21,11 +21,13 @@ public class Main {
         Model model = new Model();
         Menu menu = new Menu (model);
         ToolPalette tools = new ToolPalette(model);
+        LineThicknessPalette lineThickness = new LineThicknessPalette(model);
+
         // ToolPalette tools1 = new ToolPalette(model);
         // ToolPalette tools2 = new ToolPalette(model);
 
         toolbar.add(tools);
-        // toolbar.add(tools1);
+        toolbar.add(lineThickness);
         // toolbar.add(tools2);
         appWindow.add(menu, BorderLayout.NORTH);
         appWindow.add(toolbar, BorderLayout.WEST);
