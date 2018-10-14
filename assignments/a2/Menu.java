@@ -4,7 +4,7 @@ import java.util.*;
 import java.awt.*;
 import javax.swing.*;
 
-public class Menu extends JPanel implements Observer {
+public class Menu extends JComponent implements Observer {
 
     private Model model;
 
@@ -16,14 +16,20 @@ public class Menu extends JPanel implements Observer {
         // this.setTitle("Your program title here!");
         // this.setMinimumSize(new Dimension(128, 128));
         this.setSize(800, 200);
+        // menuBar = new JMenuBar();
+        // file = new JMenu("File");
+        // view = new JMenu("File");
+
+        // menuBar.add(file);
+        // menuBar.add(view);
         // this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.setLayout(new FlowLayout(FlowLayout.LEFT));
+        // this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         // Add the components 
         // change the north button to be a toolbar using flow layout
-		this.add(new JButton("File"));
-        this.add(new JButton("View"));
+		// this.add(new JButton("File"));
+        // this.add(new JButton("View"));
         // change the west button to have a tool bar 
 		// this.add(new JButton("West"), BorderLayout.WEST);
 		
