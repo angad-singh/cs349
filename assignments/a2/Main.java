@@ -15,6 +15,7 @@ public class Main {
         JPanel appWindow = new JPanel(new BorderLayout());
         appWindow.setSize(800, 600);
 
+        // Panel to hold all the toolbars
         JPanel toolbar = new JPanel(new GridLayout(3,1));
         toolbar.setSize(200, 600);
         
@@ -23,6 +24,7 @@ public class Main {
         ToolPalette tools = new ToolPalette(model);
         LineThicknessPalette lineThickness = new LineThicknessPalette(model);
         ColorPalette colorPalette = new ColorPalette(model);
+        Canvas canvas = new Canvas(model);
 
         // ToolPalette tools1 = new ToolPalette(model);
         // ToolPalette tools2 = new ToolPalette(model);
@@ -30,9 +32,10 @@ public class Main {
         toolbar.add(tools);
         toolbar.add(colorPalette);
         toolbar.add(lineThickness);
-        // toolbar.add(tools2);
+
         appWindow.add(menu, BorderLayout.NORTH);
         appWindow.add(toolbar, BorderLayout.WEST);
+        appWindow.add(canvas, BorderLayout.EAST);
         
         // add the panel to the app window
         frame.getContentPane().add(appWindow);
