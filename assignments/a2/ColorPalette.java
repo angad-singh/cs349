@@ -4,28 +4,30 @@ import java.util.*;
 import java.awt.*;
 import javax.swing.*;
 
-public class LineThicknessPalette extends JPanel implements Observer {
+public class ColorPalette extends JPanel implements Observer {
 
     private Model model;
 
     /**
      * Create a new View.
      */
-    public LineThicknessPalette(Model model) {
+    public ColorPalette(Model model) {
         // Set up the window.
         // this.setTitle("Your program title here!");
         // this.setMinimumSize(new Dimension(128, 128));
         this.setSize(200, 200);
         // this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.setLayout(new GridLayout(4, 1, 3, 3));
+        this.setLayout(new GridLayout(3, 2, 3, 3));
 
         // Add the components
         // change the north button to be a toolbar using flow layout
-        this.add(new JButton("Line1"));
-        this.add(new JButton("Line2"));
-        this.add(new JButton("Line3"));
-        this.add(new JButton("Line4"));
+        this.add(new JButton("Color 1"));
+        this.add(new JButton("Color 2"));
+        this.add(new JButton("Color 3"));
+        this.add(new JButton("Color 4"));
+        this.add(new JButton("Color 5"));
+        this.add(new JButton("Color 6"));
         // change the west button to have a tool bar
         // this.add(new JButton("West"), BorderLayout.WEST);
 
@@ -54,7 +56,7 @@ public class LineThicknessPalette extends JPanel implements Observer {
     public void update(Object observable) {
         // XXX Fill this in with the logic for updating the view when the model
         // changes.
-        // select the appropriate line thickness from the list
+        // select the appropriate color in the box
         System.out.println("Model changed!");
     }
 }

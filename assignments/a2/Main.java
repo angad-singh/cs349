@@ -22,11 +22,13 @@ public class Main {
         Menu menu = new Menu (model);
         ToolPalette tools = new ToolPalette(model);
         LineThicknessPalette lineThickness = new LineThicknessPalette(model);
+        ColorPalette colorPalette = new ColorPalette(model);
 
         // ToolPalette tools1 = new ToolPalette(model);
         // ToolPalette tools2 = new ToolPalette(model);
 
         toolbar.add(tools);
+        toolbar.add(colorPalette);
         toolbar.add(lineThickness);
         // toolbar.add(tools2);
         appWindow.add(menu, BorderLayout.NORTH);
