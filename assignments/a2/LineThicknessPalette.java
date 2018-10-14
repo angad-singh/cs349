@@ -3,8 +3,9 @@ import java.io.*;
 import java.util.*;
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 
-public class LineThicknessPalette extends JPanel implements Observer {
+public class LineThicknessPalette extends JComponent implements Observer {
 
     private Model model;
 
@@ -37,13 +38,19 @@ public class LineThicknessPalette extends JPanel implements Observer {
         // b.add(new JButton("Ok"));
         // b.add(Box.createHorizontalStrut(20));
         // b.add(new JButton("Cancel"));
+        this.model = model;
+        model.addObserver(this);
 
         // this.add(b, BorderLayout.SOUTH);
+        this.addMouseMotionListener(new MouseAdapter() {
+            public void mouseMoved(MouseEvent e) {
+                model.set(e.getX(), e.getY());
+            }
+        });
 
         // Hook up this observer so that it will be notified when the model
         // changes.
-        this.model = model;
-        model.addObserver(this);
+       
 
         setVisible(true);
     }
