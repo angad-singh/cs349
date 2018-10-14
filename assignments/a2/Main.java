@@ -24,7 +24,7 @@ public class Main {
         ToolPalette tools = new ToolPalette(model);
         LineThicknessPalette lineThickness = new LineThicknessPalette(model);
         ColorPalette colorPalette = new ColorPalette(model);
-        Canvas canvas = new Canvas(model);
+        MyCanvas canvas = new MyCanvas(model);
 
         // ToolPalette tools1 = new ToolPalette(model);
         // ToolPalette tools2 = new ToolPalette(model);
