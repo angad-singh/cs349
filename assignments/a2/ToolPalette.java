@@ -1,12 +1,18 @@
-
 import java.io.*;
 import java.util.*;
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class ToolPalette extends JPanel implements Observer {
 
     private Model model;
+    // JButton select;
+    // JButton erase;
+    // JButton fill("Fill");
+    // JButton line = new JButton("Line");
+    // JButton circle = new JButton("Circle");
+    // JButton rectangle
 
     /**
      * Create a new View.
@@ -18,34 +24,31 @@ public class ToolPalette extends JPanel implements Observer {
         this.setSize(200, 200);
         // this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.setLayout(new GridLayout(3,2,3,3));
+        this.setLayout(new GridLayout(3, 2, 3, 3));
 
         // Add the components
+        JButton select = new JButton("Select");
+        JButton erase = new JButton("Erase");
+        JButton fill = new JButton("Fill");
+        JButton line = new JButton("Line");
+        JButton circle = new JButton("Circle");
+        JButton rectangle = new JButton("Rectangle");
         // change the north button to be a toolbar using flow layout
-        this.add(new JButton("Select"));
-        this.add(new JButton("Erase"));
-        this.add(new JButton("Fill"));
-        this.add(new JButton("Line"));
-        this.add(new JButton("Circle"));
-        this.add(new JButton("Rectangle"));
-        // change the west button to have a tool bar
-        // this.add(new JButton("West"), BorderLayout.WEST);
+        this.add(select);
+        this.add(erase);
+        this.add(fill);
+        this.add(line);
+        this.add(circle);
+        this.add(rectangle);
 
-        // Layouts can be nested ...
-
-        // Box is an easy-to-create JPanel with a BoxLayout
-        // Box b = Box.createHorizontalBox();
-        // b.add(Box.createHorizontalGlue());
-        // b.add(new JButton("Ok"));
-        // b.add(Box.createHorizontalStrut(20));
-        // b.add(new JButton("Cancel"));
-
-        // this.add(b, BorderLayout.SOUTH);
-
-        // Hook up this observer so that it will be notified when the model
-        // changes.
         this.model = model;
         model.addObserver(this);
+
+        rectangle.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+               model.setCurrTool(1);
+            }
+        });
 
         setVisible(true);
     }

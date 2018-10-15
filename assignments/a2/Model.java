@@ -6,51 +6,13 @@ import javax.swing.JPanel;
 
 public class Model extends Observable {
     private int type;
+    private int startX;
+    private int startY;
+    private int endX;
+    private int endY;
+    private int currTool;
+    // private int
 
-    public class Drawable extends JPanel{
-        //fields
-        public int x;
-        public int y;
-        public int width;
-        public int height;
-        public int lineThickness;
-        public boolean isFilled;
-        public Color drawColor;
-        // public Color fillColor;
-        public int type;
-
-        // Constructor
-        public Drawable() {
-            this.x = 0;
-            this.y = 0;
-            this.width = 0;
-            this.height = 0;
-        }
-
-        public Drawable(int x, int y, int width, int height,
-                        int thickness, String type) {
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
-            this.lineThickness = thickness;
-            this.type = type;
-        }
-
-        public void paint(Graphics g){
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(this.drawColor);
-            g2.setStroke(new BasicStroke(this.lineThickness));
-
-            if (this.type == 1)) {
-                if (isFilled) {
-                    g2.fillRect(10,10,100,100);
-                } else {
-                    g2.drawRect(this.x, this.y, this.width, this.height);
-                }
-            }
-        }
-    }
     /** The observers that are watching this model for changes. */
     private ArrayList<Observer> observers;
     private ArrayList<Drawable> ShapeList = new ArrayList<Drawable>();
@@ -62,7 +24,7 @@ public class Model extends Observable {
         this.observers = new ArrayList<Observer>();
     }
 
-    public void setType (int i) {
+    public void setType(int i) {
         this.type = i;
     }
 
@@ -71,10 +33,23 @@ public class Model extends Observable {
         // notifyObservers();
     }
 
-    public void set(int x, int y) {
-        System.out.println("Model X = " + x);
-        System.out.println("Model Y = " + y);
-    } 
+    public void setStartPos(int x, int y) {
+        this.startX = x;
+        this.startY = y;
+    }
+
+    public void setCurrTool(int i) {
+        this.currTool = i;
+    }
+
+    public int getCurrTool() {
+        return this.currTool;
+    }
+
+    public void setEndPos(int x, int y) {
+        this.endX = x;
+        this.endY = y;
+    }
 
     /**
      * Add an observer to be notified when this model changes.
@@ -95,11 +70,15 @@ public class Model extends Observable {
         // notifyObservers();
     }
 
+    public ArrayList<Drawable> getShapeList() {
+        return this.ShapeList;
+    }
+
     /**
      * Notify all observers that the model has changed.
      */
     public void notifyObservers() {
-        for (Observer observer: this.observers) {
+        for (Observer observer : this.observers) {
             observer.update(this);
         }
     }
