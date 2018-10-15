@@ -62,6 +62,24 @@ public class ToolPalette extends JPanel implements Observer {
             }
         });
 
+        select.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                model.setCurrTool(4);
+            }
+        });
+
+        erase.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                model.setCurrTool(5);
+            }
+        });
+
+        fill.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                model.setCurrTool(6);
+            }
+        });
+
         setVisible(true);
     }
 

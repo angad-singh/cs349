@@ -5,6 +5,7 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.geom.*;
 
 public class MyCanvas extends JComponent {
 
@@ -40,6 +41,7 @@ public class MyCanvas extends JComponent {
                 current.y = e.getY();
                 // if the currently selected tool is a shape then add to the list
                 if (model.getCurrTool() <= 3) {
+                    // TODO move this to model?
                     Drawable shape = new Drawable();
                     shape.x = (model.getCurrTool() < 3) ? Math.min(start.x, current.x) : start.x;
                     shape.y = (model.getCurrTool() < 3) ? Math.min(start.y, current.y) : start.y;
@@ -55,7 +57,47 @@ public class MyCanvas extends JComponent {
                     model.addShape(shape);
                     repaint();
                 }
-                // model.setEndPos(current.x, current.y);
+            }
+
+            public void mouseClicked(MouseEvent e) {
+                current.x = e.getX();
+                current.y = e.getY();
+
+                if (model.getCurrTool() == 4) {
+                    // SELECT tool
+                    // TODO create a new function in the model
+                    for (Drawable shapeItem : model.getShapeList()) {
+                        // SELECT rectangles
+                        if (shapeItem.type == 1){
+                            if ((current.x <= shapeItem.x+shapeItem.width) && 
+                                (current.x >= shapeItem.x) &&
+                                (current.y <= shapeItem.y+shapeItem.height) &&
+                                (current.y >= shapeItem.y)) {
+                                    System.out.println("SELECT RECTANGLE");
+                                    // change the border
+                                    // change the global thickness
+                                    // change the global color
+                                    // change the tool selecton setCurrTool
+                                    // notify the views
+                                }
+                        }
+                        // SELECT circles
+                        else if (shapeItem.type == 2) {
+                        }
+                        // SELECT line
+                        else if (shapeItem.type == 3) {
+                            double mouseDist = Line2D.ptSegDist(shapeItem.x, shapeItem.y, shapeItem.x1, shapeItem.y1, current.x, current.y);
+                            if (mouseDist < 5.00) {
+                                System.out.println("SELECT LINE");
+                                // change the border
+                                // change the global thickness
+                                // change the global color
+                                // change the tool selecton setCurrTool
+                                // notify the views
+                            }
+                        }
+                    }
+                }
             }
         });
 
@@ -95,7 +137,7 @@ public class MyCanvas extends JComponent {
                 }
             }
             // draw lines
-            if (shapeItem.type == 3){
+            if (shapeItem.type == 3) {
                 g2.drawLine(shapeItem.x, shapeItem.y, shapeItem.x1, shapeItem.y1);
             }
         }
