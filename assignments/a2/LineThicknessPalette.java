@@ -44,7 +44,7 @@ public class LineThicknessPalette extends JComponent implements Observer {
         // this.add(b, BorderLayout.SOUTH);
         this.addMouseMotionListener(new MouseAdapter() {
             public void mouseMoved(MouseEvent e) {
-                model.set(e.getX(), e.getY());
+                // model.set(e.getX(), e.getY());
             }
         });
 

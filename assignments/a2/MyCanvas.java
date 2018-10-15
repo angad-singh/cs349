@@ -9,8 +9,8 @@ import javax.swing.*;
 public class MyCanvas extends JComponent {
 
     private Model model;
-    Point current = new Point(); // mouse point
-    Point start = new Point(150, 150); // click point
+    Point current = new Point();
+    Point start = new Point();
 
     /**
      * Create a new View.
@@ -25,10 +25,8 @@ public class MyCanvas extends JComponent {
                 current.y = e.getY();
                 repaint();
             }
-        });
 
-        this.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
+            public void mouseMoved(MouseEvent e) {
                 start.x = e.getX();
                 start.y = e.getY();
                 repaint();
@@ -40,6 +38,17 @@ public class MyCanvas extends JComponent {
             public void mouseReleased(MouseEvent e) {
                 current.x = e.getX();
                 current.y = e.getY();
+
+                Drawable shape = new Drawable();
+                shape.x = Math.min(start.x, current.x);
+                shape.y = Math.min(start.y, current.y);
+                shape.width = Math.abs(start.x - current.x);
+                shape.height = Math.abs(start.y - current.y);
+                // shape.lineThickness = this.model.getCurrThickness();
+                shape.isFilled = false;
+                shape.type = model.getCurrTool();
+
+                model.addShape(shape);
                 repaint();
                 // model.setEndPos(current.x, current.y);
             }
@@ -53,20 +62,10 @@ public class MyCanvas extends JComponent {
         // this.model.set(1, 2);
        
         Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(10));
+        g2.setStroke(new BasicStroke(1));
         // g2.setStroke(new BasicStroke(this.model.getCurrThickness()));
         // g2.setColor(this.model.getColor());
 
-        Drawable shape = new Drawable();
-        shape.x = start.x;
-        shape.y = start.y;
-        shape.width = Math.abs(start.x - current.x);
-        shape.height = Math.abs(start.y - current.y);
-        // shape.lineThickness = this.model.getCurrThickness();
-        shape.isFilled = false;
-        shape.type = this.model.getCurrTool();
-
-        this.model.addShape(shape);
         // loop through the model's shape list and grab the drawable objects
         // check contrasints and call appropriate methods
         for (Drawable shapeItem : this.model.getShapeList()) {
@@ -78,10 +77,6 @@ public class MyCanvas extends JComponent {
                 }
             }
         }
-
-        // g2.drawLine(10, 10, 100, 100);
-        // g2.fillRect(10, 10, 200, 200);
-
         g2.setBackground(Color.BLACK);
     }
     // super();
