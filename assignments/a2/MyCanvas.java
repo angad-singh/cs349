@@ -41,8 +41,10 @@ public class MyCanvas extends JComponent {
                 // if the currently selected tool is a shape then add to the list
                 if (model.getCurrTool() <= 3) {
                     Drawable shape = new Drawable();
-                    shape.x = Math.min(start.x, current.x);
-                    shape.y = Math.min(start.y, current.y);
+                    shape.x = (model.getCurrTool() < 3) ? Math.min(start.x, current.x) : start.x;
+                    shape.y = (model.getCurrTool() < 3) ? Math.min(start.y, current.y) : start.y;
+                    shape.x1 = current.x;
+                    shape.y1 = current.y;
                     shape.width = Math.abs(start.x - current.x);
                     shape.height = Math.abs(start.y - current.y);
                     // shape.lineThickness = this.model.getCurrThickness();
@@ -72,6 +74,7 @@ public class MyCanvas extends JComponent {
         // loop through the model's shape list and grab the drawable objects
         // check contrasints and call appropriate methods
         for (Drawable shapeItem : this.model.getShapeList()) {
+            // TODO move the following logic to model?
             // draw rectangles
             if (shapeItem.type == 1) {
                 // g2.setColor(shapeItem.drawColor);
@@ -90,6 +93,10 @@ public class MyCanvas extends JComponent {
                 } else {
                     g2.drawOval(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);
                 }
+            }
+            // draw lines
+            if (shapeItem.type == 3){
+                g2.drawLine(shapeItem.x, shapeItem.y, shapeItem.x1, shapeItem.y1);
             }
         }
         // g2.setBackground(Color.BLACK);

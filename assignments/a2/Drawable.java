@@ -7,6 +7,8 @@ public class Drawable extends JPanel {
     // fields
     public int x;
     public int y;
+    public int x1;
+    public int y1;
     public int width;
     public int height;
     public int lineThickness;
