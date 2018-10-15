@@ -83,6 +83,14 @@ public class MyCanvas extends JComponent {
                         }
                         // SELECT circles
                         else if (shapeItem.type == 2) {
+                            // find the center of the circle
+                            // distance b/w (current and center)^2 <= (radius)^2
+                            Point center = new Point(shapeItem.x + shapeItem.width/2, shapeItem.y + shapeItem.height/2);
+                            double radius = shapeItem.width/2;
+                            double dist = Math.hypot(center.x-current.x, center.y-current.y);
+                            if (dist <= radius) {
+                                System.out.println("SELECT CIRCLE");
+                            }
                         }
                         // SELECT line
                         else if (shapeItem.type == 3) {
@@ -121,8 +129,6 @@ public class MyCanvas extends JComponent {
             if (shapeItem.type == 1) {
                 // g2.setColor(shapeItem.drawColor);
                 if (shapeItem.isFilled) {
-                    System.out.println(shapeItem.isFilled);
-
                     g2.fillRect(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);
                 } else {
                     g2.drawRect(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);

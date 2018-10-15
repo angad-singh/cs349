@@ -3,6 +3,7 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.*;
 
 public class ToolPalette extends JPanel implements Observer {
 
@@ -33,6 +34,8 @@ public class ToolPalette extends JPanel implements Observer {
         JButton line = new JButton("Line");
         JButton circle = new JButton("Circle");
         JButton rectangle = new JButton("Rectangle");
+        // Use this to change border depending on what's selected
+        rectangle.setBorder(new LineBorder(Color.BLACK, 3));
         // change the north button to be a toolbar using flow layout
         this.add(select);
         this.add(erase);
