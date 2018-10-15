@@ -18,28 +18,6 @@ public class View extends JFrame implements Observer {
         this.setSize(800, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // this.setLayout(new BorderLayout());
-
-        // // Add the components 
-        // // change the north button to be a toolbar using flow layout
-		// this.add(new JButton("North"), BorderLayout.NORTH);
-        // this.add(new JButton("East"), BorderLayout.EAST);
-        // // change the west button to have a tool bar 
-		// this.add(new JButton("West"), BorderLayout.WEST);
-		
-		// // Layouts can be nested ...
-		
-		// // Box is an easy-to-create JPanel with a BoxLayout
-		// Box b = Box.createHorizontalBox();
-		// b.add(Box.createHorizontalGlue());
-		// b.add(new JButton("Ok"));
-		// b.add(Box.createHorizontalStrut(20));
-		// b.add(new JButton("Cancel"));
-		
-		// this.add(b, BorderLayout.SOUTH);
-
-        // Hook up this observer so that it will be notified when the model
-        // changes.
         this.model = model;
         model.addObserver(this);
 

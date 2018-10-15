@@ -5,8 +5,7 @@ import java.util.*;
 import javax.swing.JPanel;
 
 public class Model extends Observable {
-    int x;
-    int y;
+    private int type;
 
     public class Drawable extends JPanel{
         //fields
@@ -18,7 +17,7 @@ public class Model extends Observable {
         public boolean isFilled;
         public Color drawColor;
         // public Color fillColor;
-        public String type;
+        public int type;
 
         // Constructor
         public Drawable() {
@@ -43,7 +42,7 @@ public class Model extends Observable {
             g2.setColor(this.drawColor);
             g2.setStroke(new BasicStroke(this.lineThickness));
 
-            if (Objects.equals(this.type, new String("rectangle"))) {
+            if (this.type == 1)) {
                 if (isFilled) {
                     g2.fillRect(10,10,100,100);
                 } else {
@@ -51,14 +50,6 @@ public class Model extends Observable {
                 }
             }
         }
-
-        // public void setThickness(int thickness) {
-        //     this.lineThickness = thickness;
-        // }
-
-        // public void isFilled() {
-        //     this.lineThickness = thickness;
-        // }
     }
     /** The observers that are watching this model for changes. */
     private ArrayList<Observer> observers;
@@ -71,9 +62,13 @@ public class Model extends Observable {
         this.observers = new ArrayList<Observer>();
     }
 
+    public void setType (int i) {
+        this.type = i;
+    }
+
     public void addShape(Drawable shape) {
         this.ShapeList.add(shape);
-        notifyObservers();
+        // notifyObservers();
     }
 
     public void set(int x, int y) {
@@ -97,12 +92,7 @@ public class Model extends Observable {
 
     public void removeDrawable(Drawable shape) {
         this.ShapeList.remove(shape);
-        notifyObservers();
-    }
-
-    public void paintShapes() {
-        // Graphics g1 = 
-        
+        // notifyObservers();
     }
 
     /**

@@ -8,13 +8,14 @@ import javax.swing.*;
 
 public class MyCanvas extends JComponent {
 
-    // private Model model;
+    private Model model;
 
     /**
      * Create a new View.
      */
-    MyCanvas() {
+    MyCanvas(Model model) {
         super();
+        this.model = model;
         this.setSize(600, 600);
         this.addMouseMotionListener(new MouseAdapter() {
             public void mouseMoved(MouseEvent e) {
@@ -36,10 +37,12 @@ public class MyCanvas extends JComponent {
     public void paintComponent(Graphics g) {
         // super.paint(g);
         // cast to get 2D drawing methods
+        this.model.set(1,2);
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(10));
 
         g2.drawLine(10, 10, 100, 100);
+        g2.fillRect(10, 10, 200, 200);
 
         g2.setBackground(Color.BLACK);
     }
