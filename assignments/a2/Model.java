@@ -53,31 +53,44 @@ public class Model extends Observable {
         this.endY = y;
     }
 
+    public boolean rectHitTest(Point current, Drawable shapeItem) {
+        return ((current.x <= shapeItem.x + shapeItem.width) && (current.x >= shapeItem.x)
+                && (current.y <= shapeItem.y + shapeItem.height) && (current.y >= shapeItem.y));S
+    }
+
+    public boolean circleHitTest(Point current, Drawable shapeItem) {
+        Point center = new Point(shapeItem.x, shapeItem.y);
+        double radius = (int) Math.hypot(Math.abs(shapeItem.x - shapeItem.x1), Math.abs(shapeItem.y - shapeItem.y1));
+        double dist = Math.hypot(center.x - current.x, center.y - current.y);
+        return dist <= radius;
+    }
+
+    public boolean lineHitTest(Point current, Drawable shapeItem) {
+        double mouseDist = Line2D.ptSegDist(shapeItem.x, shapeItem.y, shapeItem.x1, shapeItem.y1, current.x, current.y);
+        return mouseDist <= 5.00;
+    }
+
     public void selectShapes(Point current) {
         for (Drawable shapeItem : this.getShapeList()) {
             // SELECT rectangles
             if (shapeItem.type == 1) {
-                if ((current.x <= shapeItem.x + shapeItem.width) && (current.x >= shapeItem.x)
-                        && (current.y <= shapeItem.y + shapeItem.height) && (current.y >= shapeItem.y)) {
+                if(this.rectHitTest(current, shapeItem)){
                     System.out.println("SELECT RECTANGLE");
-                    // change the border
-                    // change the global thickness
-                    // change the global color
-                    // change the tool selecton setCurrTool
-                    // notify the views
-                    // MAybe return after this to only select one item??
                 }
+                // // change the border
+                // // change the global thickness
+                // // change the global color
+                // // change the tool selecton setCurrTool
+                // // notify the views
+                // // MAybe return after this to only select one item??
+                // }
             }
             // SELECT circles
             else if (shapeItem.type == 2) {
                 // find the center of the circle
                 // distance b/w (current and center)^2 <= (radius)^2
-                Point center = new Point(shapeItem.x, shapeItem.y);
-                double radius = (int) Math.hypot(Math.abs(shapeItem.x - shapeItem.x1),
-                        Math.abs(shapeItem.y - shapeItem.y1));
-                double dist = Math.hypot(center.x - current.x, center.y - current.y);
                 // System.out.println("center ;"+center);
-                if (dist <= radius) {
+                if (this.circleHitTest(current, shapeItem)) {
                     System.out.println("SELECT CIRCLE");
                     // change the border
                     // change the global thickness
@@ -88,9 +101,7 @@ public class Model extends Observable {
             }
             // SELECT line
             else if (shapeItem.type == 3) {
-                double mouseDist = Line2D.ptSegDist(shapeItem.x, shapeItem.y, shapeItem.x1, shapeItem.y1, current.x,
-                        current.y);
-                if (mouseDist < 5.00) {
+                if (this.lineHitTest(current, shapeItem)) {
                     System.out.println("SELECT LINE");
                     // change the border
                     // change the global thickness

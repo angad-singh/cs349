@@ -65,55 +65,7 @@ public class MyCanvas extends JComponent {
 
                 if (model.getCurrTool() == 4) {
                     // SELECT tool
-                    // TODO create a new function in the model
                     model.selectShapes(current);
-                    // for (Drawable shapeItem : model.getShapeList()) {
-                    //     // SELECT rectangles
-                    //     if (shapeItem.type == 1){
-                    //         if ((current.x <= shapeItem.x+shapeItem.width) && 
-                    //             (current.x >= shapeItem.x) &&
-                    //             (current.y <= shapeItem.y+shapeItem.height) &&
-                    //             (current.y >= shapeItem.y)) {
-                    //                 System.out.println("SELECT RECTANGLE");
-                    //                 // change the border
-                    //                 // change the global thickness
-                    //                 // change the global color
-                    //                 // change the tool selecton setCurrTool
-                    //                 // notify the views
-                    //                 // MAybe return after this to only select one item??
-                    //             }
-                    //     }
-                    //     // SELECT circles
-                    //     else if (shapeItem.type == 2) {
-                    //         // find the center of the circle
-                    //         // distance b/w (current and center)^2 <= (radius)^2
-                    //         Point center = new Point(shapeItem.x, shapeItem.y);
-                    //         double radius = (int)Math.hypot(Math.abs(shapeItem.x - shapeItem.x1),
-                    //                                         Math.abs(shapeItem.y - shapeItem.y1));
-                    //         double dist = Math.hypot(center.x-current.x, center.y-current.y);
-                    //         // System.out.println("center ;"+center);
-                    //         if (dist <= radius) {
-                    //             System.out.println("SELECT CIRCLE");
-                    //             // change the border
-                    //             // change the global thickness
-                    //             // change the global color
-                    //             // change the tool selecton setCurrTool
-                    //             // notify the views
-                    //         }
-                    //     }
-                    //     // SELECT line
-                    //     else if (shapeItem.type == 3) {
-                    //         double mouseDist = Line2D.ptSegDist(shapeItem.x, shapeItem.y, shapeItem.x1, shapeItem.y1, current.x, current.y);
-                    //         if (mouseDist < 5.00) {
-                    //             System.out.println("SELECT LINE");
-                    //             // change the border
-                    //             // change the global thickness
-                    //             // change the global color
-                    //             // change the tool selecton setCurrTool
-                    //             // notify the views
-                    //         }
-                    //     }
-                    // }
                 }
             }
         });
