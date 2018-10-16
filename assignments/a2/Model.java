@@ -95,6 +95,7 @@ public class Model extends Observable {
                 if (this.rectHitTest(current, shapeItem)) {
                     it.remove();
                     notifyObservers();
+                    break;
                 }
             }
             // DELETE circles
@@ -102,6 +103,7 @@ public class Model extends Observable {
                 if (this.circleHitTest(current,  shapeItem)) {
                     it.remove();
                     notifyObservers();
+                    break;
                 }
             }
             // DELETE line
@@ -109,6 +111,7 @@ public class Model extends Observable {
                 if (this.lineHitTest(current,  shapeItem)) {
                     it.remove();
                     notifyObservers();
+                    break;
                 }
             }
         }
@@ -125,6 +128,7 @@ public class Model extends Observable {
                 if (this.rectHitTest(current, shapeItem)) {
                     shapeItem.isFilled = true;
                     notifyObservers();
+                    break;
                 }
             }
             // FILL circles
@@ -132,6 +136,7 @@ public class Model extends Observable {
                 if (this.circleHitTest(current, shapeItem)) {
                     shapeItem.isFilled = true;
                     notifyObservers();
+                    break;
                 }
             }
         }
@@ -144,6 +149,7 @@ public class Model extends Observable {
                 if(this.rectHitTest(current, shapeItem)){
                     System.out.println("SELECT RECTANGLE");
                     notifyObservers();
+                    break;
                 }
                 // // change the border
                 // // change the global thickness
@@ -166,6 +172,7 @@ public class Model extends Observable {
                     // change the tool selecton setCurrTool
                     // notify the views
                     notifyObservers();
+                    break;
                 }
             }
             // SELECT line
@@ -178,6 +185,7 @@ public class Model extends Observable {
                     // change the tool selecton setCurrTool
                     // notify the views
                     notifyObservers();
+                    break;
                 }
             }
         }

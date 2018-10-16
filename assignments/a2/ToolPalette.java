@@ -35,7 +35,6 @@ public class ToolPalette extends JPanel implements Observer {
         JButton circle = new JButton("Circle");
         JButton rectangle = new JButton("Rectangle");
         // Use this to change border depending on what's selected
-        rectangle.setBorder(new LineBorder(Color.BLACK, 3));
         // change the north button to be a toolbar using flow layout
         this.add(select);
         this.add(erase);
@@ -49,42 +48,101 @@ public class ToolPalette extends JPanel implements Observer {
 
         rectangle.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-               model.setCurrTool(1);
+                model.setCurrTool(1);
+                rectangle.setBorder(new LineBorder(Color.BLACK, 3));
+                circle.setBorder(new LineBorder(Color.BLACK, 0));
+                line.setBorder(new LineBorder(Color.BLACK, 0));
+                select.setBorder(new LineBorder(Color.BLACK, 0));
+                erase.setBorder(new LineBorder(Color.BLACK, 0));
+                fill.setBorder(new LineBorder(Color.BLACK, 0));
+                // repaint();
             }
         });
 
         circle.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrTool(2);
+                rectangle.setBorder(new LineBorder(Color.BLACK, 0));
+                circle.setBorder(new LineBorder(Color.BLACK, 3));
+                line.setBorder(new LineBorder(Color.BLACK, 0));
+                select.setBorder(new LineBorder(Color.BLACK, 0));
+                erase.setBorder(new LineBorder(Color.BLACK, 0));
+                fill.setBorder(new LineBorder(Color.BLACK, 0));
+                // repaint();
             }
         });
 
         line.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrTool(3);
+                rectangle.setBorder(new LineBorder(Color.BLACK, 0));
+                circle.setBorder(new LineBorder(Color.BLACK, 0));
+                line.setBorder(new LineBorder(Color.BLACK, 3));
+                select.setBorder(new LineBorder(Color.BLACK, 0));
+                erase.setBorder(new LineBorder(Color.BLACK, 0));
+                fill.setBorder(new LineBorder(Color.BLACK, 0));
+                // repaint();
             }
         });
 
         select.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrTool(4);
+                rectangle.setBorder(new LineBorder(Color.BLACK, 0));
+                circle.setBorder(new LineBorder(Color.BLACK, 0));
+                line.setBorder(new LineBorder(Color.BLACK, 0));
+                select.setBorder(new LineBorder(Color.BLACK, 3));
+                erase.setBorder(new LineBorder(Color.BLACK, 0));
+                fill.setBorder(new LineBorder(Color.BLACK, 0));
+                // repaint();
             }
         });
 
         erase.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrTool(5);
+                rectangle.setBorder(new LineBorder(Color.BLACK, 0));
+                circle.setBorder(new LineBorder(Color.BLACK, 0));
+                line.setBorder(new LineBorder(Color.BLACK, 0));
+                select.setBorder(new LineBorder(Color.BLACK, 0));
+                erase.setBorder(new LineBorder(Color.BLACK, 3));
+                fill.setBorder(new LineBorder(Color.BLACK, 0));
+                // repaint();
             }
         });
 
         fill.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrTool(6);
+                // repaint();
+                rectangle.setBorder(new LineBorder(Color.BLACK, 0));
+                circle.setBorder(new LineBorder(Color.BLACK, 0));
+                line.setBorder(new LineBorder(Color.BLACK, 0));
+                select.setBorder(new LineBorder(Color.BLACK, 0));
+                erase.setBorder(new LineBorder(Color.BLACK, 0));
+                fill.setBorder(new LineBorder(Color.BLACK, 3));
             }
         });
 
         setVisible(true);
     }
+
+    // public void paintComponent(Graphics g) {
+    //     switch (this.model.getCurrTool()) {
+    //     case 1:
+    //         rectangle.setBorder(new LineBorder(Color.BLACK, 3));
+    //     case 2:
+    //         circle.setBorder(new LineBorder(Color.BLACK, 3));
+    //     case 3:
+    //         line.setBorder(new LineBorder(Color.BLACK, 3));
+    //     case 4:
+    //         select.setBorder(new LineBorder(Color.BLACK, 3));
+    //     case 5:
+    //         erase.setBorder(new LineBorder(Color.BLACK, 3));
+    //     case 6:
+    //         fill.setBorder(new LineBorder(Color.BLACK, 3));
+    //     }
+    // }
 
     /**
      * Update with data from the model.
@@ -92,6 +150,7 @@ public class ToolPalette extends JPanel implements Observer {
     public void update(Object observable) {
         // XXX Fill this in with the logic for updating the view when the model
         // changes.
-        System.out.println("Model changed!");
+        System.out.println("Model changed! whatttttttt");
+        // repaint();
     }
 }
