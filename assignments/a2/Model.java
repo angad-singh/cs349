@@ -55,7 +55,7 @@ public class Model extends Observable {
 
     public boolean rectHitTest(Point current, Drawable shapeItem) {
         return ((current.x <= shapeItem.x + shapeItem.width) && (current.x >= shapeItem.x)
-                && (current.y <= shapeItem.y + shapeItem.height) && (current.y >= shapeItem.y));S
+                && (current.y <= shapeItem.y + shapeItem.height) && (current.y >= shapeItem.y));
     }
 
     public boolean circleHitTest(Point current, Drawable shapeItem) {
@@ -68,6 +68,36 @@ public class Model extends Observable {
     public boolean lineHitTest(Point current, Drawable shapeItem) {
         double mouseDist = Line2D.ptSegDist(shapeItem.x, shapeItem.y, shapeItem.x1, shapeItem.y1, current.x, current.y);
         return mouseDist <= 5.00;
+    }
+
+    public void deleteShapes(Point current){
+
+        Iterator<Drawable> it = ShapeList.iterator();
+
+        while (it.hasNext()) {
+            // DELETE rectangles
+            Drawable shapeItem = it.next();
+            if (shapeItem.type == 1) {
+                if (this.rectHitTest(current, shapeItem)) {
+                    it.remove();
+                    notifyObservers();
+                }
+            }
+            // DELETE circles
+            else if (shapeItem.type == 2) {
+                if (this.circleHitTest(current,  shapeItem)) {
+                    it.remove();
+                    notifyObservers();
+                }
+            }
+            // DELETE line
+            else if (shapeItem.type == 3) {
+                if (this.lineHitTest(current,  shapeItem)) {
+                    it.remove();
+                    notifyObservers();
+                }
+            }
+        }
     }
 
     public void selectShapes(Point current) {

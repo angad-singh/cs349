@@ -7,7 +7,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.geom.*;
 
-public class MyCanvas extends JComponent {
+public class MyCanvas extends JComponent implements Observer{
 
     private Model model;
     Point current = new Point();
@@ -19,6 +19,7 @@ public class MyCanvas extends JComponent {
     MyCanvas(Model model) {
         super();
         this.model = model;
+        model.addObserver(this);
         this.setSize(600, 600);
         this.addMouseMotionListener(new MouseAdapter() {
             public void mouseDragged(MouseEvent e) {
@@ -66,6 +67,9 @@ public class MyCanvas extends JComponent {
                 if (model.getCurrTool() == 4) {
                     // SELECT tool
                     model.selectShapes(current);
+                } else if (model.getCurrTool() == 5) {
+                    // ERASE tool
+                    model.deleteShapes(current);
                 }
             }
         });
@@ -156,6 +160,6 @@ public class MyCanvas extends JComponent {
         // XXX Fill this in with the logic for updating the view when the model
         // changes.
         // select the appropriate line thickness from the list
-        System.out.println("Model changed!");
+        repaint();
     }
 }
