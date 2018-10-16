@@ -14,7 +14,7 @@ public class Drawable extends JPanel {
     public int lineThickness;
     public boolean isFilled;
     public Color drawColor;
-    // public Color fillColor;
+    public Color fillColor;
     public int type;
 
     // Constructor

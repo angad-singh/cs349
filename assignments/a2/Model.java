@@ -13,6 +13,8 @@ public class Model extends Observable {
     private int endX;
     private int endY;
     private int currTool;
+    private Color drawColor = Color.BLACK;
+    private Color fillColor = Color.BLACK;
     // private int
 
     /** The observers that are watching this model for changes. */
@@ -51,6 +53,18 @@ public class Model extends Observable {
     public void setEndPos(int x, int y) {
         this.endX = x;
         this.endY = y;
+    }
+
+    public ArrayList<Drawable> getShapeList() {
+        return this.ShapeList;
+    }
+
+    public Color getCurrDrawColor() {
+        return this.drawColor;
+    }
+    
+    public Color getCurrFillColor() {
+        return this.fillColor;
     }
 
     public boolean rectHitTest(Point current, Drawable shapeItem) {
@@ -100,12 +114,36 @@ public class Model extends Observable {
         }
     }
 
+    public void fillShapes(Point current){
+
+        Iterator<Drawable> it = ShapeList.iterator();
+
+        while (it.hasNext()) {
+            // FILL rectangles
+            Drawable shapeItem = it.next();
+            if (shapeItem.type == 1) {
+                if (this.rectHitTest(current, shapeItem)) {
+                    shapeItem.isFilled = true;
+                    notifyObservers();
+                }
+            }
+            // FILL circles
+            else if (shapeItem.type == 2) {
+                if (this.circleHitTest(current, shapeItem)) {
+                    shapeItem.isFilled = true;
+                    notifyObservers();
+                }
+            }
+        }
+    }
+
     public void selectShapes(Point current) {
         for (Drawable shapeItem : this.getShapeList()) {
             // SELECT rectangles
             if (shapeItem.type == 1) {
                 if(this.rectHitTest(current, shapeItem)){
                     System.out.println("SELECT RECTANGLE");
+                    notifyObservers();
                 }
                 // // change the border
                 // // change the global thickness
@@ -127,6 +165,7 @@ public class Model extends Observable {
                     // change the global color
                     // change the tool selecton setCurrTool
                     // notify the views
+                    notifyObservers();
                 }
             }
             // SELECT line
@@ -138,6 +177,7 @@ public class Model extends Observable {
                     // change the global color
                     // change the tool selecton setCurrTool
                     // notify the views
+                    notifyObservers();
                 }
             }
         }
@@ -160,10 +200,6 @@ public class Model extends Observable {
     public void removeDrawable(Drawable shape) {
         this.ShapeList.remove(shape);
         // notifyObservers();
-    }
-
-    public ArrayList<Drawable> getShapeList() {
-        return this.ShapeList;
     }
 
     /**
