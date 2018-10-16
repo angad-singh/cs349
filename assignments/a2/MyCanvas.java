@@ -43,8 +43,8 @@ public class MyCanvas extends JComponent {
                 if (model.getCurrTool() <= 3) {
                     // TODO move this to model?
                     Drawable shape = new Drawable();
-                    shape.x = (model.getCurrTool() < 3) ? Math.min(start.x, current.x) : start.x;
-                    shape.y = (model.getCurrTool() < 3) ? Math.min(start.y, current.y) : start.y;
+                    shape.x = (model.getCurrTool() < 2) ? Math.min(start.x, current.x) : start.x;
+                    shape.y = (model.getCurrTool() < 2) ? Math.min(start.y, current.y) : start.y;
                     shape.x1 = current.x;
                     shape.y1 = current.y;
                     shape.width = Math.abs(start.x - current.x);
@@ -79,17 +79,25 @@ public class MyCanvas extends JComponent {
                                     // change the global color
                                     // change the tool selecton setCurrTool
                                     // notify the views
+                                    // MAybe return after this to only select one item??
                                 }
                         }
                         // SELECT circles
                         else if (shapeItem.type == 2) {
                             // find the center of the circle
                             // distance b/w (current and center)^2 <= (radius)^2
-                            Point center = new Point(shapeItem.x + shapeItem.width/2, shapeItem.y + shapeItem.height/2);
-                            double radius = shapeItem.width/2;
+                            Point center = new Point(shapeItem.x, shapeItem.y);
+                            double radius = (int)Math.hypot(Math.abs(shapeItem.x - shapeItem.x1),
+                                                            Math.abs(shapeItem.y - shapeItem.y1));
                             double dist = Math.hypot(center.x-current.x, center.y-current.y);
+                            // System.out.println("center ;"+center);
                             if (dist <= radius) {
                                 System.out.println("SELECT CIRCLE");
+                                // change the border
+                                // change the global thickness
+                                // change the global color
+                                // change the tool selecton setCurrTool
+                                // notify the views
                             }
                         }
                         // SELECT line
@@ -136,10 +144,14 @@ public class MyCanvas extends JComponent {
             }
             // draw circles
             if (shapeItem.type == 2) {
+                int radius = (int) Math.hypot(Math.abs(shapeItem.x1 - shapeItem.x), Math.abs(shapeItem.y1 - shapeItem.y));
+                // System.out.println("radius : " + radius);
+                // System.out.println("shapeItem.x1 - shapeItem.x : " + (shapeItem.x1 - shapeItem.x));
+                // System.out.println("shapeItem.y1 - shapeItem.y : " + (shapeItem.y1 - shapeItem.y));
                 if (shapeItem.isFilled) {
-                    g2.fillOval(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);
+                    g2.fillOval(shapeItem.x - radius, shapeItem.y - radius, 2*radius, 2*radius);
                 } else {
-                    g2.drawOval(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);
+                    g2.drawOval(shapeItem.x - radius, shapeItem.y - radius, 2*radius, 2*radius);
                 }
             }
             // draw lines
