@@ -10,6 +10,11 @@ public class LineThicknessPalette extends JComponent implements Observer {
 
     private Model model;
 
+    JButton line1 = new JButton("Line1");
+    JButton line2 = new JButton("Line2");
+    JButton line3 = new JButton("Line3");
+    JButton line4 = new JButton("Line4");
+
     /**
      * Create a new View.
      */
@@ -24,10 +29,6 @@ public class LineThicknessPalette extends JComponent implements Observer {
 
         // Add the components
         // change the north button to be a toolbar using flow layout
-        JButton line1 = new JButton("Line1");
-        JButton line2 = new JButton("Line2");
-        JButton line3 = new JButton("Line3");
-        JButton line4 = new JButton("Line4");
         // Use this to change border depending on what's selected
         // change the north button to be a toolbar using flow layout
         this.add(line1);
@@ -41,10 +42,6 @@ public class LineThicknessPalette extends JComponent implements Observer {
         line1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrThickness(2);
-                line1.setBorder(new LineBorder(Color.BLACK, 3));
-                line2.setBorder(new LineBorder(Color.BLACK, 0));
-                line3.setBorder(new LineBorder(Color.BLACK, 0));
-                line4.setBorder(new LineBorder(Color.BLACK, 0));
                 model.notifyObservers();
                 // repaint();
             }
@@ -53,10 +50,6 @@ public class LineThicknessPalette extends JComponent implements Observer {
         line2.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrThickness(4);
-                line2.setBorder(new LineBorder(Color.BLACK, 3));
-                line1.setBorder(new LineBorder(Color.BLACK, 0));
-                line3.setBorder(new LineBorder(Color.BLACK, 0));
-                line4.setBorder(new LineBorder(Color.BLACK, 0));
                 model.notifyObservers();
                 // repaint();
             }
@@ -65,10 +58,6 @@ public class LineThicknessPalette extends JComponent implements Observer {
         line3.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrThickness(6);
-                line3.setBorder(new LineBorder(Color.BLACK, 3));
-                line2.setBorder(new LineBorder(Color.BLACK, 0));
-                line1.setBorder(new LineBorder(Color.BLACK, 0));
-                line4.setBorder(new LineBorder(Color.BLACK, 0));
                 model.notifyObservers();
                 // repaint();
             }
@@ -77,10 +66,6 @@ public class LineThicknessPalette extends JComponent implements Observer {
         line4.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrThickness(8);
-                line4.setBorder(new LineBorder(Color.BLACK, 3));
-                line2.setBorder(new LineBorder(Color.BLACK, 0));
-                line3.setBorder(new LineBorder(Color.BLACK, 0));
-                line1.setBorder(new LineBorder(Color.BLACK, 0));
                 model.notifyObservers();
                 // repaint();
             }
@@ -98,7 +83,6 @@ public class LineThicknessPalette extends JComponent implements Observer {
 
         // Hook up this observer so that it will be notified when the model
         // changes.
-       
 
         setVisible(true);
     }
@@ -107,9 +91,37 @@ public class LineThicknessPalette extends JComponent implements Observer {
      * Update with data from the model.
      */
     public void update(Object observable) {
-        // XXX Fill this in with the logic for updating the view when the model
-        // changes.
-        // select the appropriate line thickness from the list
-        System.out.println("Model changed!");
+        switch (this.model.getCurrThickness()) {
+        case 2:
+            line1.setBorder(new LineBorder(Color.BLACK, 3));
+            line2.setBorder(new LineBorder(Color.BLACK, 0));
+            line3.setBorder(new LineBorder(Color.BLACK, 0));
+            line4.setBorder(new LineBorder(Color.BLACK, 0));
+            break;
+        case 4:
+            line2.setBorder(new LineBorder(Color.BLACK, 3));
+            line1.setBorder(new LineBorder(Color.BLACK, 0));
+            line3.setBorder(new LineBorder(Color.BLACK, 0));
+            line4.setBorder(new LineBorder(Color.BLACK, 0));
+            break;
+        case 6:
+            line3.setBorder(new LineBorder(Color.BLACK, 3));
+            line2.setBorder(new LineBorder(Color.BLACK, 0));
+            line1.setBorder(new LineBorder(Color.BLACK, 0));
+            line4.setBorder(new LineBorder(Color.BLACK, 0));
+            break;
+        case 8:
+            line4.setBorder(new LineBorder(Color.BLACK, 3));
+            line2.setBorder(new LineBorder(Color.BLACK, 0));
+            line3.setBorder(new LineBorder(Color.BLACK, 0));
+            line1.setBorder(new LineBorder(Color.BLACK, 0));
+            break;
+        default:
+            line4.setBorder(new LineBorder(Color.BLACK, 0));
+            line2.setBorder(new LineBorder(Color.BLACK, 0));
+            line3.setBorder(new LineBorder(Color.BLACK, 0));
+            line1.setBorder(new LineBorder(Color.BLACK, 0));
+
+        }
     }
 }

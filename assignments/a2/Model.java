@@ -194,8 +194,9 @@ public class Model extends Observable {
             // SELECT rectangles
             if (shapeItem.type == 1) {
                 if (this.rectHitTest(current, shapeItem)) {
-                    System.out.println("SELECT RECTANGLE");
                     SelectedShape = shapeItem;
+                    this.setCurrThickness(shapeItem.lineThickness);
+                    this.setCurrDrawColor(shapeItem.drawColor);
                     notifyObservers();
                     break;
                 }
@@ -213,8 +214,9 @@ public class Model extends Observable {
                 // distance b/w (current and center)^2 <= (radius)^2
                 // System.out.println("center ;"+center);
                 if (this.circleHitTest(current, shapeItem)) {
-                    System.out.println("SELECT CIRCLE");
                     SelectedShape = shapeItem;
+                    this.setCurrThickness(shapeItem.lineThickness);
+                    this.setCurrDrawColor(shapeItem.drawColor);
                     // change the border
                     // change the global thickness
                     // change the global color
@@ -227,8 +229,9 @@ public class Model extends Observable {
             // SELECT line
             else if (shapeItem.type == 3) {
                 if (this.lineHitTest(current, shapeItem)) {
-                    System.out.println("SELECT LINE");
                     SelectedShape = shapeItem;
+                    this.setCurrThickness(shapeItem.lineThickness);
+                    this.setCurrDrawColor(shapeItem.drawColor);
                     // change the border
                     // change the global thickness
                     // change the global color
