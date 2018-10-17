@@ -67,6 +67,14 @@ public class Model extends Observable {
         return this.fillColor;
     }
 
+    public void setCurrDrawColor(Color c) {
+        this.drawColor = c;
+    }
+
+    public void setCurrFillColor(Color c) {
+        this.fillColor = c;
+    }
+
     public boolean rectHitTest(Point current, Drawable shapeItem) {
         return ((current.x <= shapeItem.x + shapeItem.width) && (current.x >= shapeItem.x)
                 && (current.y <= shapeItem.y + shapeItem.height) && (current.y >= shapeItem.y));
@@ -127,6 +135,7 @@ public class Model extends Observable {
             if (shapeItem.type == 1) {
                 if (this.rectHitTest(current, shapeItem)) {
                     shapeItem.isFilled = true;
+                    shapeItem.drawColor = this.getCurrDrawColor();
                     notifyObservers();
                     break;
                 }
@@ -135,6 +144,7 @@ public class Model extends Observable {
             else if (shapeItem.type == 2) {
                 if (this.circleHitTest(current, shapeItem)) {
                     shapeItem.isFilled = true;
+                    shapeItem.drawColor = this.getCurrDrawColor();
                     notifyObservers();
                     break;
                 }

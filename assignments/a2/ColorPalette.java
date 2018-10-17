@@ -1,8 +1,9 @@
-
 import java.io.*;
 import java.util.*;
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.*;
 
 public class ColorPalette extends JPanel implements Observer {
 
@@ -21,29 +22,131 @@ public class ColorPalette extends JPanel implements Observer {
         this.setLayout(new GridLayout(3, 2, 3, 3));
 
         // Add the components
+        JButton red = new JButton("Red");
+        JButton blue = new JButton("Blue");
+        JButton green = new JButton("Green");
+        JButton yellow = new JButton("Yellow");
+        JButton black = new JButton("Black");
+        JButton white = new JButton("White");
+        // Use this to change border depending on what's selected
         // change the north button to be a toolbar using flow layout
-        this.add(new JButton("Color 1"));
-        this.add(new JButton("Color 2"));
-        this.add(new JButton("Color 3"));
-        this.add(new JButton("Color 4"));
-        this.add(new JButton("Color 5"));
-        this.add(new JButton("Color 6"));
-        // change the west button to have a tool bar
-        // this.add(new JButton("West"), BorderLayout.WEST);
+        this.add(red);
+        this.add(blue);
+        this.add(green);
+        this.add(yellow);
+        this.add(black);
+        this.add(white);
 
-        // Layouts can be nested ...
+        this.model = model;
+        model.addObserver(this);
 
-        // Box is an easy-to-create JPanel with a BoxLayout
-        // Box b = Box.createHorizontalBox();
-        // b.add(Box.createHorizontalGlue());
-        // b.add(new JButton("Ok"));
-        // b.add(Box.createHorizontalStrut(20));
-        // b.add(new JButton("Cancel"));
+        red.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                // if (model.getCurrTool() == 6) {
+                    // model.setCurrFillColor(Color.RED);
+                // } else {
+                    model.setCurrDrawColor(Color.RED);
+                // }
+                red.setBorder(new LineBorder(Color.BLACK, 3));
+                blue.setBorder(new LineBorder(Color.BLACK, 0));
+                green.setBorder(new LineBorder(Color.BLACK, 0));
+                yellow.setBorder(new LineBorder(Color.BLACK, 0));
+                black.setBorder(new LineBorder(Color.BLACK, 0));
+                white.setBorder(new LineBorder(Color.BLACK, 0));
+                model.notifyObservers();
+                // repaint();
+            }
+        });
 
-        // this.add(b, BorderLayout.SOUTH);
+        blue.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                // if (model.getCurrTool() == 6) {
+                    // model.setCurrFillColor(Color.BLUE);
+                // } else {
+                    model.setCurrDrawColor(Color.BLUE);
+                // }
+                red.setBorder(new LineBorder(Color.BLACK, 0));
+                blue.setBorder(new LineBorder(Color.BLACK, 3));
+                green.setBorder(new LineBorder(Color.BLACK, 0));
+                yellow.setBorder(new LineBorder(Color.BLACK, 0));
+                black.setBorder(new LineBorder(Color.BLACK, 0));
+                white.setBorder(new LineBorder(Color.BLACK, 0));
+                model.notifyObservers();
+                // repaint();
+            }
+        });
 
-        // Hook up this observer so that it will be notified when the model
-        // changes.
+        green.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                // if (model.getCurrTool() == 6) {
+                    // model.setCurrFillColor(Color.GREEN);
+                // } else {
+                    model.setCurrDrawColor(Color.GREEN);
+                // }
+                red.setBorder(new LineBorder(Color.BLACK, 0));
+                blue.setBorder(new LineBorder(Color.BLACK, 0));
+                green.setBorder(new LineBorder(Color.BLACK, 3));
+                yellow.setBorder(new LineBorder(Color.BLACK, 0));
+                black.setBorder(new LineBorder(Color.BLACK, 0));
+                white.setBorder(new LineBorder(Color.BLACK, 0));
+                model.notifyObservers();
+                // repaint();
+            }
+        });
+
+        yellow.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                // if (model.getCurrTool() == 6) {
+                    // model.setCurrFillColor(Color.YELLOW);
+                // } else {
+                    model.setCurrDrawColor(Color.YELLOW);
+                // }
+                red.setBorder(new LineBorder(Color.BLACK, 0));
+                blue.setBorder(new LineBorder(Color.BLACK, 0));
+                green.setBorder(new LineBorder(Color.BLACK, 0));
+                yellow.setBorder(new LineBorder(Color.BLACK, 3));
+                black.setBorder(new LineBorder(Color.BLACK, 0));
+                white.setBorder(new LineBorder(Color.BLACK, 0));
+                model.notifyObservers();
+                // repaint();
+            }
+        });
+
+        black.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                // if (model.getCurrTool() == 6) {
+                    // model.setCurrFillColor(Color.BLACK);
+                // } else {
+                    model.setCurrDrawColor(Color.BLACK);
+                // }
+                red.setBorder(new LineBorder(Color.BLACK, 0));
+                blue.setBorder(new LineBorder(Color.BLACK, 0));
+                green.setBorder(new LineBorder(Color.BLACK, 0));
+                yellow.setBorder(new LineBorder(Color.BLACK, 0));
+                black.setBorder(new LineBorder(Color.BLACK, 3));
+                white.setBorder(new LineBorder(Color.BLACK, 0));
+                model.notifyObservers();
+                // repaint();
+            }
+        });
+
+        white.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                // if (model.getCurrTool() == 6) {
+                //     model.setCurrFillColor(Color.WHITE);
+                // } else {
+                    model.setCurrDrawColor(Color.WHITE);
+                // }
+                red.setBorder(new LineBorder(Color.BLACK, 0));
+                blue.setBorder(new LineBorder(Color.BLACK, 0));
+                green.setBorder(new LineBorder(Color.BLACK, 0));
+                yellow.setBorder(new LineBorder(Color.BLACK, 0));
+                black.setBorder(new LineBorder(Color.BLACK, 0));
+                white.setBorder(new LineBorder(Color.BLACK, 3));
+                model.notifyObservers();
+                // repaint();
+            }
+        });
         this.model = model;
         model.addObserver(this);
 

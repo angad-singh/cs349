@@ -92,14 +92,15 @@ public class MyCanvas extends JComponent implements Observer{
         // loop through the model's shape list and grab the drawable objects
         // check contrasints and call appropriate methods
         for (Drawable shapeItem : this.model.getShapeList()) {
+            g2.setColor(shapeItem.drawColor);
             // TODO set color
             // draw rectangles
             if (shapeItem.type == 1) {
                 if (shapeItem.isFilled) {
-                    g2.setColor(shapeItem.fillColor);
+                    // g2.setPaint(shapeItem.fillColor);
                     g2.fillRect(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);
                 } else {
-                    g2.setColor(shapeItem.drawColor);
+                    // g2.setColor(shapeItem.drawColor);
                     g2.drawRect(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);
                 }
             }
@@ -107,16 +108,17 @@ public class MyCanvas extends JComponent implements Observer{
             if (shapeItem.type == 2) {
                 int radius = (int) Math.hypot(Math.abs(shapeItem.x1 - shapeItem.x), Math.abs(shapeItem.y1 - shapeItem.y));
                 if (shapeItem.isFilled) {
-                    g2.setColor(shapeItem.fillColor);
+                    // g2.setPaint(shapeItem.fillColor);
+                    // System.out.println(g2);
                     g2.fillOval(shapeItem.x - radius, shapeItem.y - radius, 2*radius, 2*radius);
                 } else {
-                    g2.setColor(shapeItem.drawColor);
+                    // g2.setColor(shapeItem.drawColor);
                     g2.drawOval(shapeItem.x - radius, shapeItem.y - radius, 2*radius, 2*radius);
                 }
             }
             // draw lines
             if (shapeItem.type == 3) {
-                g2.setColor(shapeItem.drawColor);
+                // g2.setColor(shapeItem.drawColor);
                 g2.drawLine(shapeItem.x, shapeItem.y, shapeItem.x1, shapeItem.y1);
             }
         }
