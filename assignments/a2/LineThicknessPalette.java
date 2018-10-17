@@ -2,8 +2,9 @@
 import java.io.*;
 import java.util.*;
 import java.awt.*;
-import javax.swing.*;
 import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
 
 public class LineThicknessPalette extends JComponent implements Observer {
 
@@ -23,21 +24,68 @@ public class LineThicknessPalette extends JComponent implements Observer {
 
         // Add the components
         // change the north button to be a toolbar using flow layout
-        this.add(new JButton("Line1"));
-        this.add(new JButton("Line2"));
-        this.add(new JButton("Line3"));
-        this.add(new JButton("Line4"));
-        // change the west button to have a tool bar
-        // this.add(new JButton("West"), BorderLayout.WEST);
+        JButton line1 = new JButton("Line1");
+        JButton line2 = new JButton("Line2");
+        JButton line3 = new JButton("Line3");
+        JButton line4 = new JButton("Line4");
+        // Use this to change border depending on what's selected
+        // change the north button to be a toolbar using flow layout
+        this.add(line1);
+        this.add(line2);
+        this.add(line3);
+        this.add(line4);
 
-        // Layouts can be nested ...
+        this.model = model;
+        model.addObserver(this);
 
-        // Box is an easy-to-create JPanel with a BoxLayout
-        // Box b = Box.createHorizontalBox();
-        // b.add(Box.createHorizontalGlue());
-        // b.add(new JButton("Ok"));
-        // b.add(Box.createHorizontalStrut(20));
-        // b.add(new JButton("Cancel"));
+        line1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                model.setCurrThickness(2);
+                line1.setBorder(new LineBorder(Color.BLACK, 3));
+                line2.setBorder(new LineBorder(Color.BLACK, 0));
+                line3.setBorder(new LineBorder(Color.BLACK, 0));
+                line4.setBorder(new LineBorder(Color.BLACK, 0));
+                model.notifyObservers();
+                // repaint();
+            }
+        });
+
+        line2.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                model.setCurrThickness(4);
+                line2.setBorder(new LineBorder(Color.BLACK, 3));
+                line1.setBorder(new LineBorder(Color.BLACK, 0));
+                line3.setBorder(new LineBorder(Color.BLACK, 0));
+                line4.setBorder(new LineBorder(Color.BLACK, 0));
+                model.notifyObservers();
+                // repaint();
+            }
+        });
+
+        line3.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                model.setCurrThickness(6);
+                line3.setBorder(new LineBorder(Color.BLACK, 3));
+                line2.setBorder(new LineBorder(Color.BLACK, 0));
+                line1.setBorder(new LineBorder(Color.BLACK, 0));
+                line4.setBorder(new LineBorder(Color.BLACK, 0));
+                model.notifyObservers();
+                // repaint();
+            }
+        });
+
+        line4.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                model.setCurrThickness(8);
+                line4.setBorder(new LineBorder(Color.BLACK, 3));
+                line2.setBorder(new LineBorder(Color.BLACK, 0));
+                line3.setBorder(new LineBorder(Color.BLACK, 0));
+                line1.setBorder(new LineBorder(Color.BLACK, 0));
+                model.notifyObservers();
+                // repaint();
+            }
+        });
+
         this.model = model;
         model.addObserver(this);
 

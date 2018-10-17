@@ -7,15 +7,15 @@ import java.awt.geom.*;
 import javax.swing.JPanel;
 
 public class Model extends Observable {
-    private int type;
-    private int startX;
-    private int startY;
-    private int endX;
-    private int endY;
+    // private int type;
+    // private int startX;
+    // private int startY;
+    // private int endX;
+    // private int endY;
     private int currTool;
     private Color drawColor = Color.BLACK;
     private Color fillColor = Color.BLACK;
-    // private int
+    private int thickness;
 
     /** The observers that are watching this model for changes. */
     private ArrayList<Observer> observers;
@@ -28,19 +28,19 @@ public class Model extends Observable {
         this.observers = new ArrayList<Observer>();
     }
 
-    public void setType(int i) {
-        this.type = i;
-    }
+    // public void setType(int i) {
+    //     this.type = i;
+    // }
 
     public void addShape(Drawable shape) {
         this.ShapeList.add(shape);
         // notifyObservers();
     }
 
-    public void setStartPos(int x, int y) {
-        this.startX = x;
-        this.startY = y;
-    }
+    // public void setStartPos(int x, int y) {
+    //     this.startX = x;
+    //     this.startY = y;
+    // }
 
     public void setCurrTool(int i) {
         this.currTool = i;
@@ -50,10 +50,10 @@ public class Model extends Observable {
         return this.currTool;
     }
 
-    public void setEndPos(int x, int y) {
-        this.endX = x;
-        this.endY = y;
-    }
+    // public void setEndPos(int x, int y) {
+    //     this.endX = x;
+    //     this.endY = y;
+    // }
 
     public ArrayList<Drawable> getShapeList() {
         return this.ShapeList;
@@ -73,6 +73,14 @@ public class Model extends Observable {
 
     public void setCurrFillColor(Color c) {
         this.fillColor = c;
+    }
+
+    public int getCurrThickness() {
+        return this.thickness;
+    }
+
+    public void setCurrThickness(int i) {
+        this.thickness = i;
     }
 
     public boolean rectHitTest(Point current, Drawable shapeItem) {

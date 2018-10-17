@@ -49,7 +49,7 @@ public class MyCanvas extends JComponent implements Observer{
                     shape.y1 = current.y;
                     shape.width = Math.abs(start.x - current.x);
                     shape.height = Math.abs(start.y - current.y);
-                    // shape.lineThickness = this.model.getCurrThickness();
+                    shape.lineThickness = model.getCurrThickness();
                     shape.drawColor = model.getCurrDrawColor();
                     shape.fillColor = model.getCurrFillColor();
                     shape.isFilled = false;
@@ -85,7 +85,7 @@ public class MyCanvas extends JComponent implements Observer{
         // this.model.set(1, 2);
 
         Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(1));
+        // g2.setStroke(new BasicStroke(1));
         // g2.setStroke(new BasicStroke(this.model.getCurrThickness()));
         // g2.setColor(this.model.getColor());
 
@@ -93,6 +93,7 @@ public class MyCanvas extends JComponent implements Observer{
         // check contrasints and call appropriate methods
         for (Drawable shapeItem : this.model.getShapeList()) {
             g2.setColor(shapeItem.drawColor);
+            g2.setStroke(new BasicStroke(shapeItem.lineThickness));
             // TODO set color
             // draw rectangles
             if (shapeItem.type == 1) {
