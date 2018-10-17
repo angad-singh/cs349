@@ -49,6 +49,7 @@ public class ToolPalette extends JPanel implements Observer {
         rectangle.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrTool(1);
+                model.resetSelectedShape();
                 rectangle.setBorder(new LineBorder(Color.BLACK, 3));
                 circle.setBorder(new LineBorder(Color.BLACK, 0));
                 line.setBorder(new LineBorder(Color.BLACK, 0));
@@ -62,6 +63,7 @@ public class ToolPalette extends JPanel implements Observer {
         circle.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrTool(2);
+                model.resetSelectedShape();
                 rectangle.setBorder(new LineBorder(Color.BLACK, 0));
                 circle.setBorder(new LineBorder(Color.BLACK, 3));
                 line.setBorder(new LineBorder(Color.BLACK, 0));
@@ -75,6 +77,7 @@ public class ToolPalette extends JPanel implements Observer {
         line.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrTool(3);
+                model.resetSelectedShape();
                 rectangle.setBorder(new LineBorder(Color.BLACK, 0));
                 circle.setBorder(new LineBorder(Color.BLACK, 0));
                 line.setBorder(new LineBorder(Color.BLACK, 3));
@@ -88,6 +91,7 @@ public class ToolPalette extends JPanel implements Observer {
         select.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrTool(4);
+                model.resetSelectedShape();
                 rectangle.setBorder(new LineBorder(Color.BLACK, 0));
                 circle.setBorder(new LineBorder(Color.BLACK, 0));
                 line.setBorder(new LineBorder(Color.BLACK, 0));
@@ -101,6 +105,7 @@ public class ToolPalette extends JPanel implements Observer {
         erase.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrTool(5);
+                model.resetSelectedShape();
                 rectangle.setBorder(new LineBorder(Color.BLACK, 0));
                 circle.setBorder(new LineBorder(Color.BLACK, 0));
                 line.setBorder(new LineBorder(Color.BLACK, 0));
@@ -115,6 +120,7 @@ public class ToolPalette extends JPanel implements Observer {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrTool(6);
                 // repaint();
+                model.resetSelectedShape();
                 rectangle.setBorder(new LineBorder(Color.BLACK, 0));
                 circle.setBorder(new LineBorder(Color.BLACK, 0));
                 line.setBorder(new LineBorder(Color.BLACK, 0));

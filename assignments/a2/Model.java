@@ -20,6 +20,7 @@ public class Model extends Observable {
     /** The observers that are watching this model for changes. */
     private ArrayList<Observer> observers;
     private ArrayList<Drawable> ShapeList = new ArrayList<Drawable>();
+    private Drawable SelectedShape;
 
     /**
      * Create a new model.
@@ -29,7 +30,7 @@ public class Model extends Observable {
     }
 
     // public void setType(int i) {
-    //     this.type = i;
+    // this.type = i;
     // }
 
     public void addShape(Drawable shape) {
@@ -38,8 +39,8 @@ public class Model extends Observable {
     }
 
     // public void setStartPos(int x, int y) {
-    //     this.startX = x;
-    //     this.startY = y;
+    // this.startX = x;
+    // this.startY = y;
     // }
 
     public void setCurrTool(int i) {
@@ -51,24 +52,33 @@ public class Model extends Observable {
     }
 
     // public void setEndPos(int x, int y) {
-    //     this.endX = x;
-    //     this.endY = y;
+    // this.endX = x;
+    // this.endY = y;
     // }
 
     public ArrayList<Drawable> getShapeList() {
         return this.ShapeList;
     }
 
+    public Drawable getSelectedShape() {
+        return this.SelectedShape;
+    }
+
+    public void resetSelectedShape() {
+        this.SelectedShape = null;
+    }
+
     public Color getCurrDrawColor() {
         return this.drawColor;
     }
-    
+
     public Color getCurrFillColor() {
         return this.fillColor;
     }
 
     public void setCurrDrawColor(Color c) {
         this.drawColor = c;
+        this.setSelectedShapeColor(c);
     }
 
     public void setCurrFillColor(Color c) {
@@ -81,6 +91,7 @@ public class Model extends Observable {
 
     public void setCurrThickness(int i) {
         this.thickness = i;
+        this.setSelectedShapeThickness(i);
     }
 
     public boolean rectHitTest(Point current, Drawable shapeItem) {
@@ -100,7 +111,25 @@ public class Model extends Observable {
         return mouseDist <= 5.00;
     }
 
-    public void deleteShapes(Point current){
+    public void setSelectedShapeColor(Color c){
+        if (this.getCurrTool() == 4){
+            Drawable selectedShape = this.getSelectedShape();
+            if (selectedShape != null){
+                selectedShape.drawColor = c;
+            }
+        }
+    }
+
+    public void setSelectedShapeThickness(int thickness) {
+        if (this.getCurrTool() == 4) {
+            Drawable selectedShape = this.getSelectedShape();
+            if (selectedShape != null) {
+                selectedShape.lineThickness = thickness;
+            }
+        }
+    }
+
+    public void deleteShapes(Point current) {
 
         Iterator<Drawable> it = ShapeList.iterator();
 
@@ -116,7 +145,7 @@ public class Model extends Observable {
             }
             // DELETE circles
             else if (shapeItem.type == 2) {
-                if (this.circleHitTest(current,  shapeItem)) {
+                if (this.circleHitTest(current, shapeItem)) {
                     it.remove();
                     notifyObservers();
                     break;
@@ -124,7 +153,7 @@ public class Model extends Observable {
             }
             // DELETE line
             else if (shapeItem.type == 3) {
-                if (this.lineHitTest(current,  shapeItem)) {
+                if (this.lineHitTest(current, shapeItem)) {
                     it.remove();
                     notifyObservers();
                     break;
@@ -133,7 +162,7 @@ public class Model extends Observable {
         }
     }
 
-    public void fillShapes(Point current){
+    public void fillShapes(Point current) {
 
         Iterator<Drawable> it = ShapeList.iterator();
 
@@ -164,8 +193,9 @@ public class Model extends Observable {
         for (Drawable shapeItem : this.getShapeList()) {
             // SELECT rectangles
             if (shapeItem.type == 1) {
-                if(this.rectHitTest(current, shapeItem)){
+                if (this.rectHitTest(current, shapeItem)) {
                     System.out.println("SELECT RECTANGLE");
+                    SelectedShape = shapeItem;
                     notifyObservers();
                     break;
                 }
@@ -184,6 +214,7 @@ public class Model extends Observable {
                 // System.out.println("center ;"+center);
                 if (this.circleHitTest(current, shapeItem)) {
                     System.out.println("SELECT CIRCLE");
+                    SelectedShape = shapeItem;
                     // change the border
                     // change the global thickness
                     // change the global color
@@ -197,6 +228,7 @@ public class Model extends Observable {
             else if (shapeItem.type == 3) {
                 if (this.lineHitTest(current, shapeItem)) {
                     System.out.println("SELECT LINE");
+                    SelectedShape = shapeItem;
                     // change the border
                     // change the global thickness
                     // change the global color

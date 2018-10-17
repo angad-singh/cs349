@@ -42,11 +42,7 @@ public class ColorPalette extends JPanel implements Observer {
 
         red.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                // if (model.getCurrTool() == 6) {
-                    // model.setCurrFillColor(Color.RED);
-                // } else {
-                    model.setCurrDrawColor(Color.RED);
-                // }
+                model.setCurrDrawColor(Color.RED);
                 red.setBorder(new LineBorder(Color.BLACK, 3));
                 blue.setBorder(new LineBorder(Color.BLACK, 0));
                 green.setBorder(new LineBorder(Color.BLACK, 0));
@@ -61,9 +57,9 @@ public class ColorPalette extends JPanel implements Observer {
         blue.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 // if (model.getCurrTool() == 6) {
-                    // model.setCurrFillColor(Color.BLUE);
+                // model.setCurrFillColor(Color.BLUE);
                 // } else {
-                    model.setCurrDrawColor(Color.BLUE);
+                model.setCurrDrawColor(Color.BLUE);
                 // }
                 red.setBorder(new LineBorder(Color.BLACK, 0));
                 blue.setBorder(new LineBorder(Color.BLACK, 3));
@@ -79,9 +75,9 @@ public class ColorPalette extends JPanel implements Observer {
         green.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 // if (model.getCurrTool() == 6) {
-                    // model.setCurrFillColor(Color.GREEN);
+                // model.setCurrFillColor(Color.GREEN);
                 // } else {
-                    model.setCurrDrawColor(Color.GREEN);
+                model.setCurrDrawColor(Color.GREEN);
                 // }
                 red.setBorder(new LineBorder(Color.BLACK, 0));
                 blue.setBorder(new LineBorder(Color.BLACK, 0));
@@ -97,9 +93,9 @@ public class ColorPalette extends JPanel implements Observer {
         yellow.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 // if (model.getCurrTool() == 6) {
-                    // model.setCurrFillColor(Color.YELLOW);
+                // model.setCurrFillColor(Color.YELLOW);
                 // } else {
-                    model.setCurrDrawColor(Color.YELLOW);
+                model.setCurrDrawColor(Color.YELLOW);
                 // }
                 red.setBorder(new LineBorder(Color.BLACK, 0));
                 blue.setBorder(new LineBorder(Color.BLACK, 0));
@@ -115,9 +111,9 @@ public class ColorPalette extends JPanel implements Observer {
         black.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 // if (model.getCurrTool() == 6) {
-                    // model.setCurrFillColor(Color.BLACK);
+                // model.setCurrFillColor(Color.BLACK);
                 // } else {
-                    model.setCurrDrawColor(Color.BLACK);
+                model.setCurrDrawColor(Color.BLACK);
                 // }
                 red.setBorder(new LineBorder(Color.BLACK, 0));
                 blue.setBorder(new LineBorder(Color.BLACK, 0));
@@ -133,9 +129,9 @@ public class ColorPalette extends JPanel implements Observer {
         white.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 // if (model.getCurrTool() == 6) {
-                //     model.setCurrFillColor(Color.WHITE);
+                // model.setCurrFillColor(Color.WHITE);
                 // } else {
-                    model.setCurrDrawColor(Color.WHITE);
+                model.setCurrDrawColor(Color.WHITE);
                 // }
                 red.setBorder(new LineBorder(Color.BLACK, 0));
                 blue.setBorder(new LineBorder(Color.BLACK, 0));
