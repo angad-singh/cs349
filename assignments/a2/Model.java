@@ -285,17 +285,9 @@ public class Model extends Observable {
         int sf = openfile.showOpenDialog(openfile);
         if (sf != JFileChooser.APPROVE_OPTION) {
             return;
-            // File file = openfile.getSelectedFile();
-            // try {
-            //   obj = parser.parse(new FileReader(file));
-            // } catch (ParseException e) {
-            //     e.printStackTrace();
-            // } catch (FileNotFoundException e) {
-            //     e.printStackTrace();
-            // }
-            // System.out.println(file);
         }
         File file = openfile.getSelectedFile();
+        this.newDrawing();
 
         try {
 
@@ -325,6 +317,7 @@ public class Model extends Observable {
                 // newShape.drawColor = (Color) shape.get("drawColor");
                 newShape.translateX = ((Long) shape.get("translateX")).intValue();
                 newShape.translateY = ((Long) shape.get("translateY")).intValue();
+                newShape.drawColor = Color.BLACK;
 
                 this.addShape(newShape);
             }
@@ -389,5 +382,11 @@ public class Model extends Observable {
         } else if (sf == JFileChooser.CANCEL_OPTION) {
             JOptionPane.showMessageDialog(null, "File save has been canceled");
         }
+    }
+
+    public void newDrawing() {
+        this.SelectedShape = null;
+        this.ShapeList.clear();
+        notifyObservers();
     }
 }

@@ -35,14 +35,20 @@ public class Main {
 
         save.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               model.saveDrawing();
+                model.saveDrawing();
             }
         });
 
-         load.addActionListener(new ActionListener() {
+        load.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               model.loadDrawing();
-               model.notifyObservers();
+                model.loadDrawing();
+                model.notifyObservers();
+            }
+        });
+
+        newImage.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                model.newDrawing();
             }
         });
 
