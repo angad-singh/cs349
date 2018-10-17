@@ -39,6 +39,13 @@ public class Main {
             }
         });
 
+         load.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               model.loadDrawing();
+               model.notifyObservers();
+            }
+        });
+
         file.add(newImage);
         file.add(load);
         file.add(save);

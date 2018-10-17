@@ -7,6 +7,7 @@ import java.awt.geom.*;
 import javax.swing.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
 import java.awt.event.*;
 import java.io.*;
 
@@ -115,10 +116,10 @@ public class Model extends Observable {
         return mouseDist <= 5.00;
     }
 
-    public void setSelectedShapeColor(Color c){
-        if (this.getCurrTool() == 4){
+    public void setSelectedShapeColor(Color c) {
+        if (this.getCurrTool() == 4) {
             Drawable selectedShape = this.getSelectedShape();
-            if (selectedShape != null){
+            if (selectedShape != null) {
                 selectedShape.drawColor = c;
             }
         }
@@ -276,10 +277,79 @@ public class Model extends Observable {
         }
     }
 
-    public void saveDrawing(){
+    public void loadDrawing() {
+        JSONParser parser = new JSONParser();
+        // Object obj;
+
+        JFileChooser openfile = new JFileChooser();
+        int sf = openfile.showOpenDialog(openfile);
+        if (sf != JFileChooser.APPROVE_OPTION) {
+            return;
+            // File file = openfile.getSelectedFile();
+            // try {
+            //   obj = parser.parse(new FileReader(file));
+            // } catch (ParseException e) {
+            //     e.printStackTrace();
+            // } catch (FileNotFoundException e) {
+            //     e.printStackTrace();
+            // }
+            // System.out.println(file);
+        }
+        File file = openfile.getSelectedFile();
+
+        try {
+
+            Object obj = parser.parse(new FileReader(file));
+
+            JSONObject jsonObject = (JSONObject) obj;
+            // System.out.println(jsonObject);
+
+            this.setCurrThickness(((Long) jsonObject.get("thickness")).intValue());
+            this.setCurrTool(((Long) jsonObject.get("currTool")).intValue());
+            int totalShapes = ((Long) jsonObject.get("totalShapes")).intValue();
+
+            for (int i = 1; i <= totalShapes; ++i ){
+                JSONObject shape = (JSONObject) jsonObject.get("shape"+i);
+                Drawable newShape = new Drawable();
+
+                newShape.x = ((Long) shape.get("x")).intValue();
+                newShape.y = ((Long) shape.get("y")).intValue();
+                newShape.x1 = ((Long) shape.get("x1")).intValue();
+                newShape.y1 = ((Long) shape.get("y1")).intValue();
+                newShape.height = ((Long) shape.get("height")).intValue();
+                newShape.width = ((Long) shape.get("height")).intValue();
+                newShape.lineThickness = ((Long) shape.get("lineThickness")).intValue();
+                newShape.isTranslated = (boolean) shape.get("isTranslated");
+                newShape.isFilled = (boolean) shape.get("isFilled");
+                newShape.type = ((Long) shape.get("type")).intValue();
+                // newShape.drawColor = (Color) shape.get("drawColor");
+                newShape.translateX = ((Long) shape.get("translateX")).intValue();
+                newShape.translateY = ((Long) shape.get("translateY")).intValue();
+
+                this.addShape(newShape);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
+     * Inspired by
+     * https://stackoverflow.com/questions/22261130/how-to-save-a-file-using-
+     * jfilechooser-showsavedialog
+     * 
+     */
+
+    public void saveDrawing() {
         JSONObject obj = new JSONObject();
         obj.put("currTool", this.getCurrTool());
         obj.put("thickness", this.getCurrThickness());
+        obj.put("totalShapes", this.getShapeList().size());
 
         int i = 0;
         for (Drawable shapeItem : this.getShapeList()) {
@@ -293,7 +363,7 @@ public class Model extends Observable {
             shape.put("width", shapeItem.width);
             shape.put("lineThickness", shapeItem.lineThickness);
             shape.put("isFilled", shapeItem.isFilled);
-            shape.put("drawColor", shapeItem.drawColor);
+            // shape.put("drawColor", shapeItem.drawColor);
             shape.put("type", shapeItem.type);
             shape.put("translateX", shapeItem.translateX);
             shape.put("translateY", shapeItem.translateY);
