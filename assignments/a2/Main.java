@@ -2,9 +2,15 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Canvas;
 import java.awt.Graphics;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import javax.swing.JFrame;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,6 +20,7 @@ public class Main {
         // frame.setMinimumSize(128, 128);
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Model model = new Model();
 
         JMenuBar menuBar = new JMenuBar();
         JMenu file = new JMenu("File");
@@ -26,6 +33,12 @@ public class Main {
         JMenuItem load = new JMenuItem("Load");
         JMenuItem save = new JMenuItem("Save");
 
+        save.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               model.saveDrawing();
+            }
+        });
+
         file.add(newImage);
         file.add(load);
         file.add(save);
@@ -35,8 +48,7 @@ public class Main {
 
         view.add(fullSize);
         view.add(window);
-        
-        Model model = new Model();
+
         JToolBar toolbar = new JToolBar("toolbar");
         toolbar.setOrientation(SwingConstants.VERTICAL);
         JPanel p = new JPanel();

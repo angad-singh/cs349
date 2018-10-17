@@ -16,6 +16,9 @@ public class Drawable extends JPanel {
     public Color drawColor;
     public Color fillColor;
     public int type;
+    public int translateX;
+    public int translateY;
+    public boolean isTranslated;
 
     // Constructor
     public Drawable() {

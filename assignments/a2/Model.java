@@ -4,7 +4,11 @@ import java.text.AttributedCharacterIterator;
 import java.util.*;
 import java.math.*;
 import java.awt.geom.*;
-import javax.swing.JPanel;
+import javax.swing.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import java.awt.event.*;
+import java.io.*;
 
 public class Model extends Observable {
     // private int type;
@@ -269,6 +273,51 @@ public class Model extends Observable {
     public void notifyObservers() {
         for (Observer observer : this.observers) {
             observer.update(this);
+        }
+    }
+
+    public void saveDrawing(){
+        JSONObject obj = new JSONObject();
+        obj.put("currTool", this.getCurrTool());
+        obj.put("thickness", this.getCurrThickness());
+
+        int i = 0;
+        for (Drawable shapeItem : this.getShapeList()) {
+            ++i;
+            JSONObject shape = new JSONObject();
+            shape.put("x", shapeItem.x);
+            shape.put("y", shapeItem.y);
+            shape.put("x1", shapeItem.x1);
+            shape.put("y1", shapeItem.y1);
+            shape.put("height", shapeItem.height);
+            shape.put("width", shapeItem.width);
+            shape.put("lineThickness", shapeItem.lineThickness);
+            shape.put("isFilled", shapeItem.isFilled);
+            shape.put("drawColor", shapeItem.drawColor);
+            shape.put("type", shapeItem.type);
+            shape.put("translateX", shapeItem.translateX);
+            shape.put("translateY", shapeItem.translateY);
+            shape.put("isTranslated", shapeItem.isTranslated);
+
+            obj.put("shape" + i, shape);
+        }
+
+        JFileChooser savefile = new JFileChooser();
+        int sf = savefile.showSaveDialog(savefile);
+        if (sf == JFileChooser.APPROVE_OPTION) {
+            try {
+                FileWriter file = new FileWriter(savefile.getSelectedFile());
+                file.write(obj.toJSONString());
+                file.close();
+                JOptionPane.showMessageDialog(null, "File has been saved", "File Saved",
+                        JOptionPane.INFORMATION_MESSAGE);
+                // true for rewrite, false for override
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        } else if (sf == JFileChooser.CANCEL_OPTION) {
+            JOptionPane.showMessageDialog(null, "File save has been canceled");
         }
     }
 }

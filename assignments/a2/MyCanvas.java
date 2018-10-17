@@ -25,6 +25,13 @@ public class MyCanvas extends JComponent implements Observer{
             public void mouseDragged(MouseEvent e) {
                 current.x = e.getX();
                 current.y = e.getY();
+                if (model.getCurrTool() == 4){ //drag selected shape around
+                    if (model.getSelectedShape() != null){
+                        model.getSelectedShape().translateX = current.x;
+                        model.getSelectedShape().translateY = current.y;
+                        model.getSelectedShape().isTranslated = true;
+                    }
+                }
                 repaint();
             }
 
@@ -84,16 +91,18 @@ public class MyCanvas extends JComponent implements Observer{
         // cast to get 2D drawing methods
         // this.model.set(1, 2);
 
-        Graphics2D g2 = (Graphics2D) g;
-        // g2.setStroke(new BasicStroke(1));
-        // g2.setStroke(new BasicStroke(this.model.getCurrThickness()));
-        // g2.setColor(this.model.getColor());
+        // Graphics2D g2 = (Graphics2D) g;
+        // System.out.println(this.model.getShapeList());
 
         // loop through the model's shape list and grab the drawable objects
         // check contrasints and call appropriate methods
         for (Drawable shapeItem : this.model.getShapeList()) {
+            Graphics2D g2 = (Graphics2D) g;
             g2.setColor(shapeItem.drawColor);
             g2.setStroke(new BasicStroke(shapeItem.lineThickness));
+            if (shapeItem.isTranslated){
+                g2.translate(shapeItem.translateX, shapeItem.translateY);
+            }
             // TODO set color
             // draw rectangles
             if (shapeItem.type == 1) {
