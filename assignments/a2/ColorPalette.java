@@ -10,12 +10,12 @@ public class ColorPalette extends JPanel implements Observer {
 
     private Model model;
     // Add the components
-    JButton red = new JButton("Red");
-    JButton blue = new JButton("Blue");
-    JButton green = new JButton("Green");
-    JButton yellow = new JButton("Yellow");
-    JButton black = new JButton("Black");
-    JButton white = new JButton("White");
+    JButton red = new JButton(new ImageIcon("images/red.png"));
+    JButton blue = new JButton(new ImageIcon("images/blue.png"));
+    JButton green = new JButton(new ImageIcon("images/green.png"));
+    JButton yellow = new JButton(new ImageIcon("images/yellow.png"));
+    JButton black = new JButton(new ImageIcon("images/black.png"));
+    JButton white = new JButton(new ImageIcon("images/brown.png"));
     JButton chooser = new JButton("Pick a Color");
 
     // ColorChooserButton chooser = new ColorChooserButton(Color.WHITE);
@@ -26,7 +26,7 @@ public class ColorPalette extends JPanel implements Observer {
     public ColorPalette(Model model) {
         // Set up the window.
         // this.setTitle("Your program title here!");
-        // this.setMinimumSize(new Dimension(128, 128));
+        this.setMinimumSize(new Dimension(200, 200));
         this.setSize(200, 200);
         // this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel predefColors = new JPanel();
@@ -100,7 +100,7 @@ public class ColorPalette extends JPanel implements Observer {
 
         white.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                model.setCurrDrawColor(Color.WHITE);
+                model.setCurrDrawColor(new Color(139,69,19));
                 model.notifyObservers();
                 // repaint();
             }

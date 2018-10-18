@@ -28,12 +28,12 @@ public class ToolPalette extends JPanel implements Observer {
         this.setLayout(new GridLayout(3, 2, 3, 3));
 
         // Add the components
-        JButton select = new JButton("Select");
-        JButton erase = new JButton("Erase");
-        JButton fill = new JButton("Fill");
-        JButton line = new JButton("Line");
-        JButton circle = new JButton("Circle");
-        JButton rectangle = new JButton("Rectangle");
+        JButton select = new JButton(new ImageIcon("images/cursor.png"));
+        JButton erase = new JButton(new ImageIcon("images/erase.png"));
+        JButton fill = new JButton(new ImageIcon("images/fill.png"));
+        JButton line = new JButton(new ImageIcon("images/line.png"));
+        JButton circle = new JButton(new ImageIcon("images/circle.png"));
+        JButton rectangle = new JButton(new ImageIcon("images/rectangle.png"));
         // Use this to change border depending on what's selected
         // change the north button to be a toolbar using flow layout
         this.add(select);
