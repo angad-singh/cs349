@@ -10,11 +10,10 @@ public class LineThicknessPalette extends JComponent implements Observer {
 
     private Model model;
 
-    JButton line1 = new JButton("Line1");
-    JButton line2 = new JButton("Line2");
-    JButton line3 = new JButton("Line3");
-    JButton line4 = new JButton("Line4");
-
+    JButton line1 = new JButton(new ImageIcon("images/Line1.png"));
+    JButton line2 = new JButton(new ImageIcon("images/Line2.png"));
+    JButton line3 = new JButton(new ImageIcon("images/Line3.png"));
+    JButton line4 = new JButton(new ImageIcon("images/Line4.png"));
     /**
      * Create a new View.
      */
@@ -26,6 +25,8 @@ public class LineThicknessPalette extends JComponent implements Observer {
         // this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.setLayout(new GridLayout(4, 1, 3, 3));
+
+        line1.setMinimumSize(new Dimension(130, 50));
 
         // Add the components
         // change the north button to be a toolbar using flow layout

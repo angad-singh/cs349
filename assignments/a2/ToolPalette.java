@@ -34,6 +34,10 @@ public class ToolPalette extends JPanel implements Observer {
         JButton line = new JButton(new ImageIcon("images/line.png"));
         JButton circle = new JButton(new ImageIcon("images/circle.png"));
         JButton rectangle = new JButton(new ImageIcon("images/rectangle.png"));
+
+        select.setMinimumSize(new Dimension(65, 30));
+        select.setPreferredSize(new Dimension(65, 30));
+
         // Use this to change border depending on what's selected
         // change the north button to be a toolbar using flow layout
         this.add(select);

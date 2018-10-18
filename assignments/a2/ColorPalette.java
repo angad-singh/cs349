@@ -41,6 +41,9 @@ public class ColorPalette extends JPanel implements Observer {
 
         // Use this to change border depending on what's selected
         // change the north button to be a toolbar using flow layout
+        red.setPreferredSize(new Dimension(65, 35));
+        red.setMinimumSize(new Dimension(65, 35));
+
         predefColors.add(red);
         predefColors.add(blue);
         predefColors.add(green);
@@ -173,7 +176,7 @@ public class ColorPalette extends JPanel implements Observer {
             yellow.setBorder(new LineBorder(Color.BLACK, 0));
             black.setBorder(new LineBorder(Color.BLACK, 3));
             white.setBorder(new LineBorder(Color.BLACK, 0));
-        } else if (this.model.getCurrDrawColor().equals(Color.WHITE)) {
+        } else if (this.model.getCurrDrawColor().equals(new Color(139,69,19))) {
             // case Color.WHITE:
             red.setBorder(new LineBorder(Color.BLACK, 0));
             blue.setBorder(new LineBorder(Color.BLACK, 0));
