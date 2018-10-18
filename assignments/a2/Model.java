@@ -319,10 +319,9 @@ public class Model extends Observable {
                 newShape.isTranslated = (boolean) shape.get("isTranslated");
                 newShape.isFilled = (boolean) shape.get("isFilled");
                 newShape.type = ((Long) shape.get("type")).intValue();
-                // newShape.drawColor = (Color) shape.get("drawColor");
+                newShape.drawColor = new Color(((Long) shape.get("drawColor")).intValue());
                 newShape.translateX = ((Long) shape.get("translateX")).intValue();
                 newShape.translateY = ((Long) shape.get("translateY")).intValue();
-                newShape.drawColor = Color.BLACK;
 
                 this.addShape(newShape);
             }
@@ -361,7 +360,9 @@ public class Model extends Observable {
             shape.put("width", shapeItem.width);
             shape.put("lineThickness", shapeItem.lineThickness);
             shape.put("isFilled", shapeItem.isFilled);
-            // shape.put("drawColor", shapeItem.drawColor);
+            shape.put("drawColor", shapeItem.drawColor.getRGB());
+            // shape.put("ColorGreen", shapeItem.drawColor.getGreen());
+            // shape.put("ColorBlue", shapeItem.drawColor.getBlue());
             shape.put("type", shapeItem.type);
             shape.put("translateX", shapeItem.translateX);
             shape.put("translateY", shapeItem.translateY);
