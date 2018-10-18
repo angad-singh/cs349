@@ -10,6 +10,10 @@ import org.json.simple.JSONObject;
 import javax.swing.JFrame;
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.KeyStroke;
+import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.*;
 
 public class Main {
@@ -71,6 +75,23 @@ public class Main {
         LineThicknessPalette lineThickness = new LineThicknessPalette(model);
         ColorPalette colorPalette = new ColorPalette(model);
         MyCanvas canvas = new MyCanvas(model);
+
+        // remove selection on pressing Escape
+        /*
+         * Inspired by
+         * https://stackoverflow.com/questions/13042504/keypressed-event-in-java
+         */
+        InputMap im = canvas.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap am = canvas.getActionMap();
+
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "onEscape");
+
+        am.put("onEscape", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.resetSelectedShape();
+            }
+        });
 
         p.add(tools);
         p.add(colorPalette);
