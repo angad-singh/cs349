@@ -277,6 +277,11 @@ public class Model extends Observable {
         }
     }
 
+    /*
+     * Inspired by
+     * https://docs.oracle.com/javase/tutorial/uiswing/components/filechooser.html
+     * https://www.mkyong.com/java/json-simple-example-read-and-write-json/
+     */
     public void loadDrawing() {
         JSONParser parser = new JSONParser();
         // Object obj;
@@ -333,8 +338,8 @@ public class Model extends Observable {
 
     /*
      * Inspired by
-     * https://stackoverflow.com/questions/22261130/how-to-save-a-file-using-
-     * jfilechooser-showsavedialog
+     * https://stackoverflow.com/questions/22261130/how-to-save-a-file-using-jfilechooser-showsavedialog
+     * https://www.mkyong.com/java/json-simple-example-read-and-write-json/
      * 
      */
 
