@@ -107,9 +107,13 @@ public class MyCanvas extends JComponent implements Observer {
                     g2.setStroke(dashed);
                 }
                 if (shapeItem.isFilled) {
-                    // g2.setColor(shapeItem.fillColor);
+                    g2.setStroke(solid);
+                    g2.setColor(shapeItem.fillColor);
                     g2.fillRect(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);
+                    g2.setColor(shapeItem.drawColor);
+                    g2.drawRect(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);
                     if (shapeItem.isSelected) {
+                        g2.setStroke(dashed);
                         g2.drawRect(shapeItem.x - 5, shapeItem.y - 5, shapeItem.width + 10, shapeItem.height + 10);
                     }
                 } else {
@@ -124,9 +128,15 @@ public class MyCanvas extends JComponent implements Observer {
                 int radius = (int) Math.hypot(Math.abs(shapeItem.x1 - shapeItem.x),
                         Math.abs(shapeItem.y1 - shapeItem.y));
                 if (shapeItem.isFilled) {
+                    g2.setStroke(solid);
+                    g2.setColor(shapeItem.fillColor);
                     g2.fillOval(shapeItem.x - radius, shapeItem.y - radius, 2 * radius, 2 * radius);
+                    g2.setColor(shapeItem.drawColor);
+                    g2.drawOval(shapeItem.x - radius, shapeItem.y - radius, 2 * radius, 2 * radius);
                     if (shapeItem.isSelected) {
-                        g2.drawOval(shapeItem.x - radius - 5, shapeItem.y - 5 - radius, 2 * radius + 10, 2 * radius + 10);
+                        g2.setStroke(dashed);
+                        g2.drawOval(shapeItem.x - radius - 5, shapeItem.y - 5 - radius, 2 * radius + 10,
+                                2 * radius + 10);
                     }
                 } else {
                     g2.drawOval(shapeItem.x - radius, shapeItem.y - radius, 2 * radius, 2 * radius);

@@ -181,8 +181,8 @@ public class Model extends Observable {
             if (shapeItem.type == 1) {
                 if (this.rectHitTest(current, shapeItem)) {
                     shapeItem.isFilled = true;
-                    shapeItem.drawColor = this.getCurrDrawColor();
-                    // shapeItem.fillColor = this.getCurrFillColor();
+                    // shapeItem.drawColor = this.getCurrDrawColor();
+                    shapeItem.fillColor = this.getCurrFillColor();
                     notifyObservers();
                     break;
                 }
@@ -191,8 +191,8 @@ public class Model extends Observable {
             else if (shapeItem.type == 2) {
                 if (this.circleHitTest(current, shapeItem)) {
                     shapeItem.isFilled = true;
-                    shapeItem.drawColor = this.getCurrDrawColor();
-                    // shapeItem.fillColor = this.getCurrFillColor();
+                    // shapeItem.drawColor = this.getCurrDrawColor();
+                    shapeItem.fillColor = this.getCurrFillColor();
                     notifyObservers();
                     break;
                 }

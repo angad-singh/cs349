@@ -62,67 +62,67 @@ public class ColorPalette extends JPanel implements Observer {
         // Add mouslisteners to all the color buttons
         red.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                // if(model.getCurrTool() == 6){
-                // model.setCurrFillColor(Color.RED);
-                // } else {
+                if(model.getCurrTool() == 6){
+                model.setCurrFillColor(Color.RED);
+                } else {
                 model.setCurrDrawColor(Color.RED);
-                // }
+                }
                 model.notifyObservers();
             }
         });
 
         blue.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                // if (model.getCurrTool() == 6) {
-                // model.setCurrFillColor(Color.BLUE);
-                // } else {
+                if (model.getCurrTool() == 6) {
+                model.setCurrFillColor(Color.BLUE);
+                } else {
                 model.setCurrDrawColor(Color.BLUE);
-                // }
+                }
                 model.notifyObservers();
             }
         });
 
         green.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                // if (model.getCurrTool() == 6) {
-                // model.setCurrFillColor(Color.GREEN);
-                // } else {
+                if (model.getCurrTool() == 6) {
+                model.setCurrFillColor(Color.GREEN);
+                } else {
                 model.setCurrDrawColor(Color.GREEN);
-                // }
+                }
                 model.notifyObservers();
             }
         });
 
         yellow.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                // if (model.getCurrTool() == 6) {
-                // model.setCurrFillColor(Color.YELLOW);
-                // } else {
+                if (model.getCurrTool() == 6) {
+                model.setCurrFillColor(Color.YELLOW);
+                } else {
                 model.setCurrDrawColor(Color.YELLOW);
-                // }
+                }
                 model.notifyObservers();
             }
         });
 
         black.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                // if (model.getCurrTool() == 6) {
-                // model.setCurrFillColor(Color.BLACK);
-                // } else {
+                if (model.getCurrTool() == 6) {
+                model.setCurrFillColor(Color.BLACK);
+                } else {
                 model.setCurrDrawColor(Color.BLACK);
-                // }
+                }
                 model.notifyObservers();
             }
         });
 
         brown.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                // if (model.getCurrTool() == 6) {
-                // model.setCurrFillColor(new Color(139,69,19));
-                // } else {
-                // model.setCurrDrawColor(new Color(139,69,19));
-                // }
-                model.setCurrDrawColor(new Color(139, 69, 19));
+                if (model.getCurrTool() == 6) {
+                model.setCurrFillColor(new Color(139,69,19));
+                } else {
+                model.setCurrDrawColor(new Color(139,69,19));
+                }
+                // model.setCurrDrawColor(new Color(139, 69, 19));
                 model.notifyObservers();
             }
         });
