@@ -87,48 +87,55 @@ public class MyCanvas extends JComponent implements Observer{
     }
 
     public void paintComponent(Graphics g) {
-        // super.paint(g);
-        // cast to get 2D drawing methods
-        // this.model.set(1, 2);
-
-        // Graphics2D g2 = (Graphics2D) g;
-        // System.out.println(this.model.getShapeList());
-
+        super.paintComponent(g);
         // loop through the model's shape list and grab the drawable objects
         // check contrasints and call appropriate methods
+        Graphics2D g2 = (Graphics2D) g;
+
         for (Drawable shapeItem : this.model.getShapeList()) {
-            Graphics2D g2 = (Graphics2D) g;
+            Stroke solid = new BasicStroke(shapeItem.lineThickness);
+            // Stroke dashed = new BasicStroke(shapeItem.lineThickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0,
+                    // new float[] { 9 }, 0);
+            Stroke dashed = new BasicStroke(shapeItem.lineThickness);
             g2.setColor(shapeItem.drawColor);
-            g2.setStroke(new BasicStroke(shapeItem.lineThickness));
+            g2.setStroke(solid);
             if (shapeItem.isTranslated){
                 g2.translate(shapeItem.translateX, shapeItem.translateY);
             }
-            // TODO set color
             // draw rectangles
             if (shapeItem.type == 1) {
+                if (shapeItem.isSelected) {
+                    g2.setStroke(dashed);
+                }
                 if (shapeItem.isFilled) {
-                    // g2.setPaint(shapeItem.fillColor);
+                    // g2.setColor(shapeItem.fillColor);
                     g2.fillRect(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);
-                } else {
                     // g2.setColor(shapeItem.drawColor);
+                    // g2.drawRect(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);
+                } else {
                     g2.drawRect(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);
                 }
             }
             // draw circles
             if (shapeItem.type == 2) {
+                if (shapeItem.isSelected) {
+                    g2.setStroke(dashed);
+                }
                 int radius = (int) Math.hypot(Math.abs(shapeItem.x1 - shapeItem.x), Math.abs(shapeItem.y1 - shapeItem.y));
                 if (shapeItem.isFilled) {
-                    // g2.setPaint(shapeItem.fillColor);
-                    // System.out.println(g2);
+                    // g2.setColor(shapeItem.fillColor);
                     g2.fillOval(shapeItem.x - radius, shapeItem.y - radius, 2*radius, 2*radius);
-                } else {
                     // g2.setColor(shapeItem.drawColor);
+                    // g2.drawOval(shapeItem.x - radius, shapeItem.y - radius, 2 * radius, 2 * radius);
+                } else {
                     g2.drawOval(shapeItem.x - radius, shapeItem.y - radius, 2*radius, 2*radius);
                 }
             }
             // draw lines
             if (shapeItem.type == 3) {
-                // g2.setColor(shapeItem.drawColor);
+                if (shapeItem.isSelected) {
+                    g2.setStroke(dashed);
+                }
                 g2.drawLine(shapeItem.x, shapeItem.y, shapeItem.x1, shapeItem.y1);
             }
         }

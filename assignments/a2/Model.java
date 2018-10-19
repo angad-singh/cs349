@@ -178,6 +178,7 @@ public class Model extends Observable {
                 if (this.rectHitTest(current, shapeItem)) {
                     shapeItem.isFilled = true;
                     shapeItem.drawColor = this.getCurrDrawColor();
+                    // shapeItem.fillColor = this.getCurrFillColor();
                     notifyObservers();
                     break;
                 }
@@ -187,6 +188,7 @@ public class Model extends Observable {
                 if (this.circleHitTest(current, shapeItem)) {
                     shapeItem.isFilled = true;
                     shapeItem.drawColor = this.getCurrDrawColor();
+                    // shapeItem.fillColor = this.getCurrFillColor();
                     notifyObservers();
                     break;
                 }
@@ -202,33 +204,24 @@ public class Model extends Observable {
                     SelectedShape = shapeItem;
                     this.setCurrThickness(shapeItem.lineThickness);
                     this.setCurrDrawColor(shapeItem.drawColor);
+                    shapeItem.isSelected = true;
                     notifyObservers();
                     break;
+                } else {
+                    shapeItem.isSelected = false;
                 }
-                // // change the border
-                // // change the global thickness
-                // // change the global color
-                // // change the tool selecton setCurrTool
-                // // notify the views
-                // // MAybe return after this to only select one item??
-                // }
             }
             // SELECT circles
             else if (shapeItem.type == 2) {
-                // find the center of the circle
-                // distance b/w (current and center)^2 <= (radius)^2
-                // System.out.println("center ;"+center);
                 if (this.circleHitTest(current, shapeItem)) {
                     SelectedShape = shapeItem;
                     this.setCurrThickness(shapeItem.lineThickness);
                     this.setCurrDrawColor(shapeItem.drawColor);
-                    // change the border
-                    // change the global thickness
-                    // change the global color
-                    // change the tool selecton setCurrTool
-                    // notify the views
+                    shapeItem.isSelected = true;
                     notifyObservers();
                     break;
+                } else {
+                    shapeItem.isSelected = false;
                 }
             }
             // SELECT line
@@ -237,13 +230,11 @@ public class Model extends Observable {
                     SelectedShape = shapeItem;
                     this.setCurrThickness(shapeItem.lineThickness);
                     this.setCurrDrawColor(shapeItem.drawColor);
-                    // change the border
-                    // change the global thickness
-                    // change the global color
-                    // change the tool selecton setCurrTool
-                    // notify the views
+                    shapeItem.isSelected = true;
                     notifyObservers();
                     break;
+                } else {
+                    shapeItem.isSelected = false;
                 }
             }
         }
@@ -320,6 +311,7 @@ public class Model extends Observable {
                 newShape.isFilled = (boolean) shape.get("isFilled");
                 newShape.type = ((Long) shape.get("type")).intValue();
                 newShape.drawColor = new Color(((Long) shape.get("drawColor")).intValue());
+                newShape.fillColor = new Color(((Long) shape.get("fillColor")).intValue());
                 newShape.translateX = ((Long) shape.get("translateX")).intValue();
                 newShape.translateY = ((Long) shape.get("translateY")).intValue();
 
@@ -361,8 +353,7 @@ public class Model extends Observable {
             shape.put("lineThickness", shapeItem.lineThickness);
             shape.put("isFilled", shapeItem.isFilled);
             shape.put("drawColor", shapeItem.drawColor.getRGB());
-            // shape.put("ColorGreen", shapeItem.drawColor.getGreen());
-            // shape.put("ColorBlue", shapeItem.drawColor.getBlue());
+            shape.put("fillColor", shapeItem.fillColor.getRGB());
             shape.put("type", shapeItem.type);
             shape.put("translateX", shapeItem.translateX);
             shape.put("translateY", shapeItem.translateY);

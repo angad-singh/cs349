@@ -19,6 +19,7 @@ public class Drawable extends JPanel {
     public int translateX;
     public int translateY;
     public boolean isTranslated;
+    public boolean isSelected;
 
     // Constructor
     public Drawable() {
@@ -36,18 +37,4 @@ public class Drawable extends JPanel {
         this.lineThickness = thickness;
         this.type = type;
     }
-
-    // public void paint(Graphics g) {
-    //     Graphics2D g2 = (Graphics2D) g;
-    //     g2.setColor(this.drawColor);
-    //     g2.setStroke(new BasicStroke(this.lineThickness));
-
-    //     if (this.type == 1) {
-    //         if (isFilled) {
-    //             g2.fillRect(10, 10, 100, 100);
-    //         } else {
-    //             g2.drawRect(this.x, this.y, this.width, this.height);
-    //         }
-    //     }
-    // }
 }
