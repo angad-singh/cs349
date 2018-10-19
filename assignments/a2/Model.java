@@ -12,11 +12,6 @@ import java.awt.event.*;
 import java.io.*;
 
 public class Model extends Observable {
-    // private int type;
-    // private int startX;
-    // private int startY;
-    // private int endX;
-    // private int endY;
     private int currTool;
     private Color drawColor = Color.BLACK;
     private Color fillColor = Color.BLACK;
@@ -24,7 +19,9 @@ public class Model extends Observable {
 
     /** The observers that are watching this model for changes. */
     private ArrayList<Observer> observers;
+    // list of shapes drawn on the canvas
     private ArrayList<Drawable> ShapeList = new ArrayList<Drawable>();
+    // currently selected shape
     private Drawable SelectedShape;
 
     /**
@@ -34,33 +31,22 @@ public class Model extends Observable {
         this.observers = new ArrayList<Observer>();
     }
 
-    // public void setType(int i) {
-    // this.type = i;
-    // }
-
     public void addShape(Drawable shape) {
         this.ShapeList.add(shape);
         // notifyObservers();
     }
 
-    // public void setStartPos(int x, int y) {
-    // this.startX = x;
-    // this.startY = y;
-    // }
-
+    // set currently selected tool
     public void setCurrTool(int i) {
         this.currTool = i;
     }
 
+    // get currently selected tool
     public int getCurrTool() {
         return this.currTool;
     }
 
-    // public void setEndPos(int x, int y) {
-    // this.endX = x;
-    // this.endY = y;
-    // }
-
+    // get all the shapes currently on canvas
     public ArrayList<Drawable> getShapeList() {
         return this.ShapeList;
     }
@@ -69,6 +55,7 @@ public class Model extends Observable {
         return this.SelectedShape;
     }
 
+    // clear the previuosly seletected shape
     public void resetSelectedShape() {
         this.SelectedShape = null;
         for (Drawable shapeItem : this.getShapeList()) {
@@ -77,6 +64,7 @@ public class Model extends Observable {
         notifyObservers();
     }
 
+    // get currently selected drawing color
     public Color getCurrDrawColor() {
         return this.drawColor;
     }
@@ -85,6 +73,7 @@ public class Model extends Observable {
         return this.fillColor;
     }
 
+    // set the currently selected draw color
     public void setCurrDrawColor(Color c) {
         this.drawColor = c;
         this.setSelectedShapeColor(c);
@@ -103,11 +92,13 @@ public class Model extends Observable {
         this.setSelectedShapeThickness(i);
     }
 
+    // hit test for rectangle to check if current point is inside or not
     public boolean rectHitTest(Point current, Drawable shapeItem) {
         return ((current.x <= shapeItem.x + shapeItem.width) && (current.x >= shapeItem.x)
                 && (current.y <= shapeItem.y + shapeItem.height) && (current.y >= shapeItem.y));
     }
 
+    // hit test for circle to check if current point is inside or not
     public boolean circleHitTest(Point current, Drawable shapeItem) {
         Point center = new Point(shapeItem.x, shapeItem.y);
         double radius = (int) Math.hypot(Math.abs(shapeItem.x - shapeItem.x1), Math.abs(shapeItem.y - shapeItem.y1));
@@ -115,11 +106,13 @@ public class Model extends Observable {
         return dist <= radius;
     }
 
+    // hit test for line to check if current point is within 5 pixels or not
     public boolean lineHitTest(Point current, Drawable shapeItem) {
         double mouseDist = Line2D.ptSegDist(shapeItem.x, shapeItem.y, shapeItem.x1, shapeItem.y1, current.x, current.y);
         return mouseDist <= 5.00;
     }
 
+    // set the selected shape's color to current color
     public void setSelectedShapeColor(Color c) {
         if (this.getCurrTool() == 4) {
             Drawable selectedShape = this.getSelectedShape();
@@ -129,6 +122,7 @@ public class Model extends Observable {
         }
     }
 
+    // set the selected shape's thickness to current thickness
     public void setSelectedShapeThickness(int thickness) {
         if (this.getCurrTool() == 4) {
             Drawable selectedShape = this.getSelectedShape();
@@ -138,6 +132,9 @@ public class Model extends Observable {
         }
     }
 
+    // delete the shapes that are clicked on when erase tool is selected
+    // break is used to break out of the loop and only delete one shape
+    // when there are overlapping shapes
     public void deleteShapes(Point current) {
 
         Iterator<Drawable> it = ShapeList.iterator();
@@ -171,6 +168,9 @@ public class Model extends Observable {
         }
     }
 
+    // fill the shapes that are clicked on when fill tool is selected
+    // break is used to break out of the loop and only fill one shape
+    // when there are overlapping shapes
     public void fillShapes(Point current) {
 
         Iterator<Drawable> it = ShapeList.iterator();
@@ -200,6 +200,9 @@ public class Model extends Observable {
         }
     }
 
+    // select the shapes that are clicked on when select tool is selected
+    // break is used to break out of the loop and only select one shape
+    // when there are overlapping shapes
     public void selectShapes(Point current) {
         boolean foundShape = false;
         for (Drawable shapeItem : this.getShapeList()) {
@@ -280,17 +283,22 @@ public class Model extends Observable {
      * Inspired by
      * https://docs.oracle.com/javase/tutorial/uiswing/components/filechooser.html
      * https://www.mkyong.com/java/json-simple-example-read-and-write-json/
+     *
+     * Load an already saved json file.
      */
     public void loadDrawing() {
         JSONParser parser = new JSONParser();
-        // Object obj;
 
         JFileChooser openfile = new JFileChooser();
+        // open the dialogue box
         int sf = openfile.showOpenDialog(openfile);
+        // if user pressed anyhting other than okay, return
         if (sf != JFileChooser.APPROVE_OPTION) {
             return;
         }
+        // open the selected file
         File file = openfile.getSelectedFile();
+        // clear the canvase
         this.newDrawing();
 
         try {
@@ -298,12 +306,12 @@ public class Model extends Observable {
             Object obj = parser.parse(new FileReader(file));
 
             JSONObject jsonObject = (JSONObject) obj;
-            // System.out.println(jsonObject);
-
+            // update the current tool and thickness
             this.setCurrThickness(((Long) jsonObject.get("thickness")).intValue());
             this.setCurrTool(((Long) jsonObject.get("currTool")).intValue());
             int totalShapes = ((Long) jsonObject.get("totalShapes")).intValue();
 
+            // load all the shapes
             for (int i = 1; i <= totalShapes; ++i ){
                 JSONObject shape = (JSONObject) jsonObject.get("shape"+i);
                 Drawable newShape = new Drawable();
@@ -340,15 +348,18 @@ public class Model extends Observable {
      * https://stackoverflow.com/questions/22261130/how-to-save-a-file-using-jfilechooser-showsavedialog
      * https://www.mkyong.com/java/json-simple-example-read-and-write-json/
      * 
+     * Save current canvas to a JSON file.
      */
 
     public void saveDrawing() {
+        // add current state of the model to a JSON object.
         JSONObject obj = new JSONObject();
         obj.put("currTool", this.getCurrTool());
         obj.put("thickness", this.getCurrThickness());
         obj.put("totalShapes", this.getShapeList().size());
 
         int i = 0;
+        // add all the shapes to the JSON object.
         for (Drawable shapeItem : this.getShapeList()) {
             ++i;
             JSONObject shape = new JSONObject();
@@ -370,8 +381,10 @@ public class Model extends Observable {
             obj.put("shape" + i, shape);
         }
 
+        // open the Save dialogue box
         JFileChooser savefile = new JFileChooser();
         int sf = savefile.showSaveDialog(savefile);
+        // if the user pressed Save button
         if (sf == JFileChooser.APPROVE_OPTION) {
             try {
                 FileWriter file = new FileWriter(savefile.getSelectedFile());
@@ -379,16 +392,16 @@ public class Model extends Observable {
                 file.close();
                 JOptionPane.showMessageDialog(null, "File has been saved", "File Saved",
                         JOptionPane.INFORMATION_MESSAGE);
-                // true for rewrite, false for override
-
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+            // if the user decided to not save the file
         } else if (sf == JFileChooser.CANCEL_OPTION) {
             JOptionPane.showMessageDialog(null, "File save has been canceled");
         }
     }
 
+    // clear the canvas
     public void newDrawing() {
         this.SelectedShape = null;
         this.ShapeList.clear();

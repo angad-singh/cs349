@@ -18,20 +18,16 @@ public class ColorPalette extends JPanel implements Observer {
     JButton green = new JButton(new ImageIcon("images/green.png"));
     JButton yellow = new JButton(new ImageIcon("images/yellow.png"));
     JButton black = new JButton(new ImageIcon("images/black.png"));
-    JButton white = new JButton(new ImageIcon("images/brown.png"));
+    JButton brown = new JButton(new ImageIcon("images/brown.png"));
     JButton chooser = new JButton(new ImageIcon("images/color.png"));
-
-    // ColorChooserButton chooser = new ColorChooserButton(Color.WHITE);
 
     /**
      * Create a new View.
      */
     public ColorPalette(Model model) {
         // Set up the window.
-        // this.setTitle("Your program title here!");
         this.setMinimumSize(new Dimension(200, 200));
         this.setSize(200, 200);
-        // this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel predefColors = new JPanel();
         predefColors.setLayout(new GridLayout(3, 2, 3, 3));
 
@@ -39,11 +35,9 @@ public class ColorPalette extends JPanel implements Observer {
         GridBagConstraints gc = new GridBagConstraints();
         // stretch the widget horizontally and vertically
         gc.fill = GridBagConstraints.BOTH;
-        gc.gridwidth = 2; // 1 grid cell wide
-        gc.gridheight = 4; // 3 grid cells tall
+        gc.gridwidth = 2; // 2 grid cell wide
+        gc.gridheight = 4; // 4 grid cells tall
 
-        // Use this to change border depending on what's selected
-        // change the north button to be a toolbar using flow layout
         red.setPreferredSize(new Dimension(65, 35));
         red.setMinimumSize(new Dimension(65, 35));
 
@@ -52,7 +46,7 @@ public class ColorPalette extends JPanel implements Observer {
         predefColors.add(green);
         predefColors.add(yellow);
         predefColors.add(black);
-        predefColors.add(white);
+        predefColors.add(brown);
 
         this.add(predefColors, gc);
 
@@ -65,6 +59,7 @@ public class ColorPalette extends JPanel implements Observer {
         this.model = model;
         model.addObserver(this);
 
+        // Add mouslisteners to all the color buttons
         red.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 // if(model.getCurrTool() == 6){
@@ -73,7 +68,6 @@ public class ColorPalette extends JPanel implements Observer {
                 model.setCurrDrawColor(Color.RED);
                 // }
                 model.notifyObservers();
-                // repaint();
             }
         });
 
@@ -85,7 +79,6 @@ public class ColorPalette extends JPanel implements Observer {
                 model.setCurrDrawColor(Color.BLUE);
                 // }
                 model.notifyObservers();
-                // repaint();
             }
         });
 
@@ -97,7 +90,6 @@ public class ColorPalette extends JPanel implements Observer {
                 model.setCurrDrawColor(Color.GREEN);
                 // }
                 model.notifyObservers();
-                // repaint();
             }
         });
 
@@ -109,7 +101,6 @@ public class ColorPalette extends JPanel implements Observer {
                 model.setCurrDrawColor(Color.YELLOW);
                 // }
                 model.notifyObservers();
-                // repaint();
             }
         });
 
@@ -124,7 +115,7 @@ public class ColorPalette extends JPanel implements Observer {
             }
         });
 
-        white.addMouseListener(new MouseAdapter() {
+        brown.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 // if (model.getCurrTool() == 6) {
                 // model.setCurrFillColor(new Color(139,69,19));
@@ -133,7 +124,6 @@ public class ColorPalette extends JPanel implements Observer {
                 // }
                 model.setCurrDrawColor(new Color(139, 69, 19));
                 model.notifyObservers();
-                // repaint();
             }
         });
 
@@ -161,10 +151,9 @@ public class ColorPalette extends JPanel implements Observer {
     }
 
     /**
-     * Update with data from the model.
+     * Update with data from the model. Add border to the currently selected button.
      */
     public void update(Object observable) {
-        // switch (this.model.getCurrDrawColor()) {
         // case Color.RED:
         if (this.model.getCurrDrawColor().equals(Color.RED)) {
             red.setBorder(new LineBorder(Color.BLACK, 2));
@@ -172,7 +161,7 @@ public class ColorPalette extends JPanel implements Observer {
             green.setBorder(new LineBorder(Color.BLACK, 0));
             yellow.setBorder(new LineBorder(Color.BLACK, 0));
             black.setBorder(new LineBorder(Color.BLACK, 0));
-            white.setBorder(new LineBorder(Color.BLACK, 0));
+            brown.setBorder(new LineBorder(Color.BLACK, 0));
         } else if (this.model.getCurrDrawColor().equals(Color.BLUE)) {
             // case Color.BLUE:
             red.setBorder(new LineBorder(Color.BLACK, 0));
@@ -180,7 +169,7 @@ public class ColorPalette extends JPanel implements Observer {
             green.setBorder(new LineBorder(Color.BLACK, 0));
             yellow.setBorder(new LineBorder(Color.BLACK, 0));
             black.setBorder(new LineBorder(Color.BLACK, 0));
-            white.setBorder(new LineBorder(Color.BLACK, 0));
+            brown.setBorder(new LineBorder(Color.BLACK, 0));
         } else if (this.model.getCurrDrawColor().equals(Color.GREEN)) {
             // case Color.GREEN:
             red.setBorder(new LineBorder(Color.BLACK, 0));
@@ -188,7 +177,7 @@ public class ColorPalette extends JPanel implements Observer {
             green.setBorder(new LineBorder(Color.BLACK, 2));
             yellow.setBorder(new LineBorder(Color.BLACK, 0));
             black.setBorder(new LineBorder(Color.BLACK, 0));
-            white.setBorder(new LineBorder(Color.BLACK, 0));
+            brown.setBorder(new LineBorder(Color.BLACK, 0));
         } else if (this.model.getCurrDrawColor().equals(Color.YELLOW)) {
             // case Color.YELLOW:
             red.setBorder(new LineBorder(Color.BLACK, 0));
@@ -196,7 +185,7 @@ public class ColorPalette extends JPanel implements Observer {
             green.setBorder(new LineBorder(Color.BLACK, 0));
             yellow.setBorder(new LineBorder(Color.BLACK, 2));
             black.setBorder(new LineBorder(Color.BLACK, 0));
-            white.setBorder(new LineBorder(Color.BLACK, 0));
+            brown.setBorder(new LineBorder(Color.BLACK, 0));
         } else if (this.model.getCurrDrawColor().equals(Color.BLACK)) {
             // case Color.BLACK:
             red.setBorder(new LineBorder(Color.BLACK, 0));
@@ -204,15 +193,15 @@ public class ColorPalette extends JPanel implements Observer {
             green.setBorder(new LineBorder(Color.BLACK, 0));
             yellow.setBorder(new LineBorder(Color.BLACK, 0));
             black.setBorder(new LineBorder(Color.BLACK, 2));
-            white.setBorder(new LineBorder(Color.BLACK, 0));
+            brown.setBorder(new LineBorder(Color.BLACK, 0));
         } else if (this.model.getCurrDrawColor().equals(new Color(139, 69, 19))) {
-            // case Color.WHITE:
+            // case Color.brown:
             red.setBorder(new LineBorder(Color.BLACK, 0));
             blue.setBorder(new LineBorder(Color.BLACK, 0));
             green.setBorder(new LineBorder(Color.BLACK, 0));
             yellow.setBorder(new LineBorder(Color.BLACK, 0));
             black.setBorder(new LineBorder(Color.BLACK, 0));
-            white.setBorder(new LineBorder(Color.BLACK, 2));
+            brown.setBorder(new LineBorder(Color.BLACK, 2));
         } else {
             // default:
             red.setBorder(new LineBorder(Color.BLACK, 0));
@@ -220,8 +209,7 @@ public class ColorPalette extends JPanel implements Observer {
             green.setBorder(new LineBorder(Color.BLACK, 0));
             yellow.setBorder(new LineBorder(Color.BLACK, 0));
             black.setBorder(new LineBorder(Color.BLACK, 0));
-            white.setBorder(new LineBorder(Color.BLACK, 0));
+            brown.setBorder(new LineBorder(Color.BLACK, 0));
         }
-        // }
     }
 }

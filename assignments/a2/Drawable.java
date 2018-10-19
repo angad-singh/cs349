@@ -3,6 +3,7 @@ import java.text.AttributedCharacterIterator;
 import java.util.*;
 import javax.swing.JPanel;
 
+// Object to track the coordinates and other properties of shapes on the canvas
 public class Drawable extends JPanel {
     // fields
     public int x;

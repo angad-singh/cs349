@@ -18,20 +18,13 @@ public class LineThicknessPalette extends JComponent implements Observer {
      * Create a new View.
      */
     public LineThicknessPalette(Model model) {
-        // Set up the window.
-        // this.setTitle("Your program title here!");
-        // this.setMinimumSize(new Dimension(128, 128));
         this.setSize(200, 200);
-        // this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.setLayout(new GridLayout(4, 1, 3, 3));
 
         line1.setMinimumSize(new Dimension(130, 50));
 
         // Add the components
-        // change the north button to be a toolbar using flow layout
-        // Use this to change border depending on what's selected
-        // change the north button to be a toolbar using flow layout
         this.add(line1);
         this.add(line2);
         this.add(line3);
@@ -40,11 +33,11 @@ public class LineThicknessPalette extends JComponent implements Observer {
         this.model = model;
         model.addObserver(this);
 
+        // Add mouseListener to the buttons
         line1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrThickness(2);
                 model.notifyObservers();
-                // repaint();
             }
         });
 
@@ -52,7 +45,6 @@ public class LineThicknessPalette extends JComponent implements Observer {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrThickness(4);
                 model.notifyObservers();
-                // repaint();
             }
         });
 
@@ -60,7 +52,6 @@ public class LineThicknessPalette extends JComponent implements Observer {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrThickness(6);
                 model.notifyObservers();
-                // repaint();
             }
         });
 
@@ -68,28 +59,19 @@ public class LineThicknessPalette extends JComponent implements Observer {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrThickness(8);
                 model.notifyObservers();
-                // repaint();
-            }
-        });
-
-        this.model = model;
-        model.addObserver(this);
-
-        // this.add(b, BorderLayout.SOUTH);
-        this.addMouseMotionListener(new MouseAdapter() {
-            public void mouseMoved(MouseEvent e) {
-                // model.set(e.getX(), e.getY());
             }
         });
 
         // Hook up this observer so that it will be notified when the model
         // changes.
+        this.model = model;
+        model.addObserver(this);
 
         setVisible(true);
     }
 
     /**
-     * Update with data from the model.
+     * Update with data from the model.Add border to the currently selected button.
      */
     public void update(Object observable) {
         switch (this.model.getCurrThickness()) {

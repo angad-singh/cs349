@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 /*
+* Licences for all the icons used in this project.
 *<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 *<div>Icons made by <a href="https://www.flaticon.com/authors/bqlqn" title="bqlqn">bqlqn</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 *<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
@@ -24,11 +25,7 @@ public class ToolPalette extends JPanel implements Observer {
      * Create a new View.
      */
     public ToolPalette(Model model) {
-        // Set up the window.
-        // this.setTitle("Your program title here!");
-        // this.setMinimumSize(new Dimension(128, 128));
         this.setSize(200, 200);
-        // this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.setLayout(new GridLayout(3, 2, 3, 3));
 
@@ -43,8 +40,6 @@ public class ToolPalette extends JPanel implements Observer {
         select.setMinimumSize(new Dimension(65, 30));
         select.setPreferredSize(new Dimension(65, 30));
 
-        // Use this to change border depending on what's selected
-        // change the north button to be a toolbar using flow layout
         this.add(select);
         this.add(erase);
         this.add(fill);
@@ -55,24 +50,30 @@ public class ToolPalette extends JPanel implements Observer {
         this.model = model;
         model.addObserver(this);
 
+        // Add mouseListeners to the buttons
         rectangle.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                // update model
                 model.setCurrTool(1);
+                // clear any selected shape
                 model.resetSelectedShape();
+                // update the buttons
                 rectangle.setBorder(new LineBorder(Color.BLACK, 2));
                 circle.setBorder(new LineBorder(Color.BLACK, 0));
                 line.setBorder(new LineBorder(Color.BLACK, 0));
                 select.setBorder(new LineBorder(Color.BLACK, 0));
                 erase.setBorder(new LineBorder(Color.BLACK, 0));
                 fill.setBorder(new LineBorder(Color.BLACK, 0));
-                // repaint();
             }
         });
 
         circle.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                // update model
                 model.setCurrTool(2);
+                // clear any selected shape
                 model.resetSelectedShape();
+                // update the buttons
                 rectangle.setBorder(new LineBorder(Color.BLACK, 0));
                 circle.setBorder(new LineBorder(Color.BLACK, 2));
                 line.setBorder(new LineBorder(Color.BLACK, 0));
@@ -85,8 +86,11 @@ public class ToolPalette extends JPanel implements Observer {
 
         line.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                // update model
                 model.setCurrTool(3);
+                // clear any selected shape
                 model.resetSelectedShape();
+                // update the buttons
                 rectangle.setBorder(new LineBorder(Color.BLACK, 0));
                 circle.setBorder(new LineBorder(Color.BLACK, 0));
                 line.setBorder(new LineBorder(Color.BLACK, 2));
@@ -99,8 +103,11 @@ public class ToolPalette extends JPanel implements Observer {
 
         select.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                // update model
                 model.setCurrTool(4);
+                // clear any selected shape
                 model.resetSelectedShape();
+                // update the buttons
                 rectangle.setBorder(new LineBorder(Color.BLACK, 0));
                 circle.setBorder(new LineBorder(Color.BLACK, 0));
                 line.setBorder(new LineBorder(Color.BLACK, 0));
@@ -113,8 +120,11 @@ public class ToolPalette extends JPanel implements Observer {
 
         erase.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                // update model
                 model.setCurrTool(5);
+                // clear any selected shape
                 model.resetSelectedShape();
+                // update the buttons
                 rectangle.setBorder(new LineBorder(Color.BLACK, 0));
                 circle.setBorder(new LineBorder(Color.BLACK, 0));
                 line.setBorder(new LineBorder(Color.BLACK, 0));
@@ -127,9 +137,11 @@ public class ToolPalette extends JPanel implements Observer {
 
         fill.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                // update model
                 model.setCurrTool(6);
-                // repaint();
+                // clear any selected shape
                 model.resetSelectedShape();
+                // update the buttons
                 rectangle.setBorder(new LineBorder(Color.BLACK, 0));
                 circle.setBorder(new LineBorder(Color.BLACK, 0));
                 line.setBorder(new LineBorder(Color.BLACK, 0));
@@ -141,31 +153,9 @@ public class ToolPalette extends JPanel implements Observer {
 
         setVisible(true);
     }
-
-    // public void paintComponent(Graphics g) {
-    //     switch (this.model.getCurrTool()) {
-    //     case 1:
-    //         rectangle.setBorder(new LineBorder(Color.BLACK, 3));
-    //     case 2:
-    //         circle.setBorder(new LineBorder(Color.BLACK, 3));
-    //     case 3:
-    //         line.setBorder(new LineBorder(Color.BLACK, 3));
-    //     case 4:
-    //         select.setBorder(new LineBorder(Color.BLACK, 3));
-    //     case 5:
-    //         erase.setBorder(new LineBorder(Color.BLACK, 3));
-    //     case 6:
-    //         fill.setBorder(new LineBorder(Color.BLACK, 3));
-    //     }
-    // }
-
     /**
      * Update with data from the model.
      */
     public void update(Object observable) {
-        // XXX Fill this in with the logic for updating the view when the model
-        // changes.
-        // System.out.println("Model changed! whatttttttt");
-        // repaint();
     }
 }

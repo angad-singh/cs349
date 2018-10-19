@@ -26,6 +26,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Model model = new Model();
 
+        // Create a menubar with File menu
         JMenuBar menuBar = new JMenuBar();
         JMenu file = new JMenu("File");
 
@@ -33,6 +34,7 @@ public class Main {
         JMenuItem load = new JMenuItem("Load Canvas");
         JMenuItem save = new JMenuItem("Save Canvas");
 
+        // add actionListeners to the menu items
         save.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 model.saveDrawing();
@@ -58,20 +60,25 @@ public class Main {
 
         menuBar.add(file);
 
+        // create a toolbar for the app
         JToolBar toolbar = new JToolBar("Toolbar");
         toolbar.setOrientation(SwingConstants.VERTICAL);
+
         JPanel p = new JPanel();
         p.setLayout(new GridLayout(3, 1));
-        // Menu menu = new Menu (model);
+        // create the tools palette
         ToolPalette tools = new ToolPalette(model);
+        // create the line thickness palette
         LineThicknessPalette lineThickness = new LineThicknessPalette(model);
+        // create the color palette
         ColorPalette colorPalette = new ColorPalette(model);
+        // create the canvas
         MyCanvas canvas = new MyCanvas(model);
 
-        // remove selection on pressing Escape
         /*
          * Inspired by
-         * https://stackoverflow.com/questions/13042504/keypressed-event-in-java
+         * https://stackoverflow.com/questions/13042504/keypressed-event-in-java 
+         * remove selection on pressing Escape
          */
         InputMap im = canvas.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = canvas.getActionMap();

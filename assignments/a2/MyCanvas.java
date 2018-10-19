@@ -10,6 +10,7 @@ import java.awt.geom.*;
 public class MyCanvas extends JComponent implements Observer {
 
     private Model model;
+    // Point objects to track mouse coordinates
     Point current = new Point();
     Point start = new Point();
 
@@ -21,6 +22,7 @@ public class MyCanvas extends JComponent implements Observer {
         this.model = model;
         model.addObserver(this);
         this.setSize(600, 600);
+
         this.addMouseMotionListener(new MouseAdapter() {
             public void mouseDragged(MouseEvent e) {
                 current.x = e.getX();
@@ -48,7 +50,6 @@ public class MyCanvas extends JComponent implements Observer {
                 current.y = e.getY();
                 // if the currently selected tool is a shape then add to the list
                 if (model.getCurrTool() <= 3) {
-                    // TODO move this to model?
                     Drawable shape = new Drawable();
                     shape.x = (model.getCurrTool() < 2) ? Math.min(start.x, current.x) : start.x;
                     shape.y = (model.getCurrTool() < 2) ? Math.min(start.y, current.y) : start.y;
@@ -95,7 +96,6 @@ public class MyCanvas extends JComponent implements Observer {
             Stroke solid = new BasicStroke(shapeItem.lineThickness);
             Stroke dashed = new BasicStroke(shapeItem.lineThickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0,
                     new float[] { 9 }, 0);
-            // Stroke dashed = new BasicStroke(shapeItem.lineThickness);
             g2.setColor(shapeItem.drawColor);
             g2.setStroke(solid);
             if (shapeItem.isTranslated) {
@@ -143,7 +143,7 @@ public class MyCanvas extends JComponent implements Observer {
     }
 
     /**
-     * Update with data from the model.
+     * Update with data from the model. Repaint canvas.
      */
     public void update(Object observable) {
         repaint();
