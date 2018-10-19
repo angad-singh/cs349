@@ -21,7 +21,7 @@ public class Main {
         // App window
         JFrame frame = new JFrame("JSketch - Paint Freely!");
         frame.getContentPane().setLayout(new BorderLayout());
-        // frame.setMinimumSize(128, 128);
+        frame.setMinimumSize(new Dimension(650, 550));
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Model model = new Model();
@@ -58,7 +58,7 @@ public class Main {
 
         menuBar.add(file);
 
-        JToolBar toolbar = new JToolBar("toolbar");
+        JToolBar toolbar = new JToolBar("Toolbar");
         toolbar.setOrientation(SwingConstants.VERTICAL);
         JPanel p = new JPanel();
         p.setLayout(new GridLayout(3, 1));
@@ -67,6 +67,8 @@ public class Main {
         LineThicknessPalette lineThickness = new LineThicknessPalette(model);
         ColorPalette colorPalette = new ColorPalette(model);
         MyCanvas canvas = new MyCanvas(model);
+
+        // JScrollPane scroll = new JScrollPane(canvas);
 
         // remove selection on pressing Escape
         /*

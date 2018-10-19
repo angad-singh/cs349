@@ -83,7 +83,6 @@ public class MyCanvas extends JComponent implements Observer{
                 }
             }
         });
-
     }
 
     public void paintComponent(Graphics g) {
