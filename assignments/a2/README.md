@@ -7,6 +7,8 @@ There are 4 views:
 - `ToolPalette,java`
 - `MyCanvas.java`
 
+Run the command `make run` to launch the app from command line.
+
 Some of the icons used in this app have been sourced from external website.
 
 Licences for all the icons used in this project.
