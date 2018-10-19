@@ -197,42 +197,46 @@ public class Model extends Observable {
     }
 
     public void selectShapes(Point current) {
+        boolean foundShape = false;
         for (Drawable shapeItem : this.getShapeList()) {
             // SELECT rectangles
             if (shapeItem.type == 1) {
-                if (this.rectHitTest(current, shapeItem)) {
+                if (this.rectHitTest(current, shapeItem) && !foundShape) {
                     SelectedShape = shapeItem;
                     this.setCurrThickness(shapeItem.lineThickness);
                     this.setCurrDrawColor(shapeItem.drawColor);
                     shapeItem.isSelected = true;
+                    foundShape = true;
                     notifyObservers();
-                    break;
+                    // break;
                 } else {
                     shapeItem.isSelected = false;
                 }
             }
             // SELECT circles
             else if (shapeItem.type == 2) {
-                if (this.circleHitTest(current, shapeItem)) {
+                if (this.circleHitTest(current, shapeItem) && !foundShape) {
                     SelectedShape = shapeItem;
                     this.setCurrThickness(shapeItem.lineThickness);
                     this.setCurrDrawColor(shapeItem.drawColor);
                     shapeItem.isSelected = true;
+                    foundShape = true;
                     notifyObservers();
-                    break;
+                    // break;
                 } else {
                     shapeItem.isSelected = false;
                 }
             }
             // SELECT line
             else if (shapeItem.type == 3) {
-                if (this.lineHitTest(current, shapeItem)) {
+                if (this.lineHitTest(current, shapeItem) && !foundShape) {
                     SelectedShape = shapeItem;
                     this.setCurrThickness(shapeItem.lineThickness);
                     this.setCurrDrawColor(shapeItem.drawColor);
                     shapeItem.isSelected = true;
+                    foundShape = true;
                     notifyObservers();
-                    break;
+                    // break;
                 } else {
                     shapeItem.isSelected = false;
                 }

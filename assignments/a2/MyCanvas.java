@@ -7,7 +7,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.geom.*;
 
-public class MyCanvas extends JComponent implements Observer{
+public class MyCanvas extends JComponent implements Observer {
 
     private Model model;
     Point current = new Point();
@@ -25,8 +25,8 @@ public class MyCanvas extends JComponent implements Observer{
             public void mouseDragged(MouseEvent e) {
                 current.x = e.getX();
                 current.y = e.getY();
-                if (model.getCurrTool() == 4){ //drag selected shape around
-                    if (model.getSelectedShape() != null){
+                if (model.getCurrTool() == 4) { // drag selected shape around
+                    if (model.getSelectedShape() != null) {
                         model.getSelectedShape().translateX = current.x;
                         model.getSelectedShape().translateY = current.y;
                         model.getSelectedShape().isTranslated = true;
@@ -93,12 +93,12 @@ public class MyCanvas extends JComponent implements Observer{
 
         for (Drawable shapeItem : this.model.getShapeList()) {
             Stroke solid = new BasicStroke(shapeItem.lineThickness);
-            // Stroke dashed = new BasicStroke(shapeItem.lineThickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0,
-                    // new float[] { 9 }, 0);
-            Stroke dashed = new BasicStroke(shapeItem.lineThickness);
+            Stroke dashed = new BasicStroke(shapeItem.lineThickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0,
+                    new float[] { 9 }, 0);
+            // Stroke dashed = new BasicStroke(shapeItem.lineThickness);
             g2.setColor(shapeItem.drawColor);
             g2.setStroke(solid);
-            if (shapeItem.isTranslated){
+            if (shapeItem.isTranslated) {
                 g2.translate(shapeItem.translateX, shapeItem.translateY);
             }
             // draw rectangles
@@ -109,8 +109,9 @@ public class MyCanvas extends JComponent implements Observer{
                 if (shapeItem.isFilled) {
                     // g2.setColor(shapeItem.fillColor);
                     g2.fillRect(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);
-                    // g2.setColor(shapeItem.drawColor);
-                    // g2.drawRect(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);
+                    if (shapeItem.isSelected) {
+                        g2.drawRect(shapeItem.x - 5, shapeItem.y - 5, shapeItem.width + 10, shapeItem.height + 10);
+                    }
                 } else {
                     g2.drawRect(shapeItem.x, shapeItem.y, shapeItem.width, shapeItem.height);
                 }
@@ -120,14 +121,15 @@ public class MyCanvas extends JComponent implements Observer{
                 if (shapeItem.isSelected) {
                     g2.setStroke(dashed);
                 }
-                int radius = (int) Math.hypot(Math.abs(shapeItem.x1 - shapeItem.x), Math.abs(shapeItem.y1 - shapeItem.y));
+                int radius = (int) Math.hypot(Math.abs(shapeItem.x1 - shapeItem.x),
+                        Math.abs(shapeItem.y1 - shapeItem.y));
                 if (shapeItem.isFilled) {
-                    // g2.setColor(shapeItem.fillColor);
-                    g2.fillOval(shapeItem.x - radius, shapeItem.y - radius, 2*radius, 2*radius);
-                    // g2.setColor(shapeItem.drawColor);
-                    // g2.drawOval(shapeItem.x - radius, shapeItem.y - radius, 2 * radius, 2 * radius);
+                    g2.fillOval(shapeItem.x - radius, shapeItem.y - radius, 2 * radius, 2 * radius);
+                    if (shapeItem.isSelected) {
+                        g2.drawOval(shapeItem.x - radius - 5, shapeItem.y - 5 - radius, 2 * radius + 10, 2 * radius + 10);
+                    }
                 } else {
-                    g2.drawOval(shapeItem.x - radius, shapeItem.y - radius, 2*radius, 2*radius);
+                    g2.drawOval(shapeItem.x - radius, shapeItem.y - radius, 2 * radius, 2 * radius);
                 }
             }
             // draw lines
