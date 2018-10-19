@@ -71,6 +71,10 @@ public class Model extends Observable {
 
     public void resetSelectedShape() {
         this.SelectedShape = null;
+        for (Drawable shapeItem : this.getShapeList()) {
+            shapeItem.isSelected = false;
+        }
+        notifyObservers();
     }
 
     public Color getCurrDrawColor() {
