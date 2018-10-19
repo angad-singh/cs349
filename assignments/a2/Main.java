@@ -28,14 +28,10 @@ public class Main {
 
         JMenuBar menuBar = new JMenuBar();
         JMenu file = new JMenu("File");
-        JMenu view = new JMenu("View");
 
-        menuBar.add(file);
-        menuBar.add(view);
-
-        JMenuItem newImage = new JMenuItem("New");
-        JMenuItem load = new JMenuItem("Load");
-        JMenuItem save = new JMenuItem("Save");
+        JMenuItem newImage = new JMenuItem("New Canvas");
+        JMenuItem load = new JMenuItem("Load Canvas");
+        JMenuItem save = new JMenuItem("Save Canvas");
 
         save.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -60,11 +56,7 @@ public class Main {
         file.add(load);
         file.add(save);
 
-        JMenuItem fullSize = new JMenuItem("Full Size");
-        JMenuItem window = new JMenuItem("Fit to Window");
-
-        view.add(fullSize);
-        view.add(window);
+        menuBar.add(file);
 
         JToolBar toolbar = new JToolBar("toolbar");
         toolbar.setOrientation(SwingConstants.VERTICAL);
