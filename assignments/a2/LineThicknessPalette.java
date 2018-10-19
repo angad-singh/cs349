@@ -94,25 +94,25 @@ public class LineThicknessPalette extends JComponent implements Observer {
     public void update(Object observable) {
         switch (this.model.getCurrThickness()) {
         case 2:
-            line1.setBorder(new LineBorder(Color.BLACK, 3));
+            line1.setBorder(new LineBorder(Color.BLACK, 2));
             line2.setBorder(new LineBorder(Color.BLACK, 0));
             line3.setBorder(new LineBorder(Color.BLACK, 0));
             line4.setBorder(new LineBorder(Color.BLACK, 0));
             break;
         case 4:
-            line2.setBorder(new LineBorder(Color.BLACK, 3));
+            line2.setBorder(new LineBorder(Color.BLACK, 2));
             line1.setBorder(new LineBorder(Color.BLACK, 0));
             line3.setBorder(new LineBorder(Color.BLACK, 0));
             line4.setBorder(new LineBorder(Color.BLACK, 0));
             break;
         case 6:
-            line3.setBorder(new LineBorder(Color.BLACK, 3));
+            line3.setBorder(new LineBorder(Color.BLACK, 2));
             line2.setBorder(new LineBorder(Color.BLACK, 0));
             line1.setBorder(new LineBorder(Color.BLACK, 0));
             line4.setBorder(new LineBorder(Color.BLACK, 0));
             break;
         case 8:
-            line4.setBorder(new LineBorder(Color.BLACK, 3));
+            line4.setBorder(new LineBorder(Color.BLACK, 2));
             line2.setBorder(new LineBorder(Color.BLACK, 0));
             line3.setBorder(new LineBorder(Color.BLACK, 0));
             line1.setBorder(new LineBorder(Color.BLACK, 0));

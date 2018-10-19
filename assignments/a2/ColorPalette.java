@@ -6,6 +6,9 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.JColorChooser;
 
+/*
+* <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+*/
 public class ColorPalette extends JPanel implements Observer {
 
     private Model model;
@@ -16,7 +19,7 @@ public class ColorPalette extends JPanel implements Observer {
     JButton yellow = new JButton(new ImageIcon("images/yellow.png"));
     JButton black = new JButton(new ImageIcon("images/black.png"));
     JButton white = new JButton(new ImageIcon("images/brown.png"));
-    JButton chooser = new JButton("Pick a Color");
+    JButton chooser = new JButton(new ImageIcon("images/color.png"));
 
     // ColorChooserButton chooser = new ColorChooserButton(Color.WHITE);
 
@@ -164,7 +167,7 @@ public class ColorPalette extends JPanel implements Observer {
         // switch (this.model.getCurrDrawColor()) {
         // case Color.RED:
         if (this.model.getCurrDrawColor().equals(Color.RED)) {
-            red.setBorder(new LineBorder(Color.BLACK, 3));
+            red.setBorder(new LineBorder(Color.BLACK, 2));
             blue.setBorder(new LineBorder(Color.BLACK, 0));
             green.setBorder(new LineBorder(Color.BLACK, 0));
             yellow.setBorder(new LineBorder(Color.BLACK, 0));
@@ -173,7 +176,7 @@ public class ColorPalette extends JPanel implements Observer {
         } else if (this.model.getCurrDrawColor().equals(Color.BLUE)) {
             // case Color.BLUE:
             red.setBorder(new LineBorder(Color.BLACK, 0));
-            blue.setBorder(new LineBorder(Color.BLACK, 3));
+            blue.setBorder(new LineBorder(Color.BLACK, 2));
             green.setBorder(new LineBorder(Color.BLACK, 0));
             yellow.setBorder(new LineBorder(Color.BLACK, 0));
             black.setBorder(new LineBorder(Color.BLACK, 0));
@@ -182,7 +185,7 @@ public class ColorPalette extends JPanel implements Observer {
             // case Color.GREEN:
             red.setBorder(new LineBorder(Color.BLACK, 0));
             blue.setBorder(new LineBorder(Color.BLACK, 0));
-            green.setBorder(new LineBorder(Color.BLACK, 3));
+            green.setBorder(new LineBorder(Color.BLACK, 2));
             yellow.setBorder(new LineBorder(Color.BLACK, 0));
             black.setBorder(new LineBorder(Color.BLACK, 0));
             white.setBorder(new LineBorder(Color.BLACK, 0));
@@ -191,7 +194,7 @@ public class ColorPalette extends JPanel implements Observer {
             red.setBorder(new LineBorder(Color.BLACK, 0));
             blue.setBorder(new LineBorder(Color.BLACK, 0));
             green.setBorder(new LineBorder(Color.BLACK, 0));
-            yellow.setBorder(new LineBorder(Color.BLACK, 3));
+            yellow.setBorder(new LineBorder(Color.BLACK, 2));
             black.setBorder(new LineBorder(Color.BLACK, 0));
             white.setBorder(new LineBorder(Color.BLACK, 0));
         } else if (this.model.getCurrDrawColor().equals(Color.BLACK)) {
@@ -200,7 +203,7 @@ public class ColorPalette extends JPanel implements Observer {
             blue.setBorder(new LineBorder(Color.BLACK, 0));
             green.setBorder(new LineBorder(Color.BLACK, 0));
             yellow.setBorder(new LineBorder(Color.BLACK, 0));
-            black.setBorder(new LineBorder(Color.BLACK, 3));
+            black.setBorder(new LineBorder(Color.BLACK, 2));
             white.setBorder(new LineBorder(Color.BLACK, 0));
         } else if (this.model.getCurrDrawColor().equals(new Color(139, 69, 19))) {
             // case Color.WHITE:
@@ -209,7 +212,7 @@ public class ColorPalette extends JPanel implements Observer {
             green.setBorder(new LineBorder(Color.BLACK, 0));
             yellow.setBorder(new LineBorder(Color.BLACK, 0));
             black.setBorder(new LineBorder(Color.BLACK, 0));
-            white.setBorder(new LineBorder(Color.BLACK, 3));
+            white.setBorder(new LineBorder(Color.BLACK, 2));
         } else {
             // default:
             red.setBorder(new LineBorder(Color.BLACK, 0));

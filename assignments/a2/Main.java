@@ -68,8 +68,6 @@ public class Main {
         ColorPalette colorPalette = new ColorPalette(model);
         MyCanvas canvas = new MyCanvas(model);
 
-        // JScrollPane scroll = new JScrollPane(canvas);
-
         // remove selection on pressing Escape
         /*
          * Inspired by

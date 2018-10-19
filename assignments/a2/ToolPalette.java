@@ -5,16 +5,21 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+/*
+*<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+*<div>Icons made by <a href="https://www.flaticon.com/authors/bqlqn" title="bqlqn">bqlqn</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+*<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+*<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+*<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+*<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+*<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+*<div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+*<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+*/
 public class ToolPalette extends JPanel implements Observer {
 
     private Model model;
-    // JButton select;
-    // JButton erase;
-    // JButton fill("Fill");
-    // JButton line = new JButton("Line");
-    // JButton circle = new JButton("Circle");
-    // JButton rectangle
-
+    
     /**
      * Create a new View.
      */
@@ -28,7 +33,7 @@ public class ToolPalette extends JPanel implements Observer {
         this.setLayout(new GridLayout(3, 2, 3, 3));
 
         // Add the components
-        JButton select = new JButton(new ImageIcon("images/cursor.png"));
+        JButton select = new JButton(new ImageIcon("images/select.png"));
         JButton erase = new JButton(new ImageIcon("images/erase.png"));
         JButton fill = new JButton(new ImageIcon("images/fill.png"));
         JButton line = new JButton(new ImageIcon("images/line.png"));
@@ -54,7 +59,7 @@ public class ToolPalette extends JPanel implements Observer {
             public void mouseClicked(MouseEvent e) {
                 model.setCurrTool(1);
                 model.resetSelectedShape();
-                rectangle.setBorder(new LineBorder(Color.BLACK, 3));
+                rectangle.setBorder(new LineBorder(Color.BLACK, 2));
                 circle.setBorder(new LineBorder(Color.BLACK, 0));
                 line.setBorder(new LineBorder(Color.BLACK, 0));
                 select.setBorder(new LineBorder(Color.BLACK, 0));
@@ -69,7 +74,7 @@ public class ToolPalette extends JPanel implements Observer {
                 model.setCurrTool(2);
                 model.resetSelectedShape();
                 rectangle.setBorder(new LineBorder(Color.BLACK, 0));
-                circle.setBorder(new LineBorder(Color.BLACK, 3));
+                circle.setBorder(new LineBorder(Color.BLACK, 2));
                 line.setBorder(new LineBorder(Color.BLACK, 0));
                 select.setBorder(new LineBorder(Color.BLACK, 0));
                 erase.setBorder(new LineBorder(Color.BLACK, 0));
@@ -84,7 +89,7 @@ public class ToolPalette extends JPanel implements Observer {
                 model.resetSelectedShape();
                 rectangle.setBorder(new LineBorder(Color.BLACK, 0));
                 circle.setBorder(new LineBorder(Color.BLACK, 0));
-                line.setBorder(new LineBorder(Color.BLACK, 3));
+                line.setBorder(new LineBorder(Color.BLACK, 2));
                 select.setBorder(new LineBorder(Color.BLACK, 0));
                 erase.setBorder(new LineBorder(Color.BLACK, 0));
                 fill.setBorder(new LineBorder(Color.BLACK, 0));
@@ -99,7 +104,7 @@ public class ToolPalette extends JPanel implements Observer {
                 rectangle.setBorder(new LineBorder(Color.BLACK, 0));
                 circle.setBorder(new LineBorder(Color.BLACK, 0));
                 line.setBorder(new LineBorder(Color.BLACK, 0));
-                select.setBorder(new LineBorder(Color.BLACK, 3));
+                select.setBorder(new LineBorder(Color.BLACK, 2));
                 erase.setBorder(new LineBorder(Color.BLACK, 0));
                 fill.setBorder(new LineBorder(Color.BLACK, 0));
                 // repaint();
@@ -114,7 +119,7 @@ public class ToolPalette extends JPanel implements Observer {
                 circle.setBorder(new LineBorder(Color.BLACK, 0));
                 line.setBorder(new LineBorder(Color.BLACK, 0));
                 select.setBorder(new LineBorder(Color.BLACK, 0));
-                erase.setBorder(new LineBorder(Color.BLACK, 3));
+                erase.setBorder(new LineBorder(Color.BLACK, 2));
                 fill.setBorder(new LineBorder(Color.BLACK, 0));
                 // repaint();
             }
@@ -130,7 +135,7 @@ public class ToolPalette extends JPanel implements Observer {
                 line.setBorder(new LineBorder(Color.BLACK, 0));
                 select.setBorder(new LineBorder(Color.BLACK, 0));
                 erase.setBorder(new LineBorder(Color.BLACK, 0));
-                fill.setBorder(new LineBorder(Color.BLACK, 3));
+                fill.setBorder(new LineBorder(Color.BLACK, 2));
             }
         });
 
@@ -160,7 +165,7 @@ public class ToolPalette extends JPanel implements Observer {
     public void update(Object observable) {
         // XXX Fill this in with the logic for updating the view when the model
         // changes.
-        System.out.println("Model changed! whatttttttt");
+        // System.out.println("Model changed! whatttttttt");
         // repaint();
     }
 }
