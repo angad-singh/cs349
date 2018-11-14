@@ -90,17 +90,22 @@ public abstract class Sprite {
         
         Point2D oldPoint = lastPoint;
         Point2D newPoint = e.getPoint();
+
+        double x_diff = newPoint.getX() - oldPoint.getX();
+        double y_diff = newPoint.getY() - oldPoint.getY();
+
         switch (interactionMode) {
             case IDLE:
                 ; // no-op (shouldn't get here)
                 break;
-            case DRAGGING:
-                double x_diff = newPoint.getX() - oldPoint.getX();
-                double y_diff = newPoint.getY() - oldPoint.getY();
+            case DRAGGING:        
                 transform.translate(x_diff, y_diff);
                 break;
             case ROTATING:
-                ; // Provide rotation code here
+                double theta = Math.atan2(newPoint.getY(), newPoint.getX()) - Math.atan2(oldPoint.getY(), oldPoint.getX());
+                System.out.println("theta = " + theta);
+                // Provide rotation code here
+                transform.rotate(theta);
                 break;
             case SCALING:
                 ; // Provide scaling code here
