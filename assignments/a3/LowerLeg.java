@@ -36,6 +36,7 @@ public class LowerLeg extends Sprite {
     
     private void initialize(int width, int height) {
         ellipse = new Ellipse2D.Double(0, 0, width, height);
+        this.bodyPart = Part.LOWERLEG;
     }
     
     /**

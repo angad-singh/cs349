@@ -23,6 +23,7 @@ public class Torso extends Sprite {
      */
     public Torso(int width, int height) {
         super();
+        this.bodyPart = Part.TORSO;    // current state
         this.initialize(width, height);
     }
     /**
@@ -31,6 +32,7 @@ public class Torso extends Sprite {
      */
     public Torso(int width, int height, Sprite parentSprite) {
         super(parentSprite);
+        this.bodyPart = Part.TORSO;    // current state
         this.initialize(width, height);
     }
     

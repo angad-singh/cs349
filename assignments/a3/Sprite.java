@@ -25,11 +25,21 @@ public abstract class Sprite {
         ROTATING
     }
 
+    protected enum Part {
+        TORSO,
+        FACE,
+        UPPERARM,
+        LOWERARM,
+        UPPERLEG,
+        LOWERLEG
+    }
+
     private Sprite parent = null;                               // Pointer to our parent
     private Vector<Sprite> children = new Vector<Sprite>();     // Holds all of our children
     private AffineTransform transform = new AffineTransform();  // Our transformation matrix
     protected Point2D lastPoint = null;                         // Last mouse point
     protected InteractionMode interactionMode = InteractionMode.IDLE;    // current state
+    protected Part bodyPart = null;    // current state
 
     public Sprite() {
     }

@@ -71,6 +71,9 @@ public class Canvas extends JPanel {
 	 */
 	private void handleMouseDragged(MouseEvent e) {
 		if (interactiveSprite != null) {
+			if(interactiveSprite.bodyPart != Sprite.Part.TORSO) {
+				interactiveSprite.interactionMode = Sprite.InteractionMode.ROTATING;
+			}
 			interactiveSprite.handleMouseDragEvent(e);
 			repaint();
 		}

@@ -24,6 +24,7 @@ public class Face extends Sprite {
     public Face(int width, int height) {
         super();
         this.initialize(width, height);
+        this.bodyPart = Part.FACE;
     }
     /**
      * Creates a rectangle based at the origin with the specified
@@ -32,6 +33,7 @@ public class Face extends Sprite {
     public Face(int width, int height, Sprite parentSprite) {
         super(parentSprite);
         this.initialize(width, height);
+        this.bodyPart = Part.FACE;    // current state
     }
     
     private void initialize(int width, int height) {
@@ -51,7 +53,12 @@ public class Face extends Sprite {
         }
         Point2D newPoint = (Point2D)p.clone();
         inverseTransform.transform(newPoint, newPoint);
-        return circle.contains(newPoint);
+        boolean result = circle.contains(newPoint);
+        if(result) {
+            interactionMode = InteractionMode.ROTATING;
+        }
+
+        return result;
     }
 
     protected void drawSprite(Graphics2D g) {
