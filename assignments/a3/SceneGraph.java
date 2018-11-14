@@ -1,3 +1,4 @@
+
 /*
 * CS 349 Java Code Examples
 *
@@ -33,19 +34,19 @@ public class SceneGraph extends JPanel {
         this.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
 
-                switch(e.getKeyCode()) {
-                    case KeyEvent.VK_RIGHT:
-                        rotateBy += 5;
-                        break;
-                    case KeyEvent.VK_LEFT:
-                        rotateBy -= 5;
-                        break;
-                    case KeyEvent.VK_UP:
-                        scaleBy += .1;
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        scaleBy -= .1;
-                        break;
+                switch (e.getKeyCode()) {
+                case KeyEvent.VK_RIGHT:
+                    rotateBy += 5;
+                    break;
+                case KeyEvent.VK_LEFT:
+                    rotateBy -= 5;
+                    break;
+                case KeyEvent.VK_UP:
+                    scaleBy += .1;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    scaleBy -= .1;
+                    break;
 
                 }
                 repaint();
@@ -98,12 +99,16 @@ public class SceneGraph extends JPanel {
 
         // using function which has a model-to-world transform built in
         drawWindow(g2, getWidth()/2, 89, 45, 0.5);
+
+        g2.setTransform(new AffineTransform());
+        g2.setColor(Color.BLACK);
+        g2.fillRect(3*getWidth()/4 + 10,89,45,90);
+        g2.drawRect(45, 10, 10, 65);
     }
 
     // 100 x 100 house shape using Java Polygon structure
     // (model position is centred at top left corner)
-    private Polygon houseShape = new Polygon(new int[] { -50, 50,  50,  0, -50},
-            new int[] { 75,  75, -25, -75, -25}, 5);
+    private Polygon houseShape = new Polygon(new int[] { -50, 50, 50, 0, -50 }, new int[] { 75, 75, -25, -75, -25 }, 5);
 
     // draws 100 x 100 window shape centred at 0,0
     void drawWindow(Graphics2D g2) {
@@ -114,6 +119,7 @@ public class SceneGraph extends JPanel {
         g2.fillRect(5, -40, 35, 35);
         g2.fillRect(-40, 5, 35, 35);
         g2.fillRect(5, 5, 35, 35);
+        // g2.fillRect(-17, -17, 35, 35);
     }
 
     // draws 100 x 100 window shape centred at 0,0
@@ -123,9 +129,9 @@ public class SceneGraph extends JPanel {
         AffineTransform save = g2.getTransform();
 
         // do the model to world transformation
-        g2.translate(x, y);  // T
+        g2.translate(x, y); // T
         g2.rotate(Math.toRadians(theta)); // R
-        g2.scale(s, s);  // S
+        g2.scale(s, s); // S
 
         // draws 100 x 100 window centred at 0,0
         drawWindow(g2);
