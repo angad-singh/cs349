@@ -38,8 +38,8 @@ public class Face extends Sprite {
     
     private void initialize(int width, int height) {
         circle = new Ellipse2D.Double(0, 0, width, height);
-        this.anchor_X = 45;
-        this.anchor_Y = 70;
+        this.anchor_X = 15;
+        this.anchor_Y = 50;
     }
     
     /**

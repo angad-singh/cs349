@@ -35,7 +35,7 @@ public class Main {
 
 		// define them based on relative, successive transformations
 		torso.transform(AffineTransform.getTranslateInstance(300, 300));
-		face.transform(AffineTransform.getTranslateInstance(30, 20)); //45,70
+		face.transform(AffineTransform.getTranslateInstance(30, 20)); //15,50
 		upperarm_R.transform(AffineTransform.getTranslateInstance(75, 80)); //0,0
 		lowerarm_R.transform(AffineTransform.getTranslateInstance(70, 0)); // 70,0
 		upperarm_L.transform(AffineTransform.getTranslateInstance(-55, 80));
