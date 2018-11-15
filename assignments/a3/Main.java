@@ -11,7 +11,7 @@ public class Main {
 
 		// add scene graph to the canvas
 		Canvas canvas = new Canvas();
-		canvas.addSprite(Main.makeSprite());
+		canvas.addSprite(Main.createDoll());
 
 		// create a frame to hold it
 		JFrame f = new JFrame();
@@ -23,7 +23,7 @@ public class Main {
 	}
 	
 	/* Make sample scene graph for testing purposes. */
-	private static Sprite makeSprite() {
+	private static Sprite createDoll() {
 		// create four different parts
 		Sprite torso = new Torso(60, 100);
 		Sprite face = new Face(30, 50);
@@ -38,7 +38,7 @@ public class Main {
 		// Sprite fourthSprite = new LowerArm(10, 10);
 
 		// define them based on relative, successive transformations
-		torso.transform(AffineTransform.getTranslateInstance(300, 300));
+		torso.transform(AffineTransform.getTranslateInstance(450, 150));
 		face.transform(AffineTransform.getTranslateInstance(30, 20)); //15,50
 		upperarm_R.transform(AffineTransform.getTranslateInstance(75, 80)); //0,0
 		lowerarm_R.transform(AffineTransform.getTranslateInstance(70, 0)); // 70,0
