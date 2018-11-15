@@ -41,8 +41,8 @@ public abstract class Sprite {
     protected Point2D lastPoint = null;                         // Last mouse point
     protected InteractionMode interactionMode = InteractionMode.IDLE;    // current state
     protected Part bodyPart = null;    // current state
-    public double anchor_X;
-    public double anchor_Y;
+    public double anchor_X = 0;
+    public double anchor_Y = 0;
 
     public Sprite() {
     }

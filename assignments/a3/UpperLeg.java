@@ -37,7 +37,9 @@ public class UpperLeg extends Sprite {
     private void initialize(int width, int height) {
         ellipse = new Ellipse2D.Double(0, 0, width, height);
         this.bodyPart = Part.UPPERLEG;
-    }
+        this.anchor_X = 0;
+        this.anchor_Y = 0;
+}
     
     /**
      * Test if our rectangle contains the point specified.

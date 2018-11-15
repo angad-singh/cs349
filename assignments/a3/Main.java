@@ -31,6 +31,10 @@ public class Main {
 		Sprite lowerarm_R = new LowerArm(70, 10);
 		Sprite upperarm_L = new UpperArm(70, 10);
 		Sprite lowerarm_L = new LowerArm(70, 10);
+		Sprite upperleg_R = new UpperLeg(10, 75);
+		Sprite lowerleg_R = new LowerLeg(10, 75);
+		Sprite upperleg_L = new UpperLeg(10, 75);
+		Sprite lowerleg_L = new LowerLeg(10, 75);
 		// Sprite fourthSprite = new LowerArm(10, 10);
 
 		// define them based on relative, successive transformations
@@ -39,9 +43,15 @@ public class Main {
 		upperarm_R.transform(AffineTransform.getTranslateInstance(75, 80)); //0,0
 		lowerarm_R.transform(AffineTransform.getTranslateInstance(70, 0)); // 70,0
 		upperarm_L.transform(AffineTransform.getTranslateInstance(-55, 80));
-		upperarm_L.anchor_X = 55;
+		upperarm_L.anchor_X = 70;
 		lowerarm_L.transform(AffineTransform.getTranslateInstance(-70, 0));
 		lowerarm_L.anchor_X = 70;
+		upperleg_R.transform(AffineTransform.getTranslateInstance(58, 170)); //0,0
+		lowerleg_R.transform(AffineTransform.getTranslateInstance(0, 75)); // 70,0
+		upperleg_L.transform(AffineTransform.getTranslateInstance(22, 170)); //0,0
+		lowerleg_L.transform(AffineTransform.getTranslateInstance(0, 75)); // 70,0
+
+
 		// fourthSprite.transform(AffineTransform.getTranslateInstance(70, 30));
 		// fourthSprite.transform(AffineTransform.getScaleInstance(4, 3));
 
@@ -49,8 +59,12 @@ public class Main {
 		torso.addChild(face);
 		torso.addChild(upperarm_R);
 		upperarm_R.addChild(lowerarm_R);
+		torso.addChild(upperleg_R);
+		upperleg_R.addChild(lowerleg_R);
 		torso.addChild(upperarm_L);
 		upperarm_L.addChild(lowerarm_L);
+		torso.addChild(upperleg_L);
+		upperleg_L.addChild(lowerleg_L);
 		
 		// return root of the tree
 		return torso;
