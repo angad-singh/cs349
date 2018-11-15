@@ -25,6 +25,7 @@ public class Face extends Sprite {
         super();
         this.initialize(width, height);
         this.bodyPart = Part.FACE;
+        this.right = false;
     }
     /**
      * Creates a rectangle based at the origin with the specified

@@ -43,6 +43,7 @@ public abstract class Sprite {
     protected Part bodyPart = null;    // current state
     public double anchor_X = 0;
     public double anchor_Y = 0;
+    public boolean right = true;
 
     public Sprite() {
     }
@@ -110,8 +111,11 @@ public abstract class Sprite {
                 // Provide rotation code here
                 // add fields that track the max rotation for the body part
                 double anchor_X = this.anchor_X;
-                double anchor_Y = this.anchor_Y;                
-                transform.rotate(theta*3,anchor_X,anchor_Y);
+                double anchor_Y = this.anchor_Y;
+
+                theta = this.right ? theta*3 : -theta*3;
+            
+                transform.rotate(theta,anchor_X,anchor_Y);
                 // transform = AffineTransform.getRotateInstance(theta*2,45,70);
                 break;
             case SCALING:

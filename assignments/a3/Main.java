@@ -44,8 +44,10 @@ public class Main {
 		lowerarm_R.transform(AffineTransform.getTranslateInstance(70, 0)); // 70,0
 		upperarm_L.transform(AffineTransform.getTranslateInstance(-55, 80));
 		upperarm_L.anchor_X = 70;
+		upperarm_L.right = false;
 		lowerarm_L.transform(AffineTransform.getTranslateInstance(-70, 0));
 		lowerarm_L.anchor_X = 70;
+		lowerarm_L.right = false;
 		upperleg_R.transform(AffineTransform.getTranslateInstance(58, 170)); //0,0
 		lowerleg_R.transform(AffineTransform.getTranslateInstance(0, 75)); // 70,0
 		upperleg_L.transform(AffineTransform.getTranslateInstance(22, 170)); //0,0
