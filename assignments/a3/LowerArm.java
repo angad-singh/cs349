@@ -35,8 +35,11 @@ public class LowerArm extends Sprite {
     }
     
     private void initialize(int width, int height) {
-        ellipse = new Ellipse2D.Double(0, 0, width, height);
+        ellipse = new Ellipse2D.Double(0,0/*-50, 80*/, width, height);
         this.bodyPart = Part.LOWERARM;
+        this.anchor_X = 0;
+        this.anchor_Y = 0;
+
     }
     
     /**

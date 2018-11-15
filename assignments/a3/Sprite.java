@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.util.Vector;
+import java.awt.geom.NoninvertibleTransformException;
 
 /**
  * A building block for creating your own shapes that can be
@@ -40,6 +41,8 @@ public abstract class Sprite {
     protected Point2D lastPoint = null;                         // Last mouse point
     protected InteractionMode interactionMode = InteractionMode.IDLE;    // current state
     protected Part bodyPart = null;    // current state
+    public double anchor_X;
+    public double anchor_Y;
 
     public Sprite() {
     }
@@ -105,9 +108,31 @@ public abstract class Sprite {
                 double theta = Math.atan2(newPoint.getY(), newPoint.getX()) - Math.atan2(oldPoint.getY(), oldPoint.getX());
                 System.out.println("theta = " + theta);
                 // Provide rotation code here
-                transform.rotate(theta);
+                // add fields that track the max rotation for the body part
+                double anchor_X = this.anchor_X;
+                double anchor_Y = this.anchor_Y;                
+                transform.rotate(-theta*2,anchor_X,anchor_Y);
+                // transform = AffineTransform.getRotateInstance(theta*2,45,70);
                 break;
             case SCALING:
+                // double scaleFactor = Math.hypot(x_diff, y_diff);
+                // AffineTransform fullTransform = this.getFullTransform();
+                // AffineTransform inverseTransform = null;
+                // try {
+                //     inverseTransform = fullTransform.createInverse();
+                // } catch (NoninvertibleTransformException ex) {
+                //     ex.printStackTrace();
+                // }
+                // double original_X = transform.getTranslateX();
+                // double original_Y = transform.getTranslateY();
+                // transform.setTransform(inverseTransform);
+
+                // transform.translate(original_X, original_Y);
+                transform.scale(x_diff, y_diff);
+                // transform.translate(-original_X, -original_Y);
+                // transform.concatenate(fullTransform);
+
+
                 ; // Provide scaling code here
                 break;
                 

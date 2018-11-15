@@ -38,6 +38,8 @@ public class Face extends Sprite {
     
     private void initialize(int width, int height) {
         circle = new Ellipse2D.Double(0, 0, width, height);
+        this.anchor_X = 45;
+        this.anchor_Y = 70;
     }
     
     /**
@@ -54,9 +56,9 @@ public class Face extends Sprite {
         Point2D newPoint = (Point2D)p.clone();
         inverseTransform.transform(newPoint, newPoint);
         boolean result = circle.contains(newPoint);
-        if(result) {
-            interactionMode = InteractionMode.ROTATING;
-        }
+        // if(result) {
+        //     interactionMode = InteractionMode.ROTATING;
+        // }
 
         return result;
     }

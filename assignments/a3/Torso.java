@@ -37,7 +37,7 @@ public class Torso extends Sprite {
     }
     
     private void initialize(int width, int height) {
-        rect = new Rectangle2D.Double(0, 0, width, height);
+        rect = new Rectangle2D.Double(15, 70, width, height);
     }
     
     /**
