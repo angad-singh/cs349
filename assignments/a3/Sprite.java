@@ -111,7 +111,7 @@ public abstract class Sprite {
                 // add fields that track the max rotation for the body part
                 double anchor_X = this.anchor_X;
                 double anchor_Y = this.anchor_Y;                
-                transform.rotate(-theta*2,anchor_X,anchor_Y);
+                transform.rotate(theta*3,anchor_X,anchor_Y);
                 // transform = AffineTransform.getRotateInstance(theta*2,45,70);
                 break;
             case SCALING:
