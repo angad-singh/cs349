@@ -70,6 +70,10 @@ public class Main {
 		Sprite upperleg_L = new UpperLeg(15, 75);
 		Sprite lowerleg_L = new LowerLeg(15, 75);
 
+		Sprite foot_R = new LowerArm(30, 15);
+		Sprite foot_L = new UpperArm(30, 15);
+
+
 		// define them based on relative, successive transformations
 		torso.transform(AffineTransform.getTranslateInstance(450, 150));
 		face.transform(AffineTransform.getTranslateInstance(30, 20)); //15,50
@@ -81,6 +85,7 @@ public class Main {
 		upperarm_L.transform(AffineTransform.getTranslateInstance(-55, 80));
 		upperarm_L.anchor_X = 70;
 		upperarm_L.right = false;
+		hand_L.right = false;
 		lowerarm_L.transform(AffineTransform.getTranslateInstance(-70, 0));
 		hand_L.transform(AffineTransform.getTranslateInstance(-15, 0));
 		// hand_L.anchor_X = 0;
@@ -91,6 +96,10 @@ public class Main {
 		lowerleg_R.transform(AffineTransform.getTranslateInstance(0, 75)); // 70,0
 		upperleg_L.transform(AffineTransform.getTranslateInstance(22, 170)); //0,0
 		lowerleg_L.transform(AffineTransform.getTranslateInstance(0, 75)); // 70,0
+
+		foot_L.transform(AffineTransform.getTranslateInstance(-20,75)); // 70,0
+		foot_L.right = false;
+		foot_R.transform(AffineTransform.getTranslateInstance(5,75)); // 70,0
 
 		// build scene graph
 		torso.addChild(face);
@@ -105,6 +114,8 @@ public class Main {
 		torso.addChild(upperleg_L);
 		upperleg_L.addChild(lowerleg_L);
 		
+		lowerleg_L.addChild(foot_L);
+		lowerleg_R.addChild(foot_R);
 		return torso;
 	}
 

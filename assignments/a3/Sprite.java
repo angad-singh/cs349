@@ -62,7 +62,6 @@ public abstract class Sprite {
         if (e.getButton() == MouseEvent.BUTTON1) {
             interactionMode = InteractionMode.DRAGGING;
         }
-        // Handle rotation, scaling mode depending on input
     }
 
     protected void handleMouseDragEvent(MouseEvent e) {
