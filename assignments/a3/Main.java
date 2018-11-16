@@ -6,6 +6,9 @@ import java.awt.geom.AffineTransform;
 import javax.swing.JFrame;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.*;
+
 
 public class Main {
 
@@ -29,6 +32,7 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 // model.quitDrawing();
                 // model.notifyObservers();
+                System.exit(0);            
             }
         });
 
@@ -41,10 +45,47 @@ public class Main {
             }
         });
 
+         /*
+         * Inspired by
+         * https://stackoverflow.com/questions/13042504/keypressed-event-in-java 
+         * remove selection on pressing Escape
+         */
+   //      InputMap im = canvas.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+   //      ActionMap am = canvas.getActionMap();
+
+   //      im.put(KeyStroke.getKeyStroke(java.awt.event.InputEvent.CTRL_DOWN_MASK, KeyEvent.VK_Q), "close");
+
+   //      am.put("close", new AbstractAction() {
+   //          @Override
+   //          public void actionPerformed(ActionEvent e) {
+			// 	System.exit(0);            
+			// }
+   //      });
+
+
+         f.addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if ((e.getKeyCode() == KeyEvent.VK_Q) && ((e.getModifiers() & KeyEvent.CTRL_MASK) != 0)) {
+                    System.exit(0);
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
         file.add(reset);
         file.add(quit);
 
         menuBar.add(file);
+		f.setResizable(false);
         f.setJMenuBar(menuBar);
         f.getContentPane().add(canvas);
 		f.getContentPane().setLayout(new GridLayout(1, 1));
