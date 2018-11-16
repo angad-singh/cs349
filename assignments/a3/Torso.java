@@ -6,33 +6,23 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import javax.swing.*;
+import java.awt.*;
 
 
-/**
- * A simple demo of how to create a rectangular sprite.
- * 
- * Michael Terry & Jeff Avery
- */
 public class Torso extends Sprite {
 
     private Rectangle2D rect = null;
 
-    /**
-     * Creates a rectangle based at the origin with the specified
-     * width and height
-     */
     public Torso(int width, int height) {
         super();
-        this.bodyPart = Part.TORSO;    // current state
+        this.bodyPart = Part.TORSO;
         this.initialize(width, height);
     }
-    /**
-     * Creates a rectangle based at the origin with the specified
-     * width, height, and parent
-     */
+
     public Torso(int width, int height, Sprite parentSprite) {
         super(parentSprite);
-        this.bodyPart = Part.TORSO;    // current state
+        this.bodyPart = Part.TORSO;
         this.initialize(width, height);
     }
     
@@ -40,9 +30,6 @@ public class Torso extends Sprite {
         rect = new Rectangle2D.Double(15, 70, width, height);
     }
     
-    /**
-     * Test if our rectangle contains the point specified.
-     */
     public boolean pointInside(Point2D p) {
         AffineTransform fullTransform = this.getFullTransform();
         AffineTransform inverseTransform = null;
@@ -58,6 +45,7 @@ public class Torso extends Sprite {
 
     protected void drawSprite(Graphics2D g) {
         g.setColor(Color.BLACK);
+        g.setStroke(new BasicStroke(5));
         g.draw(rect);
     }
     

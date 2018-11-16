@@ -8,33 +8,21 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Ellipse2D;
 
 
-/**
- * A simple demo of how to create a rectangular sprite.
- * 
- * Michael Terry & Jeff Avery
- */
 public class Face extends Sprite {
 
     private Ellipse2D circle = null;
 
-    /**
-     * Creates a rectangle based at the origin with the specified
-     * width and height
-     */
     public Face(int width, int height) {
         super();
         this.initialize(width, height);
         this.bodyPart = Part.FACE;
         this.right = false;
     }
-    /**
-     * Creates a rectangle based at the origin with the specified
-     * width, height, and parent
-     */
+
     public Face(int width, int height, Sprite parentSprite) {
         super(parentSprite);
         this.initialize(width, height);
-        this.bodyPart = Part.FACE;    // current state
+        this.bodyPart = Part.FACE;
     }
     
     private void initialize(int width, int height) {
@@ -43,9 +31,6 @@ public class Face extends Sprite {
         this.anchor_Y = 50;
     }
     
-    /**
-     * Test if our rectangle contains the point specified.
-     */
     public boolean pointInside(Point2D p) {
         AffineTransform fullTransform = this.getFullTransform();
         AffineTransform inverseTransform = null;
