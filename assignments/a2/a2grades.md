@@ -3,7 +3,7 @@ Student: a289sing
 Marker: Bahareh Sarrafzadeh
 
 
-Total: 65 / 100 (65.00%)
+Total: 72 / 100 (72.00%)
 
 Code: 
 (CO: won’t compile, CR: crashes, FR: UI freezes/unresponsive, NS: not submitted)
@@ -35,9 +35,8 @@ Notes:
 
 -2 A preview of the rectangle does not appear while the mouse button is being dragged
 
-7. [0/4] Circle drawing tool. The user can select this tool in the toolbar and then draw circles or ellipses in the canvas by holding and dragging the mouse.
+7. [2/4] Circle drawing tool. The user can select this tool in the toolbar and then draw circles or ellipses in the canvas by holding and dragging the mouse.
 
--2 Circle drawing doesn't work as expected (the first corner [or centre] of the circle/ellipse should correspond to the position of mouse press, and the second corner [or radius] should correspond to the position of the mouse release)
 -2 A preview of the circle/ellipse does not appear while the mouse button is being dragged
 
 8. [2/3] Fill tool: The user can select this tool in the toolbar and then click on a shape (rectangle or circle/ellipse) to fill it with the current colour.
@@ -51,6 +50,7 @@ Notes:
 10. [2/3] Colour picker. The user can click on the "Chooser" button to bring up a colour chooser dialog to select a colour.
 
 -1 There is no visual indication of the selected colour
+(Remark note: the indicator works for the 6 standard colours, but not for the customized colour selected in the picker. So, this grade is correct.)
 
 11. [7/7] Line thickness palette. Displays at least 3 line widths, graphically, and allows the user to select line width for new shapes.
 
@@ -91,9 +91,8 @@ Very hard to select shapes, clicking on the toolbar is very flakey, etc.
 
 1. [5/5] Makefile exists, `make` and `make run` works successfully with default arguments.
 
-2. [5/10] Model-View-Controller (MVC) used effectively (i.e. shape model contained in a model class, at least two views used to represent the canvas and/or toolbars).
+2. [10/10] Model-View-Controller (MVC) used effectively (i.e. shape model contained in a model class, at least two views used to represent the canvas and/or toolbars).
 
--5 There is only one view
 
 
 ## ADDITIONAL/BONUS FEATURES (10 + 10 optional bonus)
