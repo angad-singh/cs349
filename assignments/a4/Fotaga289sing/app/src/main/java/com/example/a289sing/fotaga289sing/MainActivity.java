@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -13,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     int rating;
 
     RatingBar ratingBar;
+    ImageButton getImages;
+    ImageButton clearImages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
 //        ratingBar.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
@@ -35,17 +37,49 @@ public class MainActivity extends AppCompatActivity {
 //        ratingBar.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
 //            public boolean onTouch(View v, MotionEvent event) {
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+//        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+//
+//            @Override
+//            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser){
+//                float i = ratingBar.getRating();
+//                Toast.makeText(getApplicationContext(), "Rating is "+i ,Toast.LENGTH_SHORT).show();
+//                /*instead of toast pass this value to some filter to filter the images*/
+//
+////                return true;
+//            }
+//            });
 
+        ratingBar = findViewById(R.id.ratingBar);
+
+        ratingBar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser){
+            public void onClick(View v) {
+                System.out.println("Ratings");
                 float i = ratingBar.getRating();
                 Toast.makeText(getApplicationContext(), "Rating is "+i ,Toast.LENGTH_SHORT).show();
-                /*instead of toast pass this value to some filter to filter the images*/
-
-//                return true;
             }
-            });
+        });
+
+        getImages = findViewById(R.id.getImages);
+
+        getImages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getApplicationContext(), "getImages pressed!" ,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        clearImages = findViewById(R.id.clearImages);
+
+        clearImages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getApplicationContext(), "clearImages pressed!" ,Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 

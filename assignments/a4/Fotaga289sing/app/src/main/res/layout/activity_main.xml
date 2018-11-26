@@ -23,15 +23,39 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
                 android:text="@string/app_name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/getImages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_get_images"
+                android:background="@color/appToolbar"
+                android:layout_marginRight="15dp"/>
+
+            <ImageButton
+                android:id="@+id/clearImages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_clear_images"
+                android:background="@color/appToolbar"
+                android:layout_marginRight="30dp"/>
+
             <RatingBar
                 android:id="@+id/ratingBar"
-                android:layout_width="292dp"
-                android:layout_height="74dp"
-                tools:layout_editor_absoluteX="135dp"
-                tools:layout_editor_absoluteY="0dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyleSmall"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:layout_marginRight="30dp" />
         </LinearLayout>
 
 
