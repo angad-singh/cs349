@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+
+
 public class MainActivity extends AppCompatActivity {
 
     int rating;
@@ -51,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
 
         ratingBar = findViewById(R.id.ratingBar);
 
-        ratingBar.setOnClickListener(new View.OnClickListener() {
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 System.out.println("Ratings");
-                float i = ratingBar.getRating();
-                Toast.makeText(getApplicationContext(), "Rating is "+i ,Toast.LENGTH_SHORT).show();
+//                float i = ratingBar.getNumStars();
+                Toast.makeText(getApplicationContext(), "Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         getImages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Snackbar.make(v, "getImages pressed!", Snackbar.LENGTH_SHORT).show();
 
                 Toast.makeText(getApplicationContext(), "getImages pressed!" ,Toast.LENGTH_SHORT).show();
             }

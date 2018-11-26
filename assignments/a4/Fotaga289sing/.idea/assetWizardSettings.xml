@@ -51,13 +51,24 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                      <entry key="textAsset">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="text" value="SUBMIT" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                     </map>
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="assetType" value="TEXT" />
                                       <entry key="imageAsset" value="$USER_HOME$/Downloads/baseline-clear-black-18/2x/baseline_clear_black_18dp.png" />
-                                      <entry key="outputName" value="ic_clear_images" />
+                                      <entry key="outputName" value="ic_submit_rating" />
                                     </map>
                                   </option>
                                 </PersistentState>
