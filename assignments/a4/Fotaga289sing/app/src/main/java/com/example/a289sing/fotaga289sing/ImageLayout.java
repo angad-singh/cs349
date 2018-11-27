@@ -9,7 +9,7 @@ import android.widget.RatingBar;
 
 public class ImageLayout extends ConstraintLayout {
 
-    float rating;
+    float image_rating;
     ImageView image;
     String url;
     RatingBar ratingBar;
@@ -21,7 +21,7 @@ public class ImageLayout extends ConstraintLayout {
         // open the image here and add it to the image view
 
 //        ratingBar = findViewById(R)
-        this.rating = 0;
+        this.image_rating = 0;
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         layoutInflater.inflate(R.layout.image_layout, this, true);
@@ -30,46 +30,20 @@ public class ImageLayout extends ConstraintLayout {
 //        this.addView(image);
         ratingBar = findViewById(R.id.ratingBar1);
 
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                image_rating = rating;
+//                Toast.makeText(, "ImageView: Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
+//
+                System.out.println("ImageView: Rating is " + image_rating);
+            }
+        });
+
 //        image = findViewById(R.id.imageView1);
 //
 //        image.setImageDrawable();
     }
-
-//    public ImageLayout(Context context, float rating, ImageView image, String url, RatingBar ratingBar) {
-//        super(context);
-//        this.rating = 0;
-//        this.url = url;
-//
-//    }
-//
-//    public ImageLayout(Context context, AttributeSet attrs, float rating, ImageView image, String url, RatingBar ratingBar) {
-//        super(context, attrs);
-//        this.rating = 0;
-//
-//        this.url = url;
-//
-//    }
-//
-//    public ImageLayout(Context context, AttributeSet attrs, int defStyleAttr, float rating, ImageView image, String url, RatingBar ratingBar) {
-//        super(context, attrs, defStyleAttr);
-//        this.rating = 0;
-//
-//        this.url = url;
-//
-//    }
-//
-//    public ImageLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, float rating, ImageView image, String url, RatingBar ratingBar) {
-//        super(context, attrs, defStyleAttr, defStyleRes);
-//        this.rating = 0;
-//
-//        this.url = url;
-//    }
-
-//    @Override
-//    protected void onDraw(Canvas canvas) {
-//        // Drawing commands go here
-//        canvas.drawColor(Color.BLACK);
-//    }
 
     public void setImageFile (Drawable d) {
         this.image.setImageDrawable(d);
