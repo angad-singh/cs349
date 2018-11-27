@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     ImageLayout image1;
     ImageLayout image2;
+    ImageLayout image3;
+    ImageLayout image4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +105,14 @@ public class MainActivity extends AppCompatActivity {
         image2 = new ImageLayout(getApplicationContext(), "https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg");
 
         layout.addView(image2);
+
+        image3 = new ImageLayout(getApplicationContext(), "https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg");
+
+        layout.addView(image3);
+
+        image4 = new ImageLayout(getApplicationContext(), "https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg");
+
+        layout.addView(image4);
 
     }
 

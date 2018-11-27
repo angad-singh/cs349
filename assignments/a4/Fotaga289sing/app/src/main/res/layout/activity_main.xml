@@ -64,13 +64,16 @@
     </android.support.v7.widget.Toolbar>
 
 
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
         <LinearLayout
             android:id="@+id/myApp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
         </LinearLayout>
+</ScrollView>
 
 
 
