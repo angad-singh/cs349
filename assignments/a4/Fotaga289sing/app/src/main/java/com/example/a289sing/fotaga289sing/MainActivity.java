@@ -1,5 +1,7 @@
 package com.example.a289sing.fotaga289sing;
 
+import android.graphics.drawable.Drawable;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -76,6 +81,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
+         * https://stackoverflow.com/questions/6343166/how-do-i-fix-android-os-networkonmainthreadexception
+         * https://github.com/JohnsAndroidStudioTutorials/Contacts/blob/master/app/src/main/java/com/sartainstudios/contacts/ContactsView.java
+         */
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
+
         getImages = findViewById(R.id.getImages);
 
         getImages.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +127,26 @@ public class MainActivity extends AppCompatActivity {
         image4 = new ImageLayout(getApplicationContext(), "https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg");
 
         layout.addView(image4);
+
+        try {
+            InputStream is = (InputStream) new URL("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/bunny.jpg").getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+
+            image1.setImageFile(d);
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        try {
+            InputStream iss = (InputStream) new URL("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg").getContent();
+            Drawable dd = Drawable.createFromStream(iss, "src name");
+
+            image2.setImageFile(dd);
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
 
     }
 

@@ -10,6 +10,8 @@
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
         android:background="@color/appToolbar"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
@@ -36,27 +38,27 @@
                 android:id="@+id/getImages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_get_images"
+                android:layout_marginEnd="15dp"
                 android:background="@color/appToolbar"
-                android:layout_marginEnd="15dp"/>
+                android:src="@drawable/ic_get_images" />
 
             <ImageButton
                 android:id="@+id/clearImages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_clear_images"
+                android:layout_marginEnd="30dp"
                 android:background="@color/appToolbar"
-                android:layout_marginEnd="30dp"/>
+                android:src="@drawable/ic_clear_images" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
+                style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="?android:attr/ratingBarStyleSmall"
+                android:layout_marginEnd="30dp"
                 android:isIndicator="false"
                 android:scaleX="1.5"
-                android:scaleY="1.5"
-                android:layout_marginEnd="30dp" />
+                android:scaleY="1.5" />
 
         </LinearLayout>
 

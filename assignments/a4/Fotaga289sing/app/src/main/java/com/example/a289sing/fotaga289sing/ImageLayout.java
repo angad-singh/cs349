@@ -1,12 +1,9 @@
 package com.example.a289sing.fotaga289sing;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
@@ -28,6 +25,10 @@ public class ImageLayout extends ConstraintLayout {
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         layoutInflater.inflate(R.layout.image_layout, this, true);
+
+        image = findViewById(R.id.imageView1);
+//        this.addView(image);
+        ratingBar = findViewById(R.id.ratingBar1);
 
 //        image = findViewById(R.id.imageView1);
 //
@@ -70,4 +71,7 @@ public class ImageLayout extends ConstraintLayout {
 //        canvas.drawColor(Color.BLACK);
 //    }
 
+    public void setImageFile (Drawable d) {
+        this.image.setImageDrawable(d);
+    }
 }
