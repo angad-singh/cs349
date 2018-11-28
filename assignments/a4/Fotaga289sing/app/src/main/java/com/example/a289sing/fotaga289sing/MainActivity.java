@@ -27,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
     ImageButton getImages;
     ImageButton clearImages;
 
-//    ArrayList<ImageLayout> images;
+    ArrayList<ImageLayout> images;
+
+    ArrayList<String> urls;
 
     ImageLayout image1;
     ImageLayout image2;
@@ -42,28 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-
-//        ratingBar.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-
-        /*
-        * https://stackoverflow.com/questions/3443939/ratingbar-onclick
-        */
-
-//        ratingBar.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-//
-//            @Override
-//            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser){
-//                float i = ratingBar.getRating();
-//                Toast.makeText(getApplicationContext(), "Rating is "+i ,Toast.LENGTH_SHORT).show();
-//                /*instead of toast pass this value to some filter to filter the images*/
-//
-////                return true;
-//            }
-//            });
 
         /*
         *
@@ -96,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                Snackbar.make(v, "getImages pressed!", Snackbar.LENGTH_SHORT).show();
-
+                getImages();
                 Toast.makeText(getApplicationContext(), "getImages pressed!" ,Toast.LENGTH_SHORT).show();
             }
         });
@@ -108,46 +88,122 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Toast.makeText(getApplicationContext(), "clearImages pressed!" ,Toast.LENGTH_SHORT).show();
+                clearImages();
             }
         });
 
-        image1 = new ImageLayout(getApplicationContext(), "https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg");
+        images = new ArrayList<>();
 
-        ViewGroup layout = findViewById(R.id.myApp);
-        layout.addView(image1);
+        urls = new ArrayList<>();
 
-        image2 = new ImageLayout(getApplicationContext(), "https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg");
+        urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/bunny.jpg");
+        urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/chinchilla.jpg");
+        urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/doggo.jpg");
+        urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/hamster.jpg");
+        urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/husky.jpg");
+        urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/kitten.png");
+        urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg");
+        urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/puppy.jpg");
+        urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/redpanda.jpg");
+        urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/sleepy.png");
 
-        layout.addView(image2);
 
-        image3 = new ImageLayout(getApplicationContext(), "https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg");
+//        ViewGroup layout = findViewById(R.id.myApp);
+//
+//        images.clear();
+//        for (int i = 0; i < 10; ++i){
+//
+////            images.add(new ImageLayout(getApplicationContext(), urls.get(i)));
+//            ImageLayout image_to_add = new ImageLayout(getApplicationContext(), urls.get(i));
+//
+//            try {
+//                InputStream is = (InputStream) new URL(urls.get(i)).getContent();
+//                Drawable d = Drawable.createFromStream(is, "src name");
+//
+//                image_to_add.setImageFile(d);
+//
+//            } catch (IOException e){
+//                e.printStackTrace();
+//            }
+//            images.add(image_to_add);
+//            layout.addView(images.get(i));
+//
+//        }
 
-        layout.addView(image3);
 
-        image4 = new ImageLayout(getApplicationContext(), "https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg");
-
-        layout.addView(image4);
-
-        try {
-            InputStream is = (InputStream) new URL("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/bunny.jpg").getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");
-
-            image1.setImageFile(d);
-
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-        try {
-            InputStream iss = (InputStream) new URL("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg").getContent();
-            Drawable dd = Drawable.createFromStream(iss, "src name");
-
-            image2.setImageFile(dd);
-
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+//        image1 = new ImageLayout(getApplicationContext(), "https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg");
+//
+//
+//        layout.addView(image1);
+//
+//        image2 = new ImageLayout(getApplicationContext(), "https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg");
+//
+//        layout.addView(image2);
+//
+//        image3 = new ImageLayout(getApplicationContext(), "https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg");
+//
+//        layout.addView(image3);
+//
+//        image4 = new ImageLayout(getApplicationContext(), "https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg");
+//
+//        layout.addView(image4);
+//
+//        try {
+//            InputStream is = (InputStream) new URL("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/bunny.jpg").getContent();
+//            Drawable d = Drawable.createFromStream(is, "src name");
+//
+//            image1.setImageFile(d);
+//
+//        } catch (IOException e){
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            InputStream iss = (InputStream) new URL("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/loris.jpg").getContent();
+//            Drawable dd = Drawable.createFromStream(iss, "src name");
+//
+//            image2.setImageFile(dd);
+//
+//        } catch (IOException e){
+//            e.printStackTrace();
+//        }
 
     }
 
-}
+    public void getImages() {
+        ViewGroup layout = findViewById(R.id.myApp);
+
+        clearImages();
+        for (int i = 0; i < 10; ++i){
+
+//            images.add(new ImageLayout(getApplicationContext(), urls.get(i)));
+            ImageLayout image_to_add = new ImageLayout(getApplicationContext(), urls.get(i));
+
+            try {
+                InputStream is = (InputStream) new URL(urls.get(i)).getContent();
+                Drawable d = Drawable.createFromStream(is, "src name");
+
+                image_to_add.setImageFile(d);
+
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+            images.add(image_to_add);
+            layout.addView(images.get(i));
+
+        }
+    }
+
+    public void clearImages() {
+        ViewGroup layout = findViewById(R.id.myApp);
+
+
+//        for (int i = 0; i < 10; ++i){
+
+          layout.removeAllViews();
+
+//        }
+        images.clear();
+    }
+
+} // End of class
