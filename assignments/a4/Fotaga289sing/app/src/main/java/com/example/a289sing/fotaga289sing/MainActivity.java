@@ -55,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                System.out.println("Ratings");
 //                float i = ratingBar.getNumStars();
                 Toast.makeText(getApplicationContext(), "Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
+                filterImages(rating);
             }
         });
 
@@ -204,6 +204,21 @@ public class MainActivity extends AppCompatActivity {
 
 //        }
         images.clear();
+    }
+
+    public void filterImages(float rating) {
+        int images_left = images.size();
+
+        for (int i = 0; i < images_left; ++i) {
+            ImageLayout img = images.get(i);
+
+            if (img.image_rating < rating) {
+                img.setVisibility(View.GONE);
+            } else {
+                img.setVisibility(View.VISIBLE);
+            }
+
+        }
     }
 
 } // End of class

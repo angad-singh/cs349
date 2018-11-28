@@ -60,6 +60,10 @@ public class ImageLayout extends ConstraintLayout {
         this.image.setImageDrawable(d);
     }
 
+
+    /*
+     * https://stackoverflow.com/questions/46385454/i-tried-to-add-ratingbar-in-dialog-but-i-have-some-issue-in-stars-number
+     */
     public void ShowDialog()
     {
         final AlertDialog.Builder popDialog = new AlertDialog.Builder(getRootView().getContext());
