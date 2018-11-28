@@ -14,6 +14,7 @@ import android.widget.RatingBar;
 public class ImageLayout extends ConstraintLayout {
 
     float image_rating;
+    float global_rating;
     ImageView image;
     String url;
     RatingBar ratingBar;
@@ -39,8 +40,16 @@ public class ImageLayout extends ConstraintLayout {
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 image_rating = rating;
 //                Toast.makeText(, "ImageView: Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
+
+                if (rating < global_rating){
+                    findViewById(R.id.imageHolder).setVisibility(View.GONE);
+                }
+// else {
+//                    findViewById(R.id.imageHolder).setVisibility(View.VISIBLE);
+//                }
 //
                 System.out.println("ImageView: Rating is " + image_rating);
+                System.out.println("ImageView: Global Rating is " + global_rating);
             }
         });
 
@@ -51,9 +60,6 @@ public class ImageLayout extends ConstraintLayout {
             }
         });
 
-//        image = findViewById(R.id.imageView1);
-//
-//        image.setImageDrawable();
     }
 
     public void setImageFile (Drawable d) {

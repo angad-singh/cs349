@@ -33,28 +33,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ImageLayout.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ImageLayout.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/a289sing/fotaga289sing/ImageLayout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="961">
-              <caret line="99" selection-start-line="99" selection-end-line="99" />
-              <folding>
-                <element signature="e#1531#1672#0" expanded="true" />
-                <element signature="e#1671#1672#0" expanded="true" />
-                <element signature="e#3168#3491#0" expanded="true" />
-                <element signature="e#3490#3491#0" expanded="true" />
-                <element signature="e#3596#3822#0" expanded="true" />
-                <element signature="e#3821#3822#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="411">
+              <caret line="48" column="19" lean-forward="true" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="image_layout.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/image_layout.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="32" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/a289sing/fotaga289sing/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1179">
-              <caret line="62" selection-start-line="62" selection-end-line="62" />
+            <state relative-caret-position="-167">
+              <caret line="105" column="97" selection-start-line="105" selection-start-column="97" selection-end-line="105" selection-end-column="97" />
+              <folding>
+                <element signature="e#2283#2682#0" expanded="true" />
+                <element signature="e#2681#2682#0" expanded="true" />
+                <element signature="e#2780#3036#0" expanded="true" />
+                <element signature="e#3035#3036#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2328,6 +2338,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/image_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/a289sing/fotaga289sing/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/a289sing/fotaga289sing/ImageLayout.java" />
       </list>
@@ -2365,6 +2376,12 @@
               <item name="Fotaga289sing" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="Fotaga289sing" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
             <path>
               <item name="Fotaga289sing" type="1abcf292:AndroidViewProjectNode" />
@@ -2512,7 +2529,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Android Profiler" />
@@ -2521,6 +2537,7 @@
       <window_info id="Build Variants" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="right" id="Preview" weight="0.32960597" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32935324" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" />
@@ -2549,24 +2566,32 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/a289sing/fotaga289sing/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/image_layout.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1179">
-          <caret line="62" selection-start-line="62" selection-end-line="62" />
+        <state relative-caret-position="105">
+          <caret line="7" column="32" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/a289sing/fotaga289sing/ImageLayout.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="961">
-          <caret line="99" selection-start-line="99" selection-end-line="99" />
+        <state relative-caret-position="411">
+          <caret line="48" column="19" lean-forward="true" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/a289sing/fotaga289sing/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-167">
+          <caret line="105" column="97" selection-start-line="105" selection-start-column="97" selection-end-line="105" selection-end-column="97" />
           <folding>
-            <element signature="e#1531#1672#0" expanded="true" />
-            <element signature="e#1671#1672#0" expanded="true" />
-            <element signature="e#3168#3491#0" expanded="true" />
-            <element signature="e#3490#3491#0" expanded="true" />
-            <element signature="e#3596#3822#0" expanded="true" />
-            <element signature="e#3821#3822#0" expanded="true" />
+            <element signature="e#2283#2682#0" expanded="true" />
+            <element signature="e#2681#2682#0" expanded="true" />
+            <element signature="e#2780#3036#0" expanded="true" />
+            <element signature="e#3035#3036#0" expanded="true" />
           </folding>
         </state>
       </provider>
