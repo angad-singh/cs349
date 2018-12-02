@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 //                float i = ratingBar.getNumStars();
-                Toast.makeText(getApplicationContext(), "Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Rating has been set to "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
 
                 for (int i = 0; i < images.size(); ++i) {
                     images.get(i).global_rating = rating;
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 //                Snackbar.make(v, "getImages pressed!", Snackbar.LENGTH_SHORT).show();
                 boolean result = getImages(true);
                 if (result){
-                Toast.makeText(getApplicationContext(), "getImages pressed!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Loaded Images", Toast.LENGTH_SHORT).show();
                }
             }
         });
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getApplicationContext(), "clearImages pressed!" ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Cleared Images" ,Toast.LENGTH_SHORT).show();
                 clearImages();
             }
         });
@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
         rating_array.clear();
         for(int i = 0; i < images.size(); ++i){
             rating_array.add(String.valueOf(images.get(i).ratingBar.getRating()));
-            System.out.println("images.get("+i+").image_rating: " + rating_array.get(i));
         }
 
         savedInstanceState.putSerializable("rating_array", rating_array);
@@ -149,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 //                float i = ratingBar.getNumStars();
-                Toast.makeText(getApplicationContext(), "Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Rating has been set to "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
 
                 for (int i = 0; i < images.size(); ++i) {
                     images.get(i).global_rating = rating;
@@ -167,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
 //                Snackbar.make(v, "getImages pressed!", Snackbar.LENGTH_SHORT).show();
                 boolean result = getImages(true);
                 if (result){
-                    Toast.makeText(getApplicationContext(), "getImages pressed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Loaded Images", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -178,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getApplicationContext(), "clearImages pressed!" ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Cleared Images" ,Toast.LENGTH_SHORT).show();
                 clearImages();
             }
         });
