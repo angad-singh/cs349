@@ -75,9 +75,7 @@ public class ImageLayout extends ConstraintLayout {
         layoutInflater.inflate(R.layout.image_layout, this, true);
 
         image = findViewById(R.id.imageView1);
-//        this.addView(image);
-        ratingBar = findViewById(R.id.ratingBar1);
-        this.ratingBar.setRating(rating);
+
 //        ratingBar.setRating(image_rating);
 
 //        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -105,6 +103,9 @@ public class ImageLayout extends ConstraintLayout {
                 ShowDialog();
             }
         });
+
+        ratingBar = findViewById(R.id.ratingBar1);
+        this.ratingBar.setRating(rating);
 
     }
 

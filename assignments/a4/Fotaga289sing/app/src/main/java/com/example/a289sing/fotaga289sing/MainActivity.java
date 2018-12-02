@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static java.lang.Float.parseFloat;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -208,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
 //            }
 
 //        }
-        ratingBar.setRating(Float.parseFloat(savedInstanceState.getString("global_rating")));
+        ratingBar.setRating(parseFloat(savedInstanceState.getString("global_rating")));
 
             hookRatingListener();
 
@@ -222,16 +224,13 @@ public class MainActivity extends AppCompatActivity {
             clearImages();
         }
 
-        int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//
-        } else {
+
             // In portrait
             System.out.println("In Portrait");
 
-            for (int i = 0; i < urls.size(); ++i){
+            for (int i = 0; i < urls.size(); ++i) {
 
-                ImageLayout image_to_add = new ImageLayout(getApplicationContext(), urls.get(i));
+                ImageLayout image_to_add = new ImageLayout(getApplicationContext(), urls.get(i), 0);
 
                 image_to_add.image.setTag(urls.get(i));
                 new DownloadImagesTask().execute(image_to_add.image);
@@ -240,7 +239,6 @@ public class MainActivity extends AppCompatActivity {
                 layout.addView(images.get(i));
 
             }
-        }
 
         hookRatingListener();
 
