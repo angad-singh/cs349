@@ -210,21 +210,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
         ratingBar.setRating(Float.parseFloat(savedInstanceState.getString("global_rating")));
 
-        for (int i = 0; i < images.size(); ++i) {
-            RatingBar img_rating_bar = images.get(i).ratingBar;
-            img_rating_bar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                @Override
-                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-//                float i = ratingBar.getNumStars();
-//                Toast.makeText(getApplicationContext(), "Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
-
-                    RatingBar ratingBar_main = findViewById(R.id.ratingBar);
-                    ratingBar.setRating(rating);
-                    filterImages(ratingBar_main.getRating());
-//                System.out.println("filterImages(ratingBar.getRating()) " + rating);
-                }
-            });
-        }
+            hookRatingListener();
 
         filterImages(ratingBar.getRating());
     }
@@ -256,6 +242,28 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        hookRatingListener();
+
+//        for (int i = 0; i < images.size(); ++i) {
+//            RatingBar img_rating_bar = images.get(i).ratingBar;
+//            img_rating_bar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+//                @Override
+//                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+////                float i = ratingBar.getNumStars();
+////                Toast.makeText(getApplicationContext(), "Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
+//
+//                    RatingBar ratingBar_main = findViewById(R.id.ratingBar);
+//                    ratingBar.setRating(rating);
+//                    filterImages(ratingBar_main.getRating());
+////                System.out.println("filterImages(ratingBar.getRating()) " + rating);
+//                }
+//            });
+//        }
+
+        return true;
+    }
+
+    public void hookRatingListener() {
         for (int i = 0; i < images.size(); ++i) {
             RatingBar img_rating_bar = images.get(i).ratingBar;
             img_rating_bar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -271,8 +279,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
-        return true;
     }
 
     public void clearImages() {
