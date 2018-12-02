@@ -1,5 +1,6 @@
 package com.example.a289sing.fotaga289sing;
 
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -25,18 +28,64 @@ public class MainActivity extends AppCompatActivity {
     ImageButton getImages;
     ImageButton clearImages;
 
-    ArrayList<ImageLayout> images;
+    ArrayList<ImageLayout> images = new ArrayList<>();
 
     ArrayList<String> urls;
+    ArrayAdapter<ImageLayout> gridViewArrayAdapter;
+    float[] rating_array = new float[10];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(savedInstanceState != null) {
+//            urls.clear();
+            urls = (ArrayList<String>) savedInstanceState.getSerializable("urls");
+//            System.out.println("urls.size() " + urls.size());
+            rating_array = (float [])savedInstanceState.getSerializable("rating_array");
+
+//            float[] rating_array = savedInstanceState.getFloatArray("rating_array");
+
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            System.out.println("rating_array.size() " + rating_array.length);
+                images.clear();
+                for (int i = 0; i < rating_array.length; ++i) {
+                    ImageLayout img_from_save = new ImageLayout(this, urls.get(i), rating_array[i]);
+                    images.add(img_from_save);
+                    System.out.println("rating_array["+i+"] "+rating_array[i]);
+                    System.out.println("urls["+i+"]"+urls.get(i));
+                }
+
+//                System.out.println("onCreate after orientation");
+
+
+                getImages(false);
+
+
+            ratingBar = findViewById(R.id.ratingBar);
+            ratingBar.setRating(savedInstanceState.getFloat("global_rating"));
+            filterImages(ratingBar.getRating());
+
+            } else {
+                System.out.println("onCreate after landscape orientation");
+            }
+        }
+
+//        setContentView(R.layout.activity_main);
+
+//
+//        int orientation = getResources().getConfiguration().orientation;
+//        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            // In landscape
+//            System.out.println("In Landscape");
+//        } else {
+//            // In portrait
+//            System.out.println("In Portrait");
+//
+//        }
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-
        /*
         * https://codelabs.developers.google.com/codelabs/constraint-layout/index.html#4
         */
@@ -72,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                Snackbar.make(v, "getImages pressed!", Snackbar.LENGTH_SHORT).show();
-                boolean result = getImages();
+                boolean result = getImages(true);
                 if (result){
                 Toast.makeText(getApplicationContext(), "getImages pressed!", Toast.LENGTH_SHORT).show();
                }
@@ -90,9 +139,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        images = new ArrayList<>();
+//        images = new ArrayList<>();
 
         urls = new ArrayList<>();
+
+
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // In landscape
+            gridViewArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, images);
+        } else {
+            // In portrait
+            System.out.println("In Portrait");
+
+        }
+
+
 
         urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/bunny.jpg");
         urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/chinchilla.jpg");
@@ -104,31 +166,90 @@ public class MainActivity extends AppCompatActivity {
         urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/puppy.jpg");
         urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/redpanda.jpg");
         urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/sleepy.png");
+
+
     }
 
-    public boolean getImages() {
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save custom values into the bundle
+        savedInstanceState.putSerializable("urls", urls);
+
+        float[] rating_array = new float[10];
+
+        for(int i = 0; i < images.size(); ++i){
+            rating_array[i] = images.get(i).image_rating;
+//            System.out.println("images.get("+i+").image_rating: " + rating_array.get(i));
+        }
+
+        savedInstanceState.putSerializable("rating_array", rating_array);
+        savedInstanceState.putFloat("global_rating", ratingBar.getRating());
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    public boolean getImages(boolean clearAll) {
         ViewGroup layout = findViewById(R.id.myApp);
 
-        clearImages();
-        for (int i = 0; i < 10; ++i){
+        if (clearAll){
+            clearImages();
+        }
+
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // In landscape
+            System.out.println("In Landscape");
+            gridViewArrayAdapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_list_item_1, images);
+            GridView gridView = findViewById(R.id.gridView);
+            gridView.setAdapter(gridViewArrayAdapter);
+
+            for (int i = 0; i < 10; ++i){
 
 //            images.add(new ImageLayout(getApplicationContext(), urls.get(i)));
-            ImageLayout image_to_add = new ImageLayout(getApplicationContext(), urls.get(i));
+                ImageLayout image_to_add = new ImageLayout(getApplicationContext(), urls.get(i));
 
-            try {
-                InputStream is = (InputStream) new URL(urls.get(i)).getContent();
-                Drawable d = Drawable.createFromStream(is, "src name");
+                try {
+                    InputStream is = (InputStream) new URL(urls.get(i)).getContent();
+                    Drawable d = Drawable.createFromStream(is, "src name");
 
-                image_to_add.setImageFile(d);
+                    image_to_add.setImageFile(d);
 
-            } catch (IOException e){
-                Toast.makeText(getApplicationContext(), "Network error. Please try again" ,Toast.LENGTH_SHORT).show();
-                return false;
+                } catch (IOException e){
+                    Toast.makeText(getApplicationContext(), "Network error. Please try again" ,Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+                images.add(image_to_add);
+                gridViewArrayAdapter.notifyDataSetChanged();
+
             }
-            images.add(image_to_add);
-            layout.addView(images.get(i));
+layout.addView(gridView);
 
+
+        } else {
+            // In portrait
+            System.out.println("In Portrait");
+
+            for (int i = 0; i < 10; ++i){
+
+//            images.add(new ImageLayout(getApplicationContext(), urls.get(i)));
+                ImageLayout image_to_add = new ImageLayout(getApplicationContext(), urls.get(i), rating_array[i]);
+
+                try {
+                    InputStream is = (InputStream) new URL(urls.get(i)).getContent();
+                    Drawable d = Drawable.createFromStream(is, "src name");
+
+                    image_to_add.setImageFile(d);
+
+                } catch (IOException e){
+                    Toast.makeText(getApplicationContext(), "Network error. Please try again" ,Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+                images.add(image_to_add);
+                layout.addView(images.get(i));
+
+            }
         }
+
         return true;
     }
 

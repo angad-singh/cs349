@@ -62,6 +62,51 @@ public class ImageLayout extends ConstraintLayout {
 
     }
 
+    public ImageLayout(Context context, String url, float rating) {
+        super(context);
+        this.url = url;
+
+        // open the image here and add it to the image view
+
+//        ratingBar = findViewById(R)
+        this.image_rating = rating;
+
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        layoutInflater.inflate(R.layout.image_layout, this, true);
+
+        image = findViewById(R.id.imageView1);
+//        this.addView(image);
+        ratingBar = findViewById(R.id.ratingBar1);
+//        ratingBar.setRating(image_rating);
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                image_rating = rating;
+//                Toast.makeText(, "ImageView: Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
+
+                if (rating < global_rating){
+                    findViewById(R.id.imageHolder).setVisibility(View.GONE);
+                }
+// else {
+//                    findViewById(R.id.imageHolder).setVisibility(View.VISIBLE);
+//                }
+//
+                System.out.println("ImageView: Rating is " + image_rating);
+                System.out.println("ImageView: Global Rating is " + global_rating);
+            }
+        });
+        ratingBar.setRating(rating);
+
+        image.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowDialog();
+            }
+        });
+
+    }
+
     public void setImageFile (Drawable d) {
         this.image.setImageDrawable(d);
     }
