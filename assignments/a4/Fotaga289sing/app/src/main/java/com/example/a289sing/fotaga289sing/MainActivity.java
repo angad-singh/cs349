@@ -148,7 +148,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 //                float i = ratingBar.getNumStars();
-                Toast.makeText(getApplicationContext(), "Rating has been set to "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
+                if (fromUser){
+                    Toast.makeText(getApplicationContext(), "Rating has been set to "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
+                }
 
                 for (int i = 0; i < images.size(); ++i) {
                     images.get(i).global_rating = rating;
@@ -163,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
         getImages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Snackbar.make(v, "getImages pressed!", Snackbar.LENGTH_SHORT).show();
                 boolean result = getImages(true);
                 if (result){
                     Toast.makeText(getApplicationContext(), "Loaded Images", Toast.LENGTH_SHORT).show();
@@ -279,6 +280,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clearImages() {
+        ratingBar.setRating(0);
         ViewGroup layout = findViewById(R.id.myApp);
         layout.removeAllViews();
         images.clear();
