@@ -9,6 +9,11 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+
+/*
+* https://stackoverflow.com/questions/3090650/android-loading-an-image-from-the-web-with-asynctask
+*/
+
 public class DownloadImagesTask extends AsyncTask<ImageView, Void, Bitmap> {
 
     ImageView imageView = null;
