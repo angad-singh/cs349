@@ -2,9 +2,13 @@ package com.example.a289sing.fotaga289sing;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -72,32 +76,10 @@ public class ImageLayout extends ConstraintLayout {
 
 //        ratingBar = findViewById(R)
 
-
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         layoutInflater.inflate(R.layout.image_layout, this, true);
 
         image = findViewById(R.id.imageView1);
-
-//        ratingBar.setRating(image_rating);
-
-//        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-//            @Override
-//            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-////                image_rating = rating;
-//////                Toast.makeText(, "ImageView: Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
-////
-////                if (rating < global_rating){
-////                    findViewById(R.id.imageHolder).setVisibility(View.GONE);
-////                }
-//// else {
-////                    findViewById(R.id.imageHolder).setVisibility(View.VISIBLE);
-////                }
-////
-//                System.out.println("ImageView: Rating is " + image_rating);
-//                System.out.println("ImageView: Global Rating is " + global_rating);
-//            }
-//        });
-//        ratingBar.setRating(rating);
 
         image.setOnClickListener(new OnClickListener() {
             @Override
@@ -115,7 +97,6 @@ public class ImageLayout extends ConstraintLayout {
         this.image.setImageDrawable(d);
     }
 
-
     /*
      * https://stackoverflow.com/questions/46385454/i-tried-to-add-ratingbar-in-dialog-but-i-have-some-issue-in-stars-number
      */
@@ -126,8 +107,25 @@ public class ImageLayout extends ConstraintLayout {
         ScrollView scrollView = new ScrollView(getRootView().getContext());
         LinearLayout linearLayout = new LinearLayout(getRootView().getContext());
         final RatingBar rating_popup = new RatingBar(linearLayout.getContext());
+        rating_popup.setForegroundGravity(Gravity.CENTER_HORIZONTAL);
         final ImageView image_popup = new ImageView(linearLayout.getContext());
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            image_popup.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        } else {
+            image_popup.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        }
+
+//        LinearLayout.LayoutParams iv = new LinearLayout.LayoutParams(
+//                LinearLayout.LayoutParams.WRAP_CONTENT,
+//                LinearLayout.LayoutParams.WRAP_CONTENT
+//        );
+////
+//        image_popup.setLayoutParams(iv);
+//        image_popup.requestLayout();
+
         image_popup.setImageDrawable(image.getDrawable());
+
 
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -168,7 +166,7 @@ public class ImageLayout extends ConstraintLayout {
 
         AlertDialog popDialogBox = popDialog.create();
         popDialogBox.show();
-        popDialogBox.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        popDialogBox.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
     }
 }
