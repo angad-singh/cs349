@@ -15,7 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
-
+import com.example.a289sing.fotaga289sing.DownloadImagesTask;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         if(savedInstanceState != null) {
 //            urls.clear();
-            urls = (ArrayList<String>) savedInstanceState.getSerializable("urls");
+//            urls = (ArrayList<String>) savedInstanceState.getSerializable("urls");
 //            System.out.println("urls.size() " + urls.size());
-            rating_array = (float [])savedInstanceState.getSerializable("rating_array");
+//            rating_array = (float [])savedInstanceState.getSerializable("rating_array");
 
 //            float[] rating_array = savedInstanceState.getFloatArray("rating_array");
 
@@ -68,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
 
             } else {
                 System.out.println("onCreate after landscape orientation");
+                System.out.println("images.size() "+images.size());
+                for(int i =0; i < images.size(); ++i){
+                    System.out.println("images["+i+"] " + images.get(i).image_rating);
+                }
+
             }
         }
 
@@ -234,16 +239,9 @@ layout.addView(gridView);
 //            images.add(new ImageLayout(getApplicationContext(), urls.get(i)));
                 ImageLayout image_to_add = new ImageLayout(getApplicationContext(), urls.get(i), rating_array[i]);
 
-                try {
-                    InputStream is = (InputStream) new URL(urls.get(i)).getContent();
-                    Drawable d = Drawable.createFromStream(is, "src name");
+                image_to_add.image.setTag(urls.get(i));
+                new DownloadImagesTask().execute(image_to_add.image);
 
-                    image_to_add.setImageFile(d);
-
-                } catch (IOException e){
-                    Toast.makeText(getApplicationContext(), "Network error. Please try again" ,Toast.LENGTH_SHORT).show();
-                    return false;
-                }
                 images.add(image_to_add);
                 layout.addView(images.get(i));
 
