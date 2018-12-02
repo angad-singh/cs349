@@ -27,7 +27,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:text="@string/app_name"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored" />
 
             <View
                 android:layout_width="0dp"
@@ -46,7 +46,7 @@
                 android:id="@+id/clearImages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
+                android:layout_marginEnd="40dp"
                 android:background="@color/appToolbar"
                 android:src="@drawable/ic_clear_images" />
 
@@ -55,10 +55,11 @@
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginTop="2.5dp"
                 android:isIndicator="false"
-                android:scaleX="1.5"
-                android:scaleY="1.5" />
+                android:scaleX="1.75"
+                android:scaleY="1.75" />
 
         </LinearLayout>
 
