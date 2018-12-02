@@ -32,13 +32,16 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> urls;
     ArrayAdapter<ImageLayout> gridViewArrayAdapter;
-    float[] rating_array = new float[10];
+    ArrayList<String> rating_array;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        rating_array = new ArrayList<>();
+        for (int i = 0; i < 10; ++i){
+            rating_array.add("0");
+        }
 
 //
 //        int orientation = getResources().getConfiguration().orientation;
@@ -138,15 +141,16 @@ public class MainActivity extends AppCompatActivity {
         // Save custom values into the bundle
         savedInstanceState.putSerializable("urls", urls);
 
-        float[] rating_array = new float[10];
-
+//        float[] rating_array = new float[10];
+        rating_array.clear();
         for(int i = 0; i < images.size(); ++i){
-            rating_array[i] = images.get(i).image_rating;
-//            System.out.println("images.get("+i+").image_rating: " + rating_array.get(i));
+            rating_array.add(String.valueOf(images.get(i).ratingBar.getRating()));
+            System.out.println("images.get("+i+").image_rating: " + rating_array.get(i));
         }
 
         savedInstanceState.putSerializable("rating_array", rating_array);
-        savedInstanceState.putFloat("global_rating", ratingBar.getRating());
+
+        savedInstanceState.putString("global_rating", String.valueOf(ratingBar.getRating()));
         savedInstanceState.putInt("numStars", ratingBar.getNumStars());
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
@@ -155,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState (Bundle savedInstanceState){
 
-        // YOU WILL NEED TO HOOK EVERYTHING BACK UP, LIKE THE RATING
         super.onRestoreInstanceState(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -199,16 +202,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        rating_array = (float [])savedInstanceState.getSerializable("rating_array");
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        rating_array = (ArrayList<String>) savedInstanceState.getSerializable("rating_array");
+
+        System.out.println("SIZEEEEEEEEEEEEEEEEEE res " +rating_array.size());
+
+
+//        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 //            System.out.println("rating_array.size() " + rating_array.length);
             images.clear();
-//            System.out.println("SIZEEEEEEEEEEEEEEEEEE " +images.size());
-            for (int i = 0; i < rating_array.length; ++i) {
-                ImageLayout img_from_save = new ImageLayout(this, urls.get(i), (float)1.5);
+            System.out.println("SIZEEEEEEEEEEEEEEEEEE res " +rating_array.size());
+            for (int i = 0; i < rating_array.size(); ++i) {
+                ImageLayout img_from_save = new ImageLayout(this, urls.get(i), Float.parseFloat(rating_array.get(i)));
                 images.add(img_from_save);
 //                System.out.println("rating_array["+i+"] "+rating_array[i]);
-//                System.out.println("urls["+i+"]"+urls.get(i));
+                System.out.println("urls["+i+"]"+urls.get(i));
             }
 
 //                System.out.println("onCreate after orientation");
@@ -224,15 +231,15 @@ public class MainActivity extends AppCompatActivity {
 //            ratingBar.setRating(savedInstanceState.getFloat("global_rating"));
 
 
-        } else {
-            System.out.println("onCreate after landscape orientation");
-            System.out.println("images.size() "+images.size());
-            for(int i =0; i < images.size(); ++i){
-                System.out.println("images["+i+"] " + images.get(i).image_rating);
-            }
+//        } else {
+//            System.out.println("onCreate after landscape orientation");
+//            System.out.println("images.size() "+images.size());
+//            for(int i =0; i < images.size(); ++i){
+//                System.out.println("images["+i+"] " + images.get(i).image_rating);
+//            }
 
-        }
-        ratingBar.setRating((float) savedInstanceState.getInt("numStars"));
+//        }
+        ratingBar.setRating(Float.parseFloat(savedInstanceState.getString("global_rating")));
 //        ratingBar.setNumStars(savedInstanceState.getInt("numStars"));
 //        System.out.println("ratingBar.getNumStars() = " + ratingBar.getNumStars());
         filterImages(ratingBar.getRating());
@@ -283,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < urls.size(); ++i){
 
 //            images.add(new ImageLayout(getApplicationContext(), urls.get(i)));
-                ImageLayout image_to_add = new ImageLayout(getApplicationContext(), urls.get(i), rating_array[i]);
+                ImageLayout image_to_add = new ImageLayout(getApplicationContext(), urls.get(i), Float.parseFloat(rating_array.get(i)));
 
                 image_to_add.image.setTag(urls.get(i));
                 new DownloadImagesTask().execute(image_to_add.image);

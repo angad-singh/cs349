@@ -48,8 +48,8 @@ public class ImageLayout extends ConstraintLayout {
 //                    findViewById(R.id.imageHolder).setVisibility(View.VISIBLE);
 //                }
 //
-                System.out.println("ImageView: Rating is " + image_rating);
-                System.out.println("ImageView: Global Rating is " + global_rating);
+//                System.out.println("ImageView: Rating is " + image_rating);
+//                System.out.println("ImageView: Global Rating is " + global_rating);
             }
         });
 
