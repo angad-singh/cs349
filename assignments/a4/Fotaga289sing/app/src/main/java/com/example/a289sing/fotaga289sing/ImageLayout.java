@@ -7,9 +7,11 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 
 public class ImageLayout extends ConstraintLayout {
 
@@ -121,7 +123,7 @@ public class ImageLayout extends ConstraintLayout {
     {
         final AlertDialog.Builder popDialog = new AlertDialog.Builder(getRootView().getContext());
 
-
+        ScrollView scrollView = new ScrollView(getRootView().getContext());
         LinearLayout linearLayout = new LinearLayout(getRootView().getContext());
         final RatingBar rating_popup = new RatingBar(linearLayout.getContext());
         final ImageView image_popup = new ImageView(linearLayout.getContext());
@@ -140,9 +142,10 @@ public class ImageLayout extends ConstraintLayout {
         //add ratingBar and ImageView to linearLayout
         linearLayout.addView(image_popup);
         linearLayout.addView(rating_popup);
+        scrollView.addView(linearLayout);
 
         popDialog.setTitle("Add Rating: ");
-        popDialog.setView(linearLayout);
+        popDialog.setView(scrollView);
 
         // Button OK
         popDialog.setPositiveButton(android.R.string.ok,
@@ -163,8 +166,9 @@ public class ImageLayout extends ConstraintLayout {
                             }
                         });
 
-        popDialog.create();
-        popDialog.show();
+        AlertDialog popDialogBox = popDialog.create();
+        popDialogBox.show();
+        popDialogBox.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
     }
 }
