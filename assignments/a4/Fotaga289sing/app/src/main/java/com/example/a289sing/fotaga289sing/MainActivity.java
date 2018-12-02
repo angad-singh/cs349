@@ -1,24 +1,16 @@
 package com.example.a289sing.fotaga289sing;
 
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
-import com.example.a289sing.fotaga289sing.DownloadImagesTask;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+
 import java.util.ArrayList;
 
 
@@ -31,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<ImageLayout> images = new ArrayList<>();
 
     ArrayList<String> urls;
-    ArrayAdapter<ImageLayout> gridViewArrayAdapter;
+//    ArrayAdapter<ImageLayout> gridViewArrayAdapter;
     ArrayList<String> rating_array;
 
     @Override
@@ -42,17 +34,6 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 10; ++i){
             rating_array.add("0");
         }
-
-//
-//        int orientation = getResources().getConfiguration().orientation;
-//        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//            // In landscape
-//            System.out.println("In Landscape");
-//        } else {
-//            // In portrait
-//            System.out.println("In Portrait");
-//
-//        }
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -119,8 +100,6 @@ public class MainActivity extends AppCompatActivity {
 //            System.out.println("In Portrait");
 //
 //        }
-
-
 
         urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/bunny.jpg");
         urls.add("https://www.student.cs.uwaterloo.ca/~cs349/f18/assignments/images/chinchilla.jpg");
@@ -204,22 +183,15 @@ public class MainActivity extends AppCompatActivity {
 
         rating_array = (ArrayList<String>) savedInstanceState.getSerializable("rating_array");
 
-        System.out.println("SIZEEEEEEEEEEEEEEEEEE res " +rating_array.size());
-
 
 //        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 //            System.out.println("rating_array.size() " + rating_array.length);
             images.clear();
-            System.out.println("SIZEEEEEEEEEEEEEEEEEE res " +rating_array.size());
+
             for (int i = 0; i < rating_array.size(); ++i) {
                 ImageLayout img_from_save = new ImageLayout(this, urls.get(i), Float.parseFloat(rating_array.get(i)));
                 images.add(img_from_save);
-//                System.out.println("rating_array["+i+"] "+rating_array[i]);
-                System.out.println("urls["+i+"]"+urls.get(i));
             }
-
-//                System.out.println("onCreate after orientation");
-
 
             for (int i = 0; i < images.size(); ++i){
                 images.get(i).image.setTag(urls.get(i));
@@ -227,9 +199,6 @@ public class MainActivity extends AppCompatActivity {
                 ViewGroup layout = findViewById(R.id.myApp);
                 layout.addView(images.get(i));
             }
-//            ratingBar = findViewById(R.id.ratingBar);
-//            ratingBar.setRating(savedInstanceState.getFloat("global_rating"));
-
 
 //        } else {
 //            System.out.println("onCreate after landscape orientation");
@@ -240,10 +209,24 @@ public class MainActivity extends AppCompatActivity {
 
 //        }
         ratingBar.setRating(Float.parseFloat(savedInstanceState.getString("global_rating")));
-//        ratingBar.setNumStars(savedInstanceState.getInt("numStars"));
-//        System.out.println("ratingBar.getNumStars() = " + ratingBar.getNumStars());
-        filterImages(ratingBar.getRating());
 
+        for (int i = 0; i < images.size(); ++i) {
+            RatingBar img_rating_bar = images.get(i).ratingBar;
+            img_rating_bar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+//                float i = ratingBar.getNumStars();
+//                Toast.makeText(getApplicationContext(), "Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
+
+                    RatingBar ratingBar_main = findViewById(R.id.ratingBar);
+                    ratingBar.setRating(rating);
+                    filterImages(ratingBar_main.getRating());
+//                System.out.println("filterImages(ratingBar.getRating()) " + rating);
+                }
+            });
+        }
+
+        filterImages(ratingBar.getRating());
     }
 
     public boolean getImages(boolean clearAll) {
@@ -255,42 +238,14 @@ public class MainActivity extends AppCompatActivity {
 
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//            // In landscape
-//            System.out.println("In Landscape");
-//            gridViewArrayAdapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_list_item_1, images);
-//            GridView gridView = findViewById(R.id.gridView);
-//            gridView.setAdapter(gridViewArrayAdapter);
 //
-//            for (int i = 0; i < 10; ++i){
-//
-////            images.add(new ImageLayout(getApplicationContext(), urls.get(i)));
-//                ImageLayout image_to_add = new ImageLayout(getApplicationContext(), urls.get(i));
-//
-//                try {
-//                    InputStream is = (InputStream) new URL(urls.get(i)).getContent();
-//                    Drawable d = Drawable.createFromStream(is, "src name");
-//
-//                    image_to_add.setImageFile(d);
-//
-//                } catch (IOException e){
-//                    Toast.makeText(getApplicationContext(), "Network error. Please try again" ,Toast.LENGTH_SHORT).show();
-//                    return false;
-//                }
-//                images.add(image_to_add);
-//                gridViewArrayAdapter.notifyDataSetChanged();
-//
-//            }
-//layout.addView(gridView);
-
-
         } else {
             // In portrait
             System.out.println("In Portrait");
 
             for (int i = 0; i < urls.size(); ++i){
 
-//            images.add(new ImageLayout(getApplicationContext(), urls.get(i)));
-                ImageLayout image_to_add = new ImageLayout(getApplicationContext(), urls.get(i), Float.parseFloat(rating_array.get(i)));
+                ImageLayout image_to_add = new ImageLayout(getApplicationContext(), urls.get(i));
 
                 image_to_add.image.setTag(urls.get(i));
                 new DownloadImagesTask().execute(image_to_add.image);
@@ -299,7 +254,22 @@ public class MainActivity extends AppCompatActivity {
                 layout.addView(images.get(i));
 
             }
-//            System.out.println("Size of images array: "+images.size());
+        }
+
+        for (int i = 0; i < images.size(); ++i) {
+            RatingBar img_rating_bar = images.get(i).ratingBar;
+            img_rating_bar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+//                float i = ratingBar.getNumStars();
+//                Toast.makeText(getApplicationContext(), "Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
+
+                    RatingBar ratingBar_main = findViewById(R.id.ratingBar);
+                    ratingBar.setRating(rating);
+                    filterImages(ratingBar_main.getRating());
+//                System.out.println("filterImages(ratingBar.getRating()) " + rating);
+                }
+            });
         }
 
         return true;
@@ -314,13 +284,11 @@ public class MainActivity extends AppCompatActivity {
     public void filterImages(float rating) {
         int images_left = images.size();
 
-//        System.out.println("Length of images: " + images_left + " rating: " + rating);
-
         for (int i = 0; i < images_left; ++i) {
             ImageLayout img = images.get(i);
             img.global_rating = rating;
 
-            if (img.image_rating < rating) {
+            if (img.ratingBar.getRating() < rating) {
                 img.setVisibility(View.GONE);
             } else {
                 img.setVisibility(View.VISIBLE);

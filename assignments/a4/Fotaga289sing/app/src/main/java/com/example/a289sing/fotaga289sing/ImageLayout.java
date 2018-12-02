@@ -69,7 +69,7 @@ public class ImageLayout extends ConstraintLayout {
         // open the image here and add it to the image view
 
 //        ratingBar = findViewById(R)
-        this.image_rating = rating;
+
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         layoutInflater.inflate(R.layout.image_layout, this, true);
@@ -77,26 +77,27 @@ public class ImageLayout extends ConstraintLayout {
         image = findViewById(R.id.imageView1);
 //        this.addView(image);
         ratingBar = findViewById(R.id.ratingBar1);
+        this.ratingBar.setRating(rating);
 //        ratingBar.setRating(image_rating);
 
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                image_rating = rating;
-//                Toast.makeText(, "ImageView: Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
-
-                if (rating < global_rating){
-                    findViewById(R.id.imageHolder).setVisibility(View.GONE);
-                }
-// else {
-//                    findViewById(R.id.imageHolder).setVisibility(View.VISIBLE);
-//                }
-//
-                System.out.println("ImageView: Rating is " + image_rating);
-                System.out.println("ImageView: Global Rating is " + global_rating);
-            }
-        });
-        ratingBar.setRating(rating);
+//        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+//            @Override
+//            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+////                image_rating = rating;
+//////                Toast.makeText(, "ImageView: Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
+////
+////                if (rating < global_rating){
+////                    findViewById(R.id.imageHolder).setVisibility(View.GONE);
+////                }
+//// else {
+////                    findViewById(R.id.imageHolder).setVisibility(View.VISIBLE);
+////                }
+////
+//                System.out.println("ImageView: Rating is " + image_rating);
+//                System.out.println("ImageView: Global Rating is " + global_rating);
+//            }
+//        });
+//        ratingBar.setRating(rating);
 
         image.setOnClickListener(new OnClickListener() {
             @Override
@@ -131,7 +132,7 @@ public class ImageLayout extends ConstraintLayout {
         );
         rating_popup.setLayoutParams(lp);
         rating_popup.setNumStars(5);
-        rating_popup.setRating(image_rating);
+        rating_popup.setRating(ratingBar.getRating());
 
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
