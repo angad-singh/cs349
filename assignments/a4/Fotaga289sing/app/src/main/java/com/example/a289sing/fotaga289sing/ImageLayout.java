@@ -29,33 +29,22 @@ public class ImageLayout extends ConstraintLayout {
         super(context);
         this.url = url;
 
-        // open the image here and add it to the image view
-
-//        ratingBar = findViewById(R)
         this.image_rating = 0;
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         layoutInflater.inflate(R.layout.image_layout, this, true);
 
         image = findViewById(R.id.imageView1);
-//        this.addView(image);
         ratingBar = findViewById(R.id.ratingBar1);
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 image_rating = rating;
-//                Toast.makeText(, "ImageView: Rating is "+String.valueOf(rating) ,Toast.LENGTH_SHORT).show();
 
                 if (rating < global_rating){
                     findViewById(R.id.imageHolder).setVisibility(View.GONE);
                 }
-// else {
-//                    findViewById(R.id.imageHolder).setVisibility(View.VISIBLE);
-//                }
-//
-//                System.out.println("ImageView: Rating is " + image_rating);
-//                System.out.println("ImageView: Global Rating is " + global_rating);
             }
         });
 
@@ -71,10 +60,6 @@ public class ImageLayout extends ConstraintLayout {
     public ImageLayout(Context context, String url, float rating) {
         super(context);
         this.url = url;
-
-        // open the image here and add it to the image view
-
-//        ratingBar = findViewById(R)
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         layoutInflater.inflate(R.layout.image_layout, this, true);
@@ -115,14 +100,6 @@ public class ImageLayout extends ConstraintLayout {
         } else {
             image_popup.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         }
-
-//        LinearLayout.LayoutParams iv = new LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.WRAP_CONTENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT
-//        );
-////
-//        image_popup.setLayoutParams(iv);
-//        image_popup.requestLayout();
 
         image_popup.setImageDrawable(image.getDrawable());
 

@@ -42,7 +42,6 @@ public class DownloadImagesTask extends AsyncTask<ImageView, Void, Bitmap> {
                 return bmp;
 
         }catch(Exception e){}
-//        Toast.makeText(this, "Network error. Please try again" ,Toast.LENGTH_SHORT).show();
         return bmp;
     }
 }
