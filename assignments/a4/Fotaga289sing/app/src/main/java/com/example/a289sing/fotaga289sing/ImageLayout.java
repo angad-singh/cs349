@@ -1,5 +1,7 @@
 package com.example.a289sing.fotaga289sing;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
@@ -8,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +28,7 @@ public class ImageLayout extends ConstraintLayout {
     String url;
     RatingBar ratingBar;
 
-    public ImageLayout(Context context, String url) {
+    public ImageLayout(final Context context, String url) {
         super(context);
         this.url = url;
 
@@ -51,13 +54,13 @@ public class ImageLayout extends ConstraintLayout {
         image.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowDialog();
+                ShowDialog(context);
             }
         });
 
     }
 
-    public ImageLayout(Context context, String url, float rating) {
+    public ImageLayout(final Context context, String url, float rating) {
         super(context);
         this.url = url;
 
@@ -69,7 +72,7 @@ public class ImageLayout extends ConstraintLayout {
         image.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowDialog();
+                ShowDialog(context);
             }
         });
 
@@ -85,30 +88,36 @@ public class ImageLayout extends ConstraintLayout {
     /*
      * https://stackoverflow.com/questions/46385454/i-tried-to-add-ratingbar-in-dialog-but-i-have-some-issue-in-stars-number
      */
-    public void ShowDialog()
+    public void ShowDialog(Context context)
     {
         final AlertDialog.Builder popDialog = new AlertDialog.Builder(getRootView().getContext());
 
         ScrollView scrollView = new ScrollView(getRootView().getContext());
         LinearLayout linearLayout = new LinearLayout(getRootView().getContext());
         final RatingBar rating_popup = new RatingBar(linearLayout.getContext());
-        rating_popup.setForegroundGravity(Gravity.CENTER_HORIZONTAL);
         final ImageView image_popup = new ImageView(linearLayout.getContext());
-
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            image_popup.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        } else {
-            image_popup.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        }
-
-        image_popup.setImageDrawable(image.getDrawable());
-
 
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            image_popup.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            lp.setMargins(320,0,300,0);
+        } else {
+            image_popup.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            lp.setMargins(200,0,200,0);
+        }
+
+        LinearLayout.LayoutParams iv = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        iv.setMargins(50, 50, 50, 50);
+        image_popup.setLayoutParams(iv);
+
+        image_popup.setImageDrawable(image.getDrawable());
+
         rating_popup.setLayoutParams(lp);
+
         rating_popup.setNumStars(5);
         rating_popup.setRating(ratingBar.getRating());
 
