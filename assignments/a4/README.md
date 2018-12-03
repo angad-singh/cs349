@@ -13,7 +13,7 @@ and running the project on a virtual device runing Android 8.0 or above.
 
 # Functionality
 The app can load images using the **load** button in the top app bar. They can tap on the **clear** button to clear all the ratings and images. A **filter** functionality is also provided which lets users filter images based on a certain rating.
-![](/assignments/a4/screenshots/Screenshot_20181203-163734.png)
+
 All the images (and the filter) can be set to any rating between 0-5 (both inclusive). To set a rating, users can tap on the numbers of stars they want to give the image. To set a rating of zero users can swipe all the way to the left in the rating bar until all the stars disappear.
 
 The app can run in both orientations, portrait and landscape. 
