@@ -28,8 +28,8 @@
                 android:layout_gravity="center_vertical"
                 android:text="@string/app_name"
                 android:textColor="@color/text"
-                android:textSize="20dp"
-                android:fontFamily="@font/neucha"
+                android:textSize="18dp"
+                android:fontFamily="@font/righteous_regular"
                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored" />
 
             <View
