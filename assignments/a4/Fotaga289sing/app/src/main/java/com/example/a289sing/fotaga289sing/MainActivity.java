@@ -288,6 +288,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void filterImages(float rating) {
         int images_left = images.size();
+        ViewGroup layout = findViewById(R.id.myApp);
 
         for (int i = 0; i < images_left; ++i) {
             ImageLayout img = images.get(i);
@@ -298,7 +299,15 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 img.setVisibility(View.VISIBLE);
             }
+        }
 
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            layout.removeAllViews();
+            for (int i = 0; i < images_left; ++i) {
+                if (images.get(i).getVisibility() == View.VISIBLE) {
+                    layout.addView(images.get(i));
+                }
+            }
         }
     }
 
