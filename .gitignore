@@ -1,3 +1,5 @@
 *.json
 *.class
 assignments/a1/breakout
+/.DS_Store
+.DS_Store

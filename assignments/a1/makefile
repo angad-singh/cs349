@@ -10,7 +10,7 @@ MAC_OPT = -I/opt/X11/include
 
 all:
 	@echo "Compiling..."
-	g++-5 -std=c++14 breakout.cpp -o breakout -L/opt/X11/lib -lX11
+	g++ -std=c++14 breakout.cpp -o breakout -L/opt/X11/lib -lX11 -lstdc++ $(MAC_OPT)
 
 run: all
 	@echo "Running..."
