@@ -30,10 +30,10 @@ Users can also save their work using the `File` menu. `Save Canvas` option can b
 The tool bar on the left side is undockable. Just click below the File menu and drag and your mouse to undock it.
 
 Click here
-![toolv](/uploads/38ec66b99aaff9d4026b611f15063f02/toolv.png)
+![toolv](https://raw.githubusercontent.com/angad-singh/cs349/master/assignments/a2/images/click.png)
 
 Undocked toolbar
-![undocked](/uploads/9285bbd4babf7868e92b5b0a251de3d7/undocked.png)
+![undocked](https://raw.githubusercontent.com/angad-singh/cs349/master/assignments/a2/images/toolbar.png)
 
 
 If the user has drawn multiple overlapping shapes and they try to perform an action on the shapes, the shape that was added first will be acted upon first.
